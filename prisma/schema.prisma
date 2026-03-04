@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model AssetTemplate {
+  id              String   @id @default(cuid())
+  ticker          String   @unique
+  name            String
+  type            String   // 'stock' ou 'fii'
+  sector          String?  // Setor da ação (Tecnologia, Energia, etc)
+  segment         String?  // Segmento do FII (Logística, Shopping, Papel)
+  description     String   // Descrição da empresa/fundo
+  profile         String   // "Dividend", "Growth", "Value", etc
+  initialPrice    Float
+  volatility      Float
+  momentum        Float
+  dividendYield   Float?
+  
+  // JSON Blobs
+  naturalCauses   String?  // JSON array de causas naturais
+  associatedNews  String?  // JSON array de notícias associadas
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// ═══════════════════════════════════════════════════════════
+// UNIFIED EVENT TEMPLATE (substitui CardTemplate + NewsTemplate)
+// Cada evento tem TEXTO jornalístico + EFEITO mecânico real
+// ═══════════════════════════════════════════════════════════
+model EventTemplate {
+  id                    String   @id @default(cuid())
+  
+  // Identificação
+  name                  String   // Nome curto: "Super Safra Recorde"
+  headline              String   // Destaque do efeito: "+15% Setor Agro por 3 rodadas"
+  
+  // Texto jornalístico
+  title                 String   // Título da notícia gerada
+  body                  String   // Corpo da notícia
+  expertTip             String?  // Dica do especialista
+  expertAnalysis        String?  // Análise detalhada (modal expandido)
+  
+  // Classificação
+  scope                 String   // 'global' | 'sector' | 'company' | 'fii'
+  category              String   // 'economy' | 'politics' | 'company' | 'sector' | 'fii' | 'crisis' | 'opportunity'
+  isPositive            Boolean  @default(true)
+  probability           String   @default("common") // common, uncommon, rare, very_rare
+  icon                  String   @default("📰")
+  
+  // Efeito mecânico (JSON)
+  effectJson            String   // JSON: { target, targetFilter, priceModifier, trendOverride, duration, volatilityModifier, fixedIncomeRateChange, ... }
+  
+  // Linkagem dinâmica
+  linkedTickers         String?  // JSON array: ["TNOV3", "BRIS3"]
+  linkedSectors         String?  // JSON array: ["Tecnologia", "Energia"]
+  
+  // Variáveis para texto dinâmico
+  variablesJson         String?  // JSON: { "valor": ["0.5%", "1.0%"] }
+  
+  // Cooldown
+  cooldownRounds        Int      @default(2)
+
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+}
+
+// ═══════════════════════════════════════════════════════════
+// RENDA FIXA DINÂMICA (rotação por rodada, liquidez variada)
+// ═══════════════════════════════════════════════════════════
+model FixedIncomeTemplate {
+  id                String   @id @default(cuid())
+  name              String   // "Poupança Nacional", "CDB BancoSólido"
+  type              String   // tesouro_selic, cdb, lci_lca, debenture, poupanca
+  description       String   @default("") // Descrição para o guide
+  baseRate          Float    // Taxa base por rodada (ex: 0.003 = 0.3%)
+  riskOfDefault     Boolean  // Pode dar calote?
+  
+  // Disponibilidade por rodada
+  availableFromRound  Int    @default(0)  // Rodada em que aparece (0 = sempre)
+  expiresAtRound      Int?               // Rodada em que some (null = nunca)
+  
+  // Liquidez
+  liquidityType     String   @default("immediate") // "immediate" | "on_maturity" | "penalty"  
+  lockRounds        Int      @default(0)  // Qtd de rodadas que o dinheiro fica preso
+  earlyWithdrawPenalty Float @default(0)  // Penalidade por saque antecipado (ex: 0.10 = 10%)
+  
+  // Flags pedagógicas
+  isBadInvestment   Boolean  @default(false) // "Poupança" perde pra inflação
+  taxExempt         Boolean  @default(false) // LCI/LCA são isentas
+  
+  // Vínculo com empresa (para risco de calote)
+  linkedTicker      String?  // Ex: "FTPY3" — se a FinTech quebrar, a debênture zera
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// Mantido para compatibilidade — será deprecado progressivamente
+model CardTemplate {
+  id              String   @id @default(cuid())
+  name            String
+  description     String
+  type            String
+  probability     String
+  effectJson      String
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Mantido para compatibilidade — será deprecado progressivamente
+model NewsTemplate {
+  id              String   @id @default(cuid())
+  title           String
+  body            String
+  scope           String
+  category        String
+  severity        Float?
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model GameRuleTemplate {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  configJson      String
+  
+  createdAt       DateTime @default(now())
+}
+
+model GameSession {
+  id              String   @id @default(cuid())
+  status          String
+  summaryJson     String?
+  finalRound      Int      @default(0)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
