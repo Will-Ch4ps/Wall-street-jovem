@@ -56,6 +56,18 @@ export async function GET() {
   const secondsToSimulate = Math.min(120, Math.floor(elapsedMs / 1000)) // Cap at 120 ticks max to avoid hang
   const candleIntervalMs = game.config.candleIntervalMs || 60000
 
+  // Compute round progress (0.0 = just started, 1.0 = about to end)
+  // This drives time-weighted pull: prices wander freely early, converge late
+  let roundProgress = 0.5 // default if no timing info
+  if (round.roundEndsAt && round.startedAt) {
+    const roundStart = new Date(round.startedAt).getTime()
+    const roundEnd = new Date(round.roundEndsAt).getTime()
+    const totalDuration = roundEnd - roundStart
+    if (totalDuration > 0) {
+      roundProgress = Math.min(1.0, Math.max(0.0, (now.getTime() - roundStart) / totalDuration))
+    }
+  }
+
   const updatedAssets = [...assets]
   const updatedHistories = { ...priceHistories }
 
@@ -89,9 +101,9 @@ export async function GET() {
 
       let tickPrice: number
       if (asset.type === 'fii') {
-        tickPrice = generateFIITick(asset as FII, tickIndex, mood)
+        tickPrice = generateFIITick(asset as FII, tickIndex, mood, roundProgress)
       } else {
-        tickPrice = generateTick(asset, tickIndex, mood)
+        tickPrice = generateTick(asset, tickIndex, mood, roundProgress)
       }
       asset.currentPrice = tickPrice
 
@@ -103,20 +115,9 @@ export async function GET() {
     // Check if candle should be closed based on time
     const currentCandleStart = new Date(hist.formingCandle.timestamp).getTime()
     if (now.getTime() - currentCandleStart >= candleIntervalMs) {
-      // enforce closure near target so data matches projections
-      asset.currentPrice = asset.targetClose
-      hist.formingCandle.close = asset.targetClose
-
-      // directional shadow hint: make upper/lower wick pull toward long‑term trend
-      const open = hist.formingCandle.open
-      const direction = asset.targetClose - open
-      if (direction > 0) {
-        // bullish candle: accentuate upper wick
-        hist.formingCandle.high = Math.max(hist.formingCandle.high, asset.targetClose + Math.abs(direction) * 0.02)
-      } else if (direction < 0) {
-        // bearish candle: accentuate lower wick
-        hist.formingCandle.low = Math.min(hist.formingCandle.low, asset.targetClose - Math.abs(direction) * 0.02)
-      }
+      // Close candle at the CURRENT simulated price — NOT the target.
+      // The time-weighted pull in priceEngine already handles convergence.
+      hist.formingCandle.close = asset.currentPrice
 
       hist.candles.push(hist.formingCandle)
       if (hist.candles.length > 50) hist.candles = hist.candles.slice(-50)

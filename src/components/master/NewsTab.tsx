@@ -124,24 +124,4 @@ function NewsItem({ news }: { news: News }) {
     </div>
   )
 }
-  )
-}
 
-function NewsItem({ news }: { news: News }) {
-  return (
-    <div className="rounded border border-zinc-700 bg-zinc-800/50 p-3 text-sm">
-      <div className="flex items-center gap-2 text-xs text-zinc-500">
-        <span>R{news.round}</span>
-        <span>{formatShortTime(news.timestamp)}</span>
-        <span className="uppercase text-indigo-400">{news.scope}</span>
-        {news.targets && news.targets.length > 0 && (
-          <span className="font-mono text-amber-500 font-bold ml-1">
-            [{news.targets.join(', ')}]
-          </span>
-        )}
-      </div>
-      <div className="mt-1 font-medium">{news.title}</div>
-      <div className="mt-0.5 text-zinc-400">{news.body}</div>
-    </div>
-  )
-}

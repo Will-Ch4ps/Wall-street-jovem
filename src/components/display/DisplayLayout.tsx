@@ -9,7 +9,7 @@ import { CandlestickChart } from '@/components/shared/CandlestickChart'
 import { Ranking } from '@/components/display/Ranking'
 import { formatCurrency } from '@/lib/formatters'
 import { EventRevealModal } from '@/components/display/EventRevealModal'
-import type { GameEvent, GameState, FII, Stock } from '@/types'
+import type { GameEvent, GameState, FII, News, Stock } from '@/types'
 
 interface DisplayLayoutProps {
     initialState?: GameState | null
@@ -121,7 +121,7 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
     useEffect(() => {
         if (state?.game?.status !== 'running') return
         // Use tickIntervalMs from config (minimum 5s to avoid hammering the server)
-        const pollIntervalMs = Math.max(5000, state.game.config.tickIntervalMs ?? 10000)
+        const pollIntervalMs = Math.max(3000, state.game.config.tickIntervalMs ?? 7000)
         const id = setInterval(async () => {
             try {
                 const res = await fetch('/api/prices')
@@ -147,7 +147,7 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
             return // Round over, freeze screen
         }
 
-        const animIntervalMs = Math.max(10000, (state.game.config.tickIntervalMs ?? 25000) * 2)
+        const animIntervalMs = Math.max(5000, (state.game.config.tickIntervalMs ?? 7000) * 2)
         const id = setInterval(() => {
             setState(prev => {
                 if (!prev) return prev;
@@ -162,26 +162,32 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                 const newAssets = prev.assets.map((a, i) => {
                     if (a.status !== 'active' && a.status !== 'ipo_open') return a;
                     const safePrice = Math.max(0.01, a.currentPrice);
-                    // Match priceEngine.ts: absolute centavo-scale changes + waves
-                    const noise = (Math.random() * 2 - 1) * a.volatility * 0.003 * safePrice;
-                    const pull = (a.targetClose - safePrice) * 0.012 * (a.momentum ?? 0.08);
+                    // Match priceEngine.ts: 1% noise, weak pull (early in round), 1.4% wave
+                    const noise = (Math.random() * 2 - 1) * a.volatility * 0.010 * safePrice;
+                    const pull = (a.targetClose - safePrice) * 0.025 * Math.max(0.05, a.momentum ?? 0.08);
 
-                    const phase = (i * 10) / 60
-                    const wave = Math.sin(Math.PI * 2 * phase) * 0.005 * a.volatility * safePrice
+                    const phase = (i * 7) / 28
+                    const wave = Math.sin(Math.PI * 2 * phase) * 0.014 * a.volatility * safePrice
 
                     const trendBias = (
-                        a.trend === 'bullish' ? 0.0008 * safePrice :
-                            a.trend === 'bearish' ? -0.0008 * safePrice :
-                                a.trend === 'volatile' ? (Math.random() * 2 - 1) * 0.0016 * safePrice :
+                        a.trend === 'bullish' ? 0.0012 * safePrice :
+                            a.trend === 'bearish' ? -0.0012 * safePrice :
+                                a.trend === 'volatile' ? (Math.random() * 2 - 1) * 0.0024 * safePrice :
                                     0
                     );
 
                     const moodBias = (
-                        mood === 'bull' ? 0.0008 * safePrice :
-                            mood === 'bear' ? -0.0008 * safePrice : 0
+                        mood === 'bull' ? 0.0012 * safePrice :
+                            mood === 'bear' ? -0.0012 * safePrice : 0
                     )
 
-                    const newPrice = Math.max(0.01, Math.round((safePrice + noise + pull + trendBias + wave + moodBias) * 100) / 100);
+                    // Micro-spike chance (3.5%)
+                    let spike = 0
+                    if (Math.random() < 0.035) {
+                        spike = safePrice * (0.012 + Math.random() * 0.023) * (Math.random() < 0.5 ? 1 : -1)
+                    }
+
+                    const newPrice = Math.max(0.01, Math.round((safePrice + noise + pull + trendBias + wave + moodBias + spike) * 100) / 100);
                     return { ...a, currentPrice: newPrice };
                 });
 

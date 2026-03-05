@@ -43,6 +43,72 @@ export function decideWhichDeck(): 'global' | 'company' | 'fii' {
   return 'fii'
 }
 
+// ──────────────────────────────────────────────────────────────
+// Per-company multiplier based on consolidation profile
+// ──────────────────────────────────────────────────────────────
+
+/**
+ * Compute a multiplier that makes consolidated companies less affected
+ * and speculative companies more affected by the same event.
+ *
+ * Returns a number roughly in [0.30, 1.80]:
+ *   - Consolidated / defensive → 0.30–0.65
+ *   - Normal → 0.70–1.20
+ *   - Speculative / growth → 1.20–1.80
+ */
+function companyImpactMultiplier(asset: BaseAsset): number {
+  const tags = asset.tags ?? []
+  let base = 1.0
+
+  // ── Defensive traits (reduce impact) ──
+  const defensiveTags = ['defensivo', 'lider', 'monopolio', 'dividendos']
+  const defensiveHits = defensiveTags.filter(t => tags.includes(t)).length
+  if (defensiveHits > 0) {
+    // Each defensive tag reduces base by 15-20%
+    base -= defensiveHits * (0.15 + Math.random() * 0.05)
+  }
+
+  // Low volatility = more consolidated
+  if (asset.volatility < 0.06) {
+    base -= (0.10 + Math.random() * 0.10) // -10% to -20%
+  }
+
+  // ── Speculative traits (amplify impact) ──
+  const specTags = ['growth', 'especulativo', 'cíclica']
+  const specHits = specTags.filter(t => tags.includes(t)).length
+  if (specHits > 0) {
+    // Each speculative tag increases base by 15-25%
+    base += specHits * (0.15 + Math.random() * 0.10)
+  }
+
+  // High volatility = more reactive to news
+  if (asset.volatility > 0.14) {
+    base += (0.15 + Math.random() * 0.15) // +15% to +30%
+  }
+
+  // ── Clamp to sensible range ──
+  return Math.max(0.30, Math.min(1.80, base))
+}
+
+/**
+ * For global events, companies outside the event's target sector
+ * receive a reduced and randomized portion of the impact.
+ */
+function crossSectorDampening(asset: BaseAsset, effectTargetFilter?: string): number {
+  if (!effectTargetFilter) return 1.0 // no filter = full impact
+
+  // Check if asset belongs to the target sector
+  const tags = asset.tags ?? []
+  const sectorMatch =
+    asset.sector === effectTargetFilter ||
+    tags.includes(effectTargetFilter.toLowerCase())
+
+  if (sectorMatch) return 1.0 // same sector = full impact
+
+  // Other sectors receive 40-90% of the impact
+  return 0.40 + Math.random() * 0.50
+}
+
 export function applyCardEffect(
   card: Card,
   assets: Asset[],
@@ -83,15 +149,23 @@ export function applyCardEffect(
 
   for (const asset of targets) {
     if (effect.priceModifier) {
-      // compute stability factor: assets with lower volatility are more consolidated
-      const stabilityFactor = 1 - Math.min(0.5, asset.volatility)
-      const impact = applyPriceModifier(asset, effect.priceModifier, { stabilityFactor })
+      // ── Per-company differentiated impact ──
+      const companyMult = companyImpactMultiplier(asset)
+      const sectorDamp = crossSectorDampening(asset, effect.targetFilter)
+      const combinedMult = companyMult * sectorDamp
+
+      // Adjust the modifier range for this specific company
+      const adjustedModifier = {
+        min: effect.priceModifier.min * combinedMult,
+        max: effect.priceModifier.max * combinedMult,
+      }
+
+      // applyPriceModifier now uses Gaussian distribution internally
+      const impact = applyPriceModifier(asset, adjustedModifier)
       impactMap[asset.ticker] = impact
-      // also give a bump to volatility so prices swing more before settling
-      asset.volatility = Math.min(0.3, asset.volatility * 1.4)
     }
     if (effect.volatilityModifier != null) {
-      asset.volatility = Math.min(0.2, asset.volatility * (1 + effect.volatilityModifier))
+      asset.volatility = Math.min(0.25, asset.volatility * (1 + effect.volatilityModifier))
     }
     if (effect.suspend) {
       asset.status = 'suspended'

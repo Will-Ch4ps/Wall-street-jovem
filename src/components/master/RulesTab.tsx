@@ -2,8 +2,7 @@
 
 import { useState } from 'react'
 import type { GameState } from '@/types'
-import { AssetScenarioPanel } from '@/components/master/AssetScenarioPanel'
-import { projectEndGame } from '@/lib/analysis'
+
 
 interface RulesTabProps {
     state: GameState
@@ -81,27 +80,12 @@ export function RulesTab({ state, onUpdate }: RulesTabProps) {
     const [candleIntervalSec, setCandleIntervalSec] = useState((cfg.candleIntervalMs / 1000).toString())
     const [marketMood, setMarketMood] = useState<string>(cfg.marketMood || 'neutral')
 
-    // quick manual price adjustment
-    const [quickTicker, setQuickTicker] = useState('')
-    const [quickTarget, setQuickTarget] = useState('')
-
-    const [eventTickerFilter, setEventTickerFilter] = useState('')
-    const [eventPolarityFilter, setEventPolarityFilter] = useState<'positive' | 'negative' | ''>('')
-
     // === Section 4: Cards ===
     const [cardDrawIntervalSec, setCardDrawIntervalSec] = useState((cfg.cardDrawIntervalMs / 1000).toString())
     const [maxCardsPerRound, setMaxCardsPerRound] = useState(cfg.maxCardsPerRound.toString())
     const [autoRevealNews, setAutoRevealNews] = useState(cfg.autoRevealNews)
     const [allowAfterHours, setAllowAfterHours] = useState(cfg.allowAfterHours ?? true)
     const [afterHoursFixedPrice, setAfterHoursFixedPrice] = useState(cfg.afterHoursFixedPrice ?? false)
-
-    // === Scheduler ===
-    const [scheduleRound, setScheduleRound] = useState(state.game.currentRound + 1)
-    const [scheduleType, setScheduleType] = useState<'news' | 'market_shift'>('news')
-    const [scheduleNewsTitle, setScheduleNewsTitle] = useState('')
-    const [scheduleNewsBody, setScheduleNewsBody] = useState('')
-    const [scheduleMarketTicker, setScheduleMarketTicker] = useState('')
-    const [scheduleMarketAmount, setScheduleMarketAmount] = useState('')
 
     const [loading, setLoading] = useState(false)
 
@@ -149,106 +133,7 @@ export function RulesTab({ state, onUpdate }: RulesTabProps) {
         }
     }
 
-    const handleCreateSchedule = async () => {
-        if (!scheduleRound || scheduleRound <= state.game.currentRound) {
-            alert("A rodada agendada deve ser no futuro.")
-            return
-        }
-        setLoading(true)
-        try {
-            const newEvent = {
-                id: crypto.randomUUID(),
-                triggerRound: scheduleRound,
-                type: scheduleType,
-                newsData: scheduleType === 'news' ? { title: scheduleNewsTitle, body: scheduleNewsBody } : undefined,
-                marketShiftData: scheduleType === 'market_shift' ? { ticker: scheduleMarketTicker, priceShiftAmount: parseFloat(scheduleMarketAmount) } : undefined
-            }
-            const updatedEvents = [...(cfg.scheduledEvents || []), newEvent]
-            const res = await fetch('/api/game', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'update',
-                    state: { game: { ...state.game, config: { ...cfg, scheduledEvents: updatedEvents } } }
-                }),
-            })
-            if (res.ok) {
-                onUpdate?.()
-                setScheduleNewsTitle('')
-                setScheduleNewsBody('')
-                setScheduleMarketAmount('')
-                alert('⏳ Impacto Agendado Globalmente!')
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
 
-    const handleQuickShift = async () => {
-        if (!quickTicker || isNaN(parseFloat(quickTarget))) {
-            alert('Selecione ativo e informe novo alvo válido.')
-            return
-        }
-        setLoading(true)
-        try {
-            const res = await fetch('/api/game', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'update_asset',
-                    ticker: quickTicker,
-                    updates: { targetClose: parseFloat(quickTarget) }
-                }),
-            })
-            if (res.ok) {
-                onUpdate?.()
-                setQuickTicker('')
-                setQuickTarget('')
-                alert('🎯 Alvo atualizado com sucesso!')
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    const handleTriggerRandomEvent = async () => {
-        setLoading(true)
-        try {
-            const body: any = { action: 'draw', ignoreLimit: true }
-            if (eventTickerFilter) body.targetTicker = eventTickerFilter
-            if (eventPolarityFilter) body.isPositive = eventPolarityFilter === 'positive'
-            const res = await fetch('/api/events', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(body),
-            })
-            const data = await res.json()
-            if (res.ok && data.event) {
-                alert(`Evento disparado: ${data.event.headline}`)
-                onUpdate?.()
-            }
-        } finally {
-            setLoading(false)
-        }
-    }
-
-    const handleRemoveSchedule = async (eventId: string) => {
-        setLoading(true)
-        try {
-            const updatedEvents = cfg.scheduledEvents?.filter(e => e.id !== eventId) || []
-            const res = await fetch('/api/game', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    action: 'update',
-                    state: { game: { ...state.game, config: { ...cfg, scheduledEvents: updatedEvents } } }
-                }),
-            })
-            if (res.ok) onUpdate?.()
-        } finally {
-            setLoading(false)
-        }
-    }
 
     const inputCls = "w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-white focus:border-indigo-500 outline-none transition text-sm"
 
@@ -416,82 +301,7 @@ export function RulesTab({ state, onUpdate }: RulesTabProps) {
                 </div>
             </div>
 
-            {/* quick manual price adjustment */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-sm">
-                <SectionTitle
-                    icon="⚡"
-                    title="Impacto Rápido"
-                    subtitle="Ajuste imediato de metas de preço por ativo"
-                />
-                <div className="grid gap-4 md:grid-cols-3">
-                    <select
-                        value={quickTicker}
-                        onChange={e => setQuickTicker(e.target.value)}
-                        className={`${inputCls} w-full`}
-                    >
-                        <option value="">Selecionar ativo</option>
-                        {state.assets.map(a => (
-                            <option key={a.ticker} value={a.ticker}>{a.ticker} — {a.name}</option>
-                        ))}
-                    </select>
-                    <div className="relative">
-                        <input
-                            type="number"
-                            placeholder="Novo alvo (R$)"
-                            value={quickTarget}
-                            onChange={e => setQuickTarget(e.target.value)}
-                            className={`${inputCls} w-full pr-8`} />
-                        <span className="absolute right-3 top-3 text-zinc-500 text-sm">R$</span>
-                    </div>
-                    <button
-                        onClick={handleQuickShift}
-                        disabled={loading || !quickTicker || !quickTarget}
-                        className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 rounded-xl font-bold shadow-lg shadow-indigo-500/20 transition disabled:opacity-50"
-                    >
-                        Aplicar Alteração
-                    </button>
-                </div>
-            </div>
 
-            {/* asset control panel */}
-            <AssetScenarioPanel state={state} onUpdate={onUpdate} />
-
-            {/* manual event dispatcher */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-sm mt-6">
-                <SectionTitle
-                    icon="🔥"
-                    title="Disparar Evento"
-                    subtitle="Use filtros rápidos ou deixe em branco para sorteio livre"
-                />
-                <div className="grid gap-4 md:grid-cols-3">
-                    <select
-                        value={eventTickerFilter}
-                        onChange={e => setEventTickerFilter(e.target.value)}
-                        className={`${inputCls} w-full`}
-                    >
-                        <option value="">Nenhum ticker (global)</option>
-                        {state.assets.map(a => (
-                            <option key={a.ticker} value={a.ticker}>{a.ticker}</option>
-                        ))}
-                    </select>
-                    <select
-                        value={eventPolarityFilter}
-                        onChange={e => setEventPolarityFilter(e.target.value as any)}
-                        className={`${inputCls} w-full`}
-                    >
-                        <option value="">Qualquer tipo</option>
-                        <option value="positive">Positivo</option>
-                        <option value="negative">Negativo</option>
-                    </select>
-                    <button
-                        onClick={handleTriggerRandomEvent}
-                        disabled={loading}
-                        className="px-6 py-3 bg-red-600 hover:bg-red-500 rounded-xl font-bold shadow-lg shadow-red-500/20 transition disabled:opacity-50"
-                    >
-                        🎲 Sortear Agora
-                    </button>
-                </div>
-            </div>
 
             {/* ========== Section 4: Cards ========== */}
             <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-sm relative overflow-hidden">
@@ -600,113 +410,7 @@ export function RulesTab({ state, onUpdate }: RulesTabProps) {
                 </button>
             </div>
 
-            {/* ========== Section 5: Scheduler (unchanged) ========== */}
-            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xl backdrop-blur-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-amber-600/5 rounded-full blur-3xl -mr-20 -mt-20" />
-                <h3 className="mb-2 text-lg font-bold flex items-center gap-2 relative z-10"><span className="text-xl">⏳</span> Motor de Impactos Agendados</h3>
-                <p className="text-zinc-400 text-sm mb-6 relative z-10">Crie regras de automação que serão disparadas quando uma rodada futura específica for iniciada.</p>
 
-                <div className="grid gap-6 md:grid-cols-2 relative z-10">
-                    <div className="space-y-4">
-                        <div className="flex gap-4">
-                            <div className="flex-1">
-                                <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2 block">Rodada Gatilho</label>
-                                <input
-                                    type="number"
-                                    value={scheduleRound}
-                                    onChange={(e) => setScheduleRound(parseInt(e.target.value))}
-                                    min={state.game.currentRound + 1}
-                                    className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-white focus:border-amber-500 outline-none transition"
-                                />
-                            </div>
-                            <div className="flex-1">
-                                <label className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2 block">Tipo de Impacto</label>
-                                <select
-                                    value={scheduleType}
-                                    onChange={(e) => setScheduleType(e.target.value as 'news' | 'market_shift')}
-                                    className="w-full rounded-xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-white focus:border-amber-500 outline-none transition"
-                                >
-                                    <option value="news">📰 Disparar Notícia</option>
-                                    <option value="market_shift">📉 Quebra/Alta de Ação</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        {scheduleType === 'news' && (
-                            <div className="space-y-3 p-4 bg-zinc-950/50 border border-zinc-800 rounded-xl">
-                                <input
-                                    type="text"
-                                    placeholder="Manchete da Notícia..."
-                                    value={scheduleNewsTitle}
-                                    onChange={(e) => setScheduleNewsTitle(e.target.value)}
-                                    className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white focus:border-amber-500 outline-none transition"
-                                />
-                                <textarea
-                                    placeholder="Corpo da Notícia detalhando os efeitos..."
-                                    value={scheduleNewsBody}
-                                    onChange={(e) => setScheduleNewsBody(e.target.value)}
-                                    rows={3}
-                                    className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white focus:border-amber-500 outline-none transition"
-                                />
-                            </div>
-                        )}
-
-                        {scheduleType === 'market_shift' && (
-                            <div className="space-y-3 p-4 bg-zinc-950/50 border border-zinc-800 rounded-xl flex gap-3">
-                                <select
-                                    value={scheduleMarketTicker}
-                                    onChange={(e) => setScheduleMarketTicker(e.target.value)}
-                                    className="flex-1 rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white focus:border-amber-500 outline-none transition"
-                                >
-                                    <option value="">Ticker Alvo</option>
-                                    {state.assets.map(a => <option key={a.ticker} value={a.ticker}>{a.ticker}</option>)}
-                                </select>
-                                <div className="flex-1 relative">
-                                    <input
-                                        type="number"
-                                        placeholder="Novo Tgt Close..."
-                                        value={scheduleMarketAmount}
-                                        onChange={(e) => setScheduleMarketAmount(e.target.value)}
-                                        className="w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-white focus:border-amber-500 outline-none transition pr-8"
-                                    />
-                                    <span className="absolute right-3 top-2 text-zinc-500 text-sm">R$</span>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-
-                    <div className="flex flex-col">
-                        <div className="flex-1 overflow-auto max-h-[200px] space-y-2 mb-4">
-                            <p className="text-xs font-bold uppercase tracking-wider text-zinc-500 mb-2">Agendamentos Ativos</p>
-                            {(!cfg.scheduledEvents || cfg.scheduledEvents.length === 0) ? (
-                                <p className="text-sm text-zinc-600 italic">Nenhum impacto agendado.</p>
-                            ) : (
-                                cfg.scheduledEvents.map(ev => (
-                                    <div key={ev.id} className="flex items-center justify-between p-3 bg-zinc-950 border border-zinc-800 rounded-lg group">
-                                        <div>
-                                            <span className="bg-amber-500 text-black text-[10px] font-black px-1.5 py-0.5 rounded mr-2">RODADA {ev.triggerRound}</span>
-                                            <span className="text-sm text-zinc-300">
-                                                {ev.type === 'news' ? 'Notícia Automática' : `Choque em ${ev.marketShiftData?.ticker}`}
-                                            </span>
-                                        </div>
-                                        <button onClick={() => handleRemoveSchedule(ev.id)} disabled={loading} className="text-red-500 opacity-0 group-hover:opacity-100 transition hover:text-red-400 text-sm">
-                                            Excluir
-                                        </button>
-                                    </div>
-                                ))
-                            )}
-                        </div>
-
-                        <button
-                            onClick={handleCreateSchedule}
-                            disabled={loading || (scheduleType === 'news' ? !scheduleNewsTitle : (!scheduleMarketTicker || !scheduleMarketAmount))}
-                            className="w-full px-6 py-3 bg-amber-600 hover:bg-amber-700 rounded-xl font-bold shadow-lg shadow-amber-500/20 transition disabled:opacity-50 mt-auto"
-                        >
-                            Agendar Impacto Automático
-                        </button>
-                    </div>
-                </div>
-            </div>
 
         </div>
     )

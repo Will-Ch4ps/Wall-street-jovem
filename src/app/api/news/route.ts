@@ -100,26 +100,3 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: err instanceof Error ? err.message : 'Failed' }, { status: 500 })
   }
 }
-            news.title = news.title.replace(`{${news.scope === 'company' ? 'empresa' : 'fii'}}`, randomAsset.ticker)
-            news.body = news.body.replace(`{${news.scope === 'company' ? 'empresa' : 'fii'}}`, randomAsset.ticker)
-          }
-        }
-
-        const updatedState = {
-          ...state,
-          news: [...(state.news || []), news],
-        }
-        await saveGameState(updatedState)
-        return NextResponse.json({ news, state: updatedState })
-      }
-    }
-
-    return NextResponse.json(state)
-  } catch (err) {
-    console.error(err)
-    return NextResponse.json(
-      { error: err instanceof Error ? err.message : 'Failed' },
-      { status: 500 }
-    )
-  }
-}

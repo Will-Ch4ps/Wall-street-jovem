@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { nanoid } from 'nanoid'
 import { formatCurrency } from '@/lib/formatters'
 import { calculateNetWorth } from '@/engine/portfolioCalc'
-import type { GameState, OwnerType } from '@/types'
+import type { GameState, OwnerType, Position } from '@/types'
 
 interface HoldingsPanelProps {
   state: GameState
@@ -85,6 +85,208 @@ export function HoldingsPanel({ state, onUpdate }: HoldingsPanelProps) {
         }),
       })
       if (res.ok) onUpdate?.()
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // ── Calcula o payout proporcional de um membro ──
+  const getMemberPayout = (holdingId: string, playerId: string): number => {
+    const holding = state.holdings.find((h) => h.id === holdingId)
+    if (!holding || holding.totalContributed <= 0) return 0
+    const portfolio = state.portfolios.find(
+      (p) => p.ownerId === holdingId && p.ownerType === 'holding'
+    ) ?? { ownerId: holdingId, ownerType: 'holding' as OwnerType, positions: [] }
+    const { netWorth } = calculateNetWorth(
+      holding, portfolio, state.assets,
+      state.fixedIncomeInvestments, state.fixedIncomeProducts,
+      state.loans, state.game.currentRound, state.game.config.taxRate
+    )
+    const sharePercent = (holding.contributions[playerId] ?? 0) / holding.totalContributed
+    return Math.max(0, Math.round(sharePercent * netWorth * 100) / 100)
+  }
+
+  // ── Retira um membro da holding ──
+  const withdrawMember = async (holdingId: string, playerId: string) => {
+    const holding = state.holdings.find((h) => h.id === holdingId)
+    const player = state.players.find((p) => p.id === playerId)
+    if (!holding || !player) return
+    const payout = getMemberPayout(holdingId, playerId)
+    const sharePercent = holding.totalContributed > 0
+      ? (holding.contributions[playerId] ?? 0) / holding.totalContributed
+      : 0
+
+    const confirmMsg = `Retirar ${player.name} da holding "${holding.name}"?\n\n` +
+      `Participação: ${(sharePercent * 100).toFixed(1)}%\n` +
+      `Valor a receber: ${formatCurrency(payout)}\n\n` +
+      `Posições serão liquidadas proporcionalmente se necessário.`
+    if (!confirm(confirmMsg)) return
+
+    setLoading(true)
+    try {
+      const portfolio = state.portfolios.find(
+        (p) => p.ownerId === holdingId && p.ownerType === 'holding'
+      )
+
+      // Liquidar posições proporcionalmente ao share do membro
+      let cashFromLiquidation = 0
+      let updatedPositions: Position[] = portfolio?.positions ? [...portfolio.positions] : []
+
+      // Quanto precisa ser liquidado?
+      const cashNeeded = Math.max(0, payout - holding.cash)
+
+      if (cashNeeded > 0 && updatedPositions.length > 0) {
+        // Vender posições proporcionalmente (share%) ao preço de mercado
+        updatedPositions = updatedPositions.map((pos) => {
+          const asset = state.assets.find((a) => a.ticker === pos.ticker)
+          if (!asset) return pos
+          const sharesToSell = Math.floor(pos.quantity * sharePercent)
+          if (sharesToSell <= 0) return pos
+          const saleValue = sharesToSell * asset.currentPrice
+          cashFromLiquidation += saleValue
+          return {
+            ...pos,
+            quantity: pos.quantity - sharesToSell,
+            totalInvested: pos.totalInvested * ((pos.quantity - sharesToSell) / pos.quantity),
+          }
+        }).filter((pos) => pos.quantity > 0)
+      }
+
+      const totalCashAvailable = holding.cash + cashFromLiquidation
+      const actualPayout = Math.min(payout, totalCashAvailable)
+
+      // Atualizar holding: remover membro, recalcular contribuições
+      const isLastMember = holding.memberIds.length <= 1
+      const newContributions = { ...holding.contributions }
+      const memberContribution = newContributions[playerId] ?? 0
+      delete newContributions[playerId]
+      const newTotalContributed = holding.totalContributed - memberContribution
+
+      const updatedHolding = {
+        ...holding,
+        memberIds: holding.memberIds.filter((id) => id !== playerId),
+        cash: totalCashAvailable - actualPayout,
+        totalContributed: isLastMember ? 0 : newTotalContributed,
+        contributions: newContributions,
+        isActive: !isLastMember,
+      }
+
+      const updatedHoldings = state.holdings.map((h) =>
+        h.id === holdingId ? updatedHolding : h
+      )
+
+      const updatedPlayers = state.players.map((p) =>
+        p.id === playerId ? { ...p, cash: p.cash + actualPayout } : p
+      )
+
+      const updatedPortfolios = state.portfolios.map((p) =>
+        p.ownerId === holdingId && p.ownerType === 'holding'
+          ? { ...p, positions: updatedPositions }
+          : p
+      )
+
+      const res = await fetch('/api/game', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update',
+          state: {
+            holdings: updatedHoldings,
+            players: updatedPlayers,
+            portfolios: updatedPortfolios,
+          },
+        }),
+      })
+      if (res.ok) {
+        onUpdate?.()
+        alert(`✅ ${player.name} retirado(a) da holding.\nRecebeu: ${formatCurrency(actualPayout)}`)
+      }
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // ── Dissolve a holding inteira ──
+  const dissolveHolding = async (holdingId: string) => {
+    const holding = state.holdings.find((h) => h.id === holdingId)
+    if (!holding || holding.memberIds.length === 0) return
+
+    const portfolio = state.portfolios.find(
+      (p) => p.ownerId === holdingId && p.ownerType === 'holding'
+    ) ?? { ownerId: holdingId, ownerType: 'holding' as OwnerType, positions: [] }
+    const { netWorth } = calculateNetWorth(
+      holding, portfolio, state.assets,
+      state.fixedIncomeInvestments, state.fixedIncomeProducts,
+      state.loans, state.game.currentRound, state.game.config.taxRate
+    )
+
+    const breakdownLines = holding.memberIds.map((mid) => {
+      const p = state.players.find((pl) => pl.id === mid)
+      const share = holding.totalContributed > 0
+        ? (holding.contributions[mid] ?? 0) / holding.totalContributed
+        : 0
+      return `  ${p?.name ?? '?'}: ${(share * 100).toFixed(1)}% → ${formatCurrency(share * netWorth)}`
+    }).join('\n')
+
+    if (!confirm(
+      `Dissolver holding "${holding.name}"?\n\n` +
+      `Patrimônio líquido: ${formatCurrency(netWorth)}\n\nDistribuição:\n${breakdownLines}\n\n` +
+      `Todas as posições serão liquidadas a preço de mercado.`
+    )) return
+
+    setLoading(true)
+    try {
+      // Liquidar todas as posições ao preço de mercado
+      let totalCashFromPositions = 0
+      if (portfolio.positions.length > 0) {
+        for (const pos of portfolio.positions) {
+          const asset = state.assets.find((a) => a.ticker === pos.ticker)
+          if (asset) totalCashFromPositions += pos.quantity * asset.currentPrice
+        }
+      }
+
+      const totalCash = holding.cash + totalCashFromPositions
+
+      // Distribuir para cada membro proporcionalmente
+      let updatedPlayers = [...state.players]
+      for (const memberId of holding.memberIds) {
+        const sharePercent = holding.totalContributed > 0
+          ? (holding.contributions[memberId] ?? 0) / holding.totalContributed
+          : (1 / holding.memberIds.length) // fallback: divisão igual
+        const memberPayout = Math.round(sharePercent * totalCash * 100) / 100
+        updatedPlayers = updatedPlayers.map((p) =>
+          p.id === memberId ? { ...p, cash: p.cash + memberPayout } : p
+        )
+      }
+
+      const updatedHoldings = state.holdings.map((h) =>
+        h.id === holdingId
+          ? { ...h, cash: 0, isActive: false, memberIds: [], contributions: {}, totalContributed: 0 }
+          : h
+      )
+
+      const updatedPortfolios = state.portfolios.map((p) =>
+        p.ownerId === holdingId && p.ownerType === 'holding'
+          ? { ...p, positions: [] }
+          : p
+      )
+
+      const res = await fetch('/api/game', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          action: 'update',
+          state: {
+            holdings: updatedHoldings,
+            players: updatedPlayers,
+            portfolios: updatedPortfolios,
+          },
+        }),
+      })
+      if (res.ok) {
+        onUpdate?.()
+        alert(`✅ Holding "${holding.name}" dissolvida com sucesso!`)
+      }
     } finally {
       setLoading(false)
     }
@@ -203,15 +405,44 @@ export function HoldingsPanel({ state, onUpdate }: HoldingsPanelProps) {
                         const player = state.players.find((p) => p.id === memberId)
                         const contribution = h.contributions[memberId] || 0
                         const percentage = h.totalContributed > 0 ? (contribution / h.totalContributed) * 100 : 0
+                        const estimatedPayout = getMemberPayout(h.id, memberId)
                         return (
-                          <div key={memberId} className="flex justify-between items-center text-xs">
-                            <span className="text-zinc-300">{player?.name || 'Desconhecido'}</span>
-                            <span className="font-mono text-indigo-400">
-                              {percentage.toFixed(1)}% ({formatCurrency(contribution)})
-                            </span>
+                          <div key={memberId} className="flex justify-between items-center text-xs gap-2 py-1">
+                            <div className="flex flex-col">
+                              <span className="text-zinc-300">{player?.name || 'Desconhecido'}</span>
+                              <span className="text-zinc-500 text-[10px]">
+                                Contribuiu {formatCurrency(contribution)} · Cota atual {formatCurrency(estimatedPayout)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-mono text-indigo-400 whitespace-nowrap">
+                                {percentage.toFixed(1)}%
+                              </span>
+                              <button
+                                onClick={() => withdrawMember(h.id, memberId)}
+                                disabled={loading}
+                                className="px-2 py-1 text-[10px] font-bold rounded bg-red-600/20 text-red-400 border border-red-800/50 hover:bg-red-600/40 transition disabled:opacity-50 whitespace-nowrap"
+                                title={`Retirar ${player?.name} — receberá ${formatCurrency(estimatedPayout)}`}
+                              >
+                                Retirar
+                              </button>
+                            </div>
                           </div>
                         )
                       })}
+                    </div>
+                  )}
+
+                  {/* Botão Dissolver */}
+                  {h.memberIds.length > 0 && (
+                    <div className="mt-4 border-t border-zinc-700 pt-3">
+                      <button
+                        onClick={() => dissolveHolding(h.id)}
+                        disabled={loading}
+                        className="w-full rounded-lg bg-red-900/30 border border-red-800/50 px-4 py-2 text-xs font-bold text-red-400 hover:bg-red-900/50 transition disabled:opacity-50"
+                      >
+                        💣 Dissolver Holding — Distribuir para todos
+                      </button>
                     </div>
                   )}
                 </div>
