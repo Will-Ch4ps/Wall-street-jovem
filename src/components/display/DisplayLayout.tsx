@@ -15,7 +15,7 @@ interface DisplayLayoutProps {
     initialState?: GameState | null
 }
 
-type TabType = 'geral' | 'empresa' | 'jogadores'
+type TabType = 'geral' | 'empresa' | 'jogadores' | 'noticias'
 
 export function DisplayLayout({ initialState }: DisplayLayoutProps) {
     const [state, setState] = useState<GameState | null>(initialState ?? null)
@@ -241,8 +241,8 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
         }, {} as Record<string, Stock[]>)
 
         return (
-            <div className="grid grid-cols-1 gap-6 p-4 lg:grid-cols-3">
-                <div className="space-y-6 lg:col-span-2">
+            <div className="grid grid-cols-1 gap-6 p-4 lg:grid-cols-4">
+                <div className="space-y-6 lg:col-span-3">
                     <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 shadow-lg backdrop-blur-sm">
                         <div className="flex items-center justify-between mb-4">
                             <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Mercados e Setores da Economia</h2>
@@ -253,14 +253,14 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                             )}
                         </div>
 
-                        <div className="space-y-6 max-h-[50vh] overflow-y-auto pr-2 custom-scrollbar">
+                        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
                             {Object.entries(stocksBySector).map(([sector, sectorStocks]) => (
-                                <div key={sector} className="p-4 rounded-lg bg-black/20 border border-white/5">
+                                <div key={sector} className="p-4 rounded-lg bg-black/20 border border-white/5 inline-block w-full">
                                     <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                                         <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
                                         {sector}
                                     </h3>
-                                    <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+                                    <div className="flex flex-col gap-3">
                                         {sectorStocks.map((a) => (
                                             <AssetCard key={a.ticker} asset={a} compact />
                                         ))}
@@ -271,15 +271,15 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                     </div>
                     <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 shadow-lg backdrop-blur-sm">
                         <h2 className="mb-4 text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Fundos Imobiliários (FIIs)</h2>
-                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4">
+                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
                             {fiis.map((a) => (
                                 <AssetCard key={a.ticker} asset={a} compact />
                             ))}
                         </div>
                     </div>
                 </div>
-                <div className="space-y-6">
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 shadow-lg backdrop-blur-sm overflow-hidden">
+                <div className="space-y-6 lg:col-span-1">
+                    <div className="sticky top-[100px] rounded-xl border border-zinc-800 bg-zinc-900/50 shadow-lg backdrop-blur-sm overflow-hidden">
                         <Ranking
                             players={players}
                             holdings={holdings}
@@ -292,13 +292,24 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                             taxRate={game.config.taxRate}
                         />
                     </div>
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 shadow-lg backdrop-blur-sm">
-                        <NewsFeed events={state.events} news={state.news} maxItems={8} />
-                    </div>
                 </div>
             </div>
         )
     }
+
+    const renderNoticias = () => (
+        <div className="p-4 space-y-6 max-w-7xl mx-auto">
+            <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-6 shadow-xl min-h-[70vh]">
+                <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
+                        Notícias do Mercado
+                    </h2>
+                    <span className="text-zinc-400 text-sm">Acompanhe as especulações e todos os eventos públicos da economia.</span>
+                </div>
+                <NewsFeed events={state.events} news={state.news} maxItems={50} allowDetails={true} />
+            </div>
+        </div>
+    )
 
     const renderEmpresa = () => (
         <div className="p-4 space-y-6 max-w-7xl mx-auto">
@@ -616,12 +627,19 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                 >
                     Consultar Jogador/Holding
                 </button>
+                <button
+                    onClick={() => setActiveTab('noticias')}
+                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'noticias' ? 'bg-amber-600 text-white shadow-lg shadow-amber-500/30' : 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+                >
+                    Notícias do Mercado
+                </button>
             </div>
 
             <div className="min-h-[calc(100vh-160px)] pb-12 pt-6">
                 {activeTab === 'geral' && renderGeral()}
                 {activeTab === 'empresa' && renderEmpresa()}
                 {activeTab === 'jogadores' && renderJogadores()}
+                {activeTab === 'noticias' && renderNoticias()}
             </div>
 
             <footer className="fixed bottom-0 w-full flex justify-between items-center border-t border-zinc-800 bg-zinc-950/90 backdrop-blur-md px-6 py-3 text-xs font-mono z-50">

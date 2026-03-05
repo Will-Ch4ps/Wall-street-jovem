@@ -73,7 +73,7 @@ export function NewsFeed({ events, news = [], maxItems = 10, className = '', all
           <span>📰</span> Últimos Eventos
         </h2>
 
-        <div className="space-y-3 max-h-[28rem] overflow-y-auto pr-2 custom-scrollbar">
+        <div className="space-y-3 max-h-[28rem] overflow-y-auto pr-2 custom-scrollbar overflow-x-hidden">
           {combinedItems.length === 0 ? (
             <p className="text-sm text-zinc-500 italic">Nenhum evento registrado ainda.</p>
           ) : (
@@ -88,19 +88,19 @@ export function NewsFeed({ events, news = [], maxItems = 10, className = '', all
                 <div
                   key={e.id}
                   onClick={() => allowDetails && setSelectedEvent(e.rawEvent)}
-                  className={`relative overflow-hidden rounded-lg border border-zinc-700/50 ${bgGradient} p-3 transition-transform ${borderLeft} border-l-4 ${allowDetails ? 'cursor-pointer hover:scale-[1.02] hover:shadow-lg' : ''}`}
+                  className={`relative overflow-hidden rounded-lg border border-zinc-700/50 ${bgGradient} p-3 transition-transform ${borderLeft} border-l-4 ${allowDetails ? 'cursor-pointer hover:scale-[1.02] hover:shadow-lg' : ''} break-words`}
                 >
-                  <div className="flex items-start justify-between gap-2 mb-2">
+                  <div className="flex items-start justify-between gap-2 mb-2 flex-wrap">
                     <div className="flex items-center gap-2">
-                      <span className="text-xl">{e.icon}</span>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 bg-black/40 px-2 py-0.5 rounded">Round {e.round} • {formatShortTime(e.timestamp)}</span>
+                      <span className="text-xl flex-shrink-0">{e.icon}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 bg-black/40 px-2 py-0.5 rounded break-words">Round {e.round} • {formatShortTime(e.timestamp)}</span>
                     </div>
                     {e.duration > 1 ? (
-                      <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20 whitespace-nowrap">
+                      <span className="text-[10px] font-bold text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20 whitespace-nowrap mt-1 sm:mt-0">
                         ⏳ {e.duration} Rodadas
                       </span>
                     ) : (
-                      <span className="text-[10px] font-bold text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded whitespace-nowrap">
+                      <span className="text-[10px] font-bold text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded whitespace-nowrap mt-1 sm:mt-0">
                         ⚡ Imediato
                       </span>
                     )}
@@ -109,11 +109,11 @@ export function NewsFeed({ events, news = [], maxItems = 10, className = '', all
                   <h3 className="font-bold text-zinc-100 text-sm leading-tight mb-1">{e.name}</h3>
                   <p className={`font-semibold text-xs mb-1 ${iconColor}`}>{e.headline}</p>
                   {/* TEXTO DA NOTÍCIA AGORA APARECE NO CARD */}
-                  {e.body && <p className="text-zinc-400 text-xs leading-relaxed mb-2">{e.body}</p>}
+                  {e.body && <p className="text-zinc-400 text-xs leading-relaxed mb-2 break-words">{e.body}</p>}
 
-                  <div className="flex items-center gap-2 mt-2 pt-2 border-t border-white/5">
-                    <span className="text-[10px] text-zinc-500 font-medium">Alvos afetados:</span>
-                    <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-mono font-bold tracking-wider">
+                  <div className="flex items-center gap-2 mt-2 pt-2 border-t border-white/5 flex-wrap">
+                    <span className="text-[10px] text-zinc-500 font-medium whitespace-nowrap">Alvos afetados:</span>
+                    <span className="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded font-mono font-bold tracking-wider break-words flex-1 min-w-0">
                       {getTargetLabel(e.targets)}
                     </span>
                   </div>
