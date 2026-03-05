@@ -157,7 +157,7 @@ export default function HomePage() {
                   <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">👥</div>
                   <p className="font-semibold text-sm">Add Jogador</p>
                 </Link>
-                <Link href="/master?tab=mercado" className="bg-zinc-900/30 hover:bg-zinc-800 border border-zinc-800 rounded-xl p-4 text-center transition group">
+                <Link href="/master?tab=cenarios" className="bg-zinc-900/30 hover:bg-zinc-800 border border-zinc-800 rounded-xl p-4 text-center transition group">
                   <div className="text-2xl mb-2 group-hover:scale-110 transition-transform">🏦</div>
                   <p className="font-semibold text-sm">Criar IPO</p>
                 </Link>

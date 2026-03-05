@@ -37,9 +37,12 @@ export function AssetScenarioPanel({ state, onUpdate }: AssetScenarioPanelProps)
     const [error, setError] = useState<string | null>(null)
 
     const assets = state.assets
-        .filter(a => a.status === 'active' || a.status === 'ipo_open')
         .filter(a => filter === 'all' || a.type === filter)
-        .sort((a, b) => a.ticker.localeCompare(b.ticker))
+        .sort((a, b) => {
+            if (a.status === 'ipo_pending' && b.status !== 'ipo_pending') return -1;
+            if (a.status !== 'ipo_pending' && b.status === 'ipo_pending') return 1;
+            return a.ticker.localeCompare(b.ticker);
+        })
 
     const getEdit = (a: BaseAsset): AssetEdit => edits[a.ticker] ?? {
         trend: a.trend,
@@ -53,6 +56,30 @@ export function AssetScenarioPanel({ state, onUpdate }: AssetScenarioPanelProps)
             ...prev,
             [ticker]: { ...getEdit(state.assets.find(a => a.ticker === ticker)!), ...prev[ticker], [field]: value },
         }))
+    }
+
+    const handleLaunchIPO = async (ticker: string, offerPrice: string) => {
+        const parsedPrice = parseFloat(offerPrice)
+        if (isNaN(parsedPrice) || parsedPrice <= 0) return
+
+        setLoading(true)
+        setError(null)
+        try {
+            const res = await fetch('/api/ipo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ticker, offerPrice: parsedPrice })
+            })
+            const data = await res.json()
+            if (!res.ok) throw new Error(data.error ?? 'Erro ao Lançar IPO')
+            setSaved(ticker)
+            setTimeout(() => setSaved(null), 2000)
+            onUpdate()
+        } catch (e) {
+            setError(e instanceof Error ? e.message : 'Erro desconhecido')
+        } finally {
+            setLoading(false)
+        }
     }
 
     const handleSave = async (ticker: string) => {
@@ -140,90 +167,109 @@ export function AssetScenarioPanel({ state, onUpdate }: AssetScenarioPanelProps)
 
                     return (
                         <div key={a.ticker}
-                            className={`rounded-xl border transition cursor-pointer ${isSelected ? 'border-indigo-500 bg-indigo-950/30' : 'border-zinc-800 bg-zinc-900/60 hover:border-zinc-600'}`}
+                            className={`rounded-xl border transition cursor-pointer ${isSelected ? 'border-indigo-500 bg-indigo-950/30' : a.status === 'ipo_pending' ? 'border-amber-700' : 'border-zinc-800 bg-zinc-900/60 hover:border-zinc-600'}`}
                             onClick={() => setSelected(isSelected ? null : a.ticker)}>
                             {/* Header row */}
                             <div className="px-4 py-3 flex items-center justify-between">
                                 <div className="flex items-center gap-2">
-                                    <span className="font-bold text-white font-mono text-sm">{a.ticker}</span>
+                                    <span className={`font-bold font-mono text-sm ${a.status === 'ipo_pending' ? 'text-amber-500' : 'text-white'}`}>{a.ticker}</span>
                                     {isDirty && <span className="text-xs text-amber-400">●</span>}
                                     {isSaved && <span className="text-xs text-emerald-400">✓ Salvo</span>}
+                                    {a.status === 'ipo_pending' && <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-amber-900/50 text-amber-300 border border-amber-500/50">IPO Blocked</span>}
                                 </div>
                                 <div className="text-right">
                                     <p className="text-sm font-mono text-white">{formatCurrency(a.currentPrice)}</p>
-                                    <p className={`text-xs font-mono ${todayPct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                                        {todayPct >= 0 ? '+' : ''}{todayPct.toFixed(1)}% hoje
-                                    </p>
-                                    <p className="text-[10px] text-zinc-400 mt-0.5">
-                                        Fechamento rod.: {formatCurrency(a.targetClose)}
-                                    </p>
-                                    <p className="text-[10px] text-zinc-400 mt-0.5">
-                                        Est. fim jogo {formatCurrency(proj.mid)} ({projPct >= 0 ? '+' : ''}{projPct.toFixed(1)}%)
-                                    </p>
+                                    {a.status !== 'ipo_pending' && (
+                                        <>
+                                            <p className={`text-xs font-mono ${todayPct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                                                {todayPct >= 0 ? '+' : ''}{todayPct.toFixed(1)}% hoje
+                                            </p>
+                                            <p className="text-[10px] text-zinc-400 mt-0.5">
+                                                Fechamento rod.: {formatCurrency(a.targetClose)}
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
                             </div>
 
-                            {/* Trend quick-select */}
-                            <div className="px-4 pb-3 space-y-3" onClick={e => e.stopPropagation()}>
-                                <div>
-                                    <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1.5">Tendência</p>
-                                    <div className="flex gap-1.5 flex-wrap">
-                                        {TREND_OPTIONS.map(t => (
-                                            <button key={t.value}
-                                                onClick={() => setField(a.ticker, 'trend', t.value)}
-                                                className={`px-2.5 py-1 text-xs rounded-lg border font-medium transition ${edit.trend === t.value ? t.color : 'border-zinc-700 text-zinc-500 hover:border-zinc-500 hover:text-zinc-300'
-                                                    }`}>
-                                                {t.icon} {t.label}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                {/* Target Close */}
-                                <div className="grid grid-cols-3 gap-2">
-                                    <div>
-                                        <label className="text-xs text-zinc-500 block mb-1">Meta (Alvo)</label>
+                            {a.status === 'ipo_pending' ? (
+                                <div className="px-4 pb-3 space-y-3" onClick={e => e.stopPropagation()}>
+                                    <div className="p-3 bg-amber-950/30 border border-amber-500/50 rounded-lg">
+                                        <p className="text-amber-400 text-sm font-bold mb-1">Status: IPO Pendente</p>
+                                        <p className="text-zinc-400 text-xs mb-3">Defina o preço de oferta inicial para lançar essa empresa no mercado.</p>
+                                        <label className="text-xs text-zinc-500 block mb-1">Preço Promocional (Oferta)</label>
                                         <input type="number" value={edit.targetClose}
                                             onChange={e => setField(a.ticker, 'targetClose', e.target.value)}
-                                            className="w-full text-xs font-mono rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
-                                        <p className={`text-xs mt-0.5 font-mono ${targetPct >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
-                                            {targetPct >= 0 ? '+' : ''}{targetPct.toFixed(1)}%
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <label className="text-xs text-zinc-500 block mb-1">Momentum</label>
-                                        <input type="number" value={edit.momentum} step="0.01" min="0.01" max="0.30"
-                                            onChange={e => setField(a.ticker, 'momentum', e.target.value)}
-                                            className="w-full text-xs font-mono rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
-                                        <p className="text-xs text-zinc-600 mt-0.5">atração ao alvo</p>
-                                    </div>
-                                    <div>
-                                        <label className="text-xs text-zinc-500 block mb-1">Volatilidade</label>
-                                        <input type="number" value={edit.volatility} step="0.005" min="0.01" max="0.30"
-                                            onChange={e => setField(a.ticker, 'volatility', e.target.value)}
-                                            className="w-full text-xs font-mono rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
-                                        <p className="text-xs text-zinc-600 mt-0.5">ruído por tick</p>
+                                            className="w-full mb-3 text-xs font-mono rounded-lg border border-amber-700/50 bg-black/50 px-3 py-2 text-white focus:ring-2 focus:ring-amber-500 outline-none" />
+
+                                        <button onClick={() => handleLaunchIPO(a.ticker, edit.targetClose)} disabled={loading}
+                                            className="w-full py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-black font-bold text-xs transition disabled:opacity-30 shadow-lg shadow-amber-900/20">
+                                            {loading ? 'Lançando...' : '🚀 Lançar IPO B3 Agora'}
+                                        </button>
                                     </div>
                                 </div>
+                            ) : (
+                                <div className="px-4 pb-3 space-y-3" onClick={e => e.stopPropagation()}>
+                                    <div>
+                                        <p className="text-xs text-zinc-500 uppercase tracking-wider mb-1.5">Tendência</p>
+                                        <div className="flex gap-1.5 flex-wrap">
+                                            {TREND_OPTIONS.map(t => (
+                                                <button key={t.value}
+                                                    onClick={() => setField(a.ticker, 'trend', t.value)}
+                                                    className={`px-2.5 py-1 text-xs rounded-lg border font-medium transition ${edit.trend === t.value ? t.color : 'border-zinc-700 text-zinc-500 hover:border-zinc-500 hover:text-zinc-300'
+                                                        }`}>
+                                                    {t.icon} {t.label}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
 
-                                {/* Price presets */}
-                                <div className="flex gap-1.5 flex-wrap">
-                                    {[-0.20, -0.10, +0.10, +0.20, +0.30].map(pct => {
-                                        const preset = +(a.currentPrice * (1 + pct)).toFixed(2)
-                                        return (
-                                            <button key={pct} onClick={() => setField(a.ticker, 'targetClose', preset.toString())}
-                                                className={`px-2 py-0.5 text-xs rounded border ${pct >= 0 ? 'border-emerald-800 text-emerald-400 hover:bg-emerald-900/20' : 'border-red-800 text-red-400 hover:bg-red-900/20'} transition`}>
-                                                {pct >= 0 ? '+' : ''}{(pct * 100).toFixed(0)}% → {formatCurrency(preset)}
-                                            </button>
-                                        )
-                                    })}
+                                    {/* Target Close */}
+                                    <div className="grid grid-cols-3 gap-2">
+                                        <div>
+                                            <label className="text-xs text-zinc-500 block mb-1">Meta (Alvo)</label>
+                                            <input type="number" value={edit.targetClose}
+                                                onChange={e => setField(a.ticker, 'targetClose', e.target.value)}
+                                                className="w-full text-xs font-mono rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
+                                            <p className={`text-xs mt-0.5 font-mono ${targetPct >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+                                                {targetPct >= 0 ? '+' : ''}{targetPct.toFixed(1)}%
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <label className="text-xs text-zinc-500 block mb-1">Momentum</label>
+                                            <input type="number" value={edit.momentum} step="0.01" min="0.01" max="0.30"
+                                                onChange={e => setField(a.ticker, 'momentum', e.target.value)}
+                                                className="w-full text-xs font-mono rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
+                                            <p className="text-xs text-zinc-600 mt-0.5">atração ao alvo</p>
+                                        </div>
+                                        <div>
+                                            <label className="text-xs text-zinc-500 block mb-1">Volatilidade</label>
+                                            <input type="number" value={edit.volatility} step="0.005" min="0.01" max="0.30"
+                                                onChange={e => setField(a.ticker, 'volatility', e.target.value)}
+                                                className="w-full text-xs font-mono rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-white focus:ring-2 focus:ring-indigo-500 outline-none" />
+                                            <p className="text-xs text-zinc-600 mt-0.5">ruído por tick</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Price presets */}
+                                    <div className="flex gap-1.5 flex-wrap">
+                                        {[-0.20, -0.10, +0.10, +0.20, +0.30].map(pct => {
+                                            const preset = +(a.currentPrice * (1 + pct)).toFixed(2)
+                                            return (
+                                                <button key={pct} onClick={() => setField(a.ticker, 'targetClose', preset.toString())}
+                                                    className={`px-2 py-0.5 text-xs rounded border ${pct >= 0 ? 'border-emerald-800 text-emerald-400 hover:bg-emerald-900/20' : 'border-red-800 text-red-400 hover:bg-red-900/20'} transition`}>
+                                                    {pct >= 0 ? '+' : ''}{(pct * 100).toFixed(0)}% → {formatCurrency(preset)}
+                                                </button>
+                                            )
+                                        })}
+                                    </div>
+
+                                    <button onClick={() => handleSave(a.ticker)} disabled={loading || !isDirty}
+                                        className="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition disabled:opacity-30">
+                                        {loading ? 'Salvando...' : isSaved ? '✅ Aplicado!' : '💾 Aplicar Cenário'}
+                                    </button>
                                 </div>
-
-                                <button onClick={() => handleSave(a.ticker)} disabled={loading || !isDirty}
-                                    className="w-full py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs transition disabled:opacity-30">
-                                    {loading ? 'Salvando...' : isSaved ? '✅ Aplicado!' : '💾 Aplicar Cenário'}
-                                </button>
-                            </div>
+                            )}
                         </div>
                     )
                 })}

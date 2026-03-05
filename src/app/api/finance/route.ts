@@ -561,6 +561,10 @@ export async function POST(request: NextRequest) {
         }
       }
 
+      // Deactivate all active market offers on round transition (unless they are designed to last across rounds, 
+      // but for this game's simplicity, we clear the board each round unless manual).
+      const finalMarketOffers = state.marketOffers.map(o => ({ ...o, isActive: false }))
+
       const updatedState: GameState = {
         ...state,
         assets: finalAssets,
@@ -580,6 +584,7 @@ export async function POST(request: NextRequest) {
         holdings,
         loans: updatedLoans,
         transactions,
+        marketOffers: finalMarketOffers,
       }
       await saveGameState(updatedState)
       return NextResponse.json({ state: updatedState })

@@ -10,9 +10,10 @@ import { OffersTab } from './OffersTab'
 import { HoldingsPanel } from './HoldingsPanel'
 import { AnalysisTab } from './AnalysisTab'
 import { RulesTab } from './RulesTab'
+import { IpoPanel } from './IpoPanel'
 import type { GameState } from '@/types'
 
-type Tab = 'mercado' | 'transacoes' | 'analise' | 'eventos' | 'financeiro' | 'transicao' | 'ofertas' | 'holdings' | 'regras'
+type Tab = 'mercado' | 'cenarios' | 'transacoes' | 'analise' | 'eventos' | 'financeiro' | 'transicao' | 'ofertas' | 'holdings' | 'regras'
 
 export function MasterLayout() {
   const [tab, setTab] = useState<Tab>('mercado')
@@ -305,7 +306,8 @@ export function MasterLayout() {
 
           <nav className="flex flex-col gap-1 px-4 mt-4">
             {[
-              { id: 'mercado', label: 'Mercado e Ativos', icon: '📈' },
+              { id: 'mercado', label: 'Lista de Ativos', icon: '📈' },
+              { id: 'cenarios', label: 'Cenários e IPOs', icon: '⚙️' },
               { id: 'transacoes', label: 'Transações', icon: '💰' },
               { id: 'analise', label: 'Análise de Mercado', icon: '🔭' },
               { id: 'eventos', label: 'Eventos (Notícias e Cards)', icon: '🎭' },
@@ -435,6 +437,7 @@ export function MasterLayout() {
         <div className="flex-1 overflow-auto p-6 custom-scrollbar">
           <div className="max-w-6xl mx-auto min-h-[500px]">
             {tab === 'mercado' && <MarketTab assets={state.assets} />}
+            {tab === 'cenarios' && <IpoPanel state={state} onUpdate={fetchState} />}
             {tab === 'transacoes' && (
               <div className="grid gap-6 lg:grid-cols-2">
                 <TransactionPanel state={state} onSuccess={fetchState} />

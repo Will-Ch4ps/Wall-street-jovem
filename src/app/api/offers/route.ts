@@ -25,12 +25,12 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     const { action, ticker, type, offerPrice, totalQuantity, reason, expiresInMinutes } = body
-    const asset = state.assets.find((a) => a.ticker === ticker)
-    if (!asset) {
-      return NextResponse.json({ error: 'Asset not found' }, { status: 404 })
-    }
-
     if (action === 'create') {
+      const asset = state.assets.find((a) => a.ticker === ticker)
+      if (!asset) {
+        return NextResponse.json({ error: 'Asset not found' }, { status: 404 })
+      }
+
       const expiresAt = new Date()
       expiresAt.setMinutes(expiresAt.getMinutes() + (expiresInMinutes ?? 3))
       const offer: MarketOffer = {
@@ -53,6 +53,21 @@ export async function POST(request: NextRequest) {
       }
       await saveGameState(updatedState)
       return NextResponse.json({ offer, state: updatedState })
+    }
+
+    if (action === 'cancel') {
+      const { offerId } = body
+      const offerIndex = state.marketOffers.findIndex(o => o.id === offerId)
+      if (offerIndex === -1) {
+        return NextResponse.json({ error: 'Offer not found' }, { status: 404 })
+      }
+
+      const newOffers = [...state.marketOffers]
+      newOffers[offerIndex] = { ...newOffers[offerIndex], isActive: false }
+
+      const updatedState = { ...state, marketOffers: newOffers }
+      await saveGameState(updatedState)
+      return NextResponse.json({ state: updatedState })
     }
 
     return NextResponse.json(state)

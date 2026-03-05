@@ -105,13 +105,16 @@ function buildTags(sector: string, profile: string): string[] {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function mapStock(a: any): Stock {
+  const pendingIPOs = ['BRIS3', 'ONLS3', 'BLAB3']
+  const isPending = pendingIPOs.includes(a.ticker)
+
   return {
     ticker: a.ticker,
     name: a.name,
     type: 'stock',
     sector: a.sector || 'Desconhecido',
     profile: a.profile || '',
-    status: 'active',
+    status: isPending ? 'ipo_pending' : 'active',
     initialPrice: a.initialPrice,
     currentPrice: a.initialPrice,
     openPrice: a.initialPrice,

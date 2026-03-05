@@ -34,7 +34,26 @@ export async function POST(request: NextRequest) {
     }
 
     if (action === 'draw') {
-      const deckType = cardType ?? decideWhichDeck()
+      let deckType = cardType
+      if (!deckType) {
+        // Enforce deterministic distribution: balance company/fii vs global
+        const effectsThisRound = (state.activeCardEffects || []).filter(e => e.round === currentRound)
+        const specificTargetsDrawn = effectsThisRound.filter(e => e.effect.target === 'company' || e.effect.target === 'fii').length
+        const globalTargetsDrawn = effectsThisRound.filter(e => e.effect.target === 'all' || e.effect.target === 'sector').length
+
+        if (maxCardsPerRound >= 2) {
+          if (specificTargetsDrawn === 0 && globalTargetsDrawn >= 1) {
+            deckType = Math.random() > 0.3 ? 'company' : 'fii'
+          } else if (globalTargetsDrawn === 0 && specificTargetsDrawn >= 1) {
+            deckType = 'global'
+          } else {
+            deckType = decideWhichDeck()
+          }
+        } else {
+          deckType = decideWhichDeck()
+        }
+      }
+
       let deck = globalDeck
       if (deckType === 'company') deck = companyDeck
       else if (deckType === 'fii') deck = fiiDeck
