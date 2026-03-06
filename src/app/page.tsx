@@ -8,6 +8,7 @@ import type { GameState } from '@/types'
 export default function HomePage() {
   const [state, setState] = useState<GameState | null>(null)
   const [loading, setLoading] = useState(true)
+  const [playerSearchQuery, setPlayerSearchQuery] = useState('')
 
   const fetchState = async () => {
     try {
@@ -183,46 +184,64 @@ export default function HomePage() {
               <span className="bg-zinc-800 p-2 rounded-lg text-sm">🔍</span> Consultar Jogador
             </h2>
 
-            <div className="w-full rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xl">
-              <p className="text-xs font-medium text-zinc-500 mb-4">
+            <div className="w-full rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6 shadow-xl flex flex-col h-full max-h-[800px]">
+              <p className="text-xs font-medium text-zinc-500 mb-4 shrink-0">
                 Clique para abrir o painel completo do investidor com carteira, gráficos e operações.
               </p>
 
               {state && (state.players.length > 0 || state.holdings.length > 0) ? (
-                <div className="space-y-2">
-                  {state.players.filter(p => p.isActive).map(p => (
-                    <Link
-                      key={p.id}
-                      href={`/master/player/${encodeURIComponent(p.id)}?type=player`}
-                      className="flex items-center gap-3 p-3 bg-zinc-950/60 border border-zinc-800 rounded-xl hover:border-indigo-500/60 hover:bg-zinc-800/50 transition group"
-                    >
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-xs font-black text-white shrink-0">
-                        {p.name.substring(0, 2).toUpperCase()}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm text-white truncate">{p.name}</p>
-                        <p className="text-xs text-zinc-500">Jogador • {formatCurrency(p.cash)} disponível</p>
-                      </div>
-                      <span className="text-zinc-600 group-hover:text-indigo-400 transition">→</span>
-                    </Link>
-                  ))}
-                  {state.holdings.filter(h => h.isActive).map(h => (
-                    <Link
-                      key={h.id}
-                      href={`/master/player/${encodeURIComponent(h.id)}?type=holding`}
-                      className="flex items-center gap-3 p-3 bg-zinc-950/60 border border-zinc-800 rounded-xl hover:border-violet-500/60 hover:bg-zinc-800/50 transition group"
-                    >
-                      <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center text-xs font-black text-white shrink-0">
-                        {h.name.substring(0, 2).toUpperCase()}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-sm text-white truncate">{h.name}</p>
-                        <p className="text-xs text-zinc-500">Holding • {formatCurrency(h.cash)} disponível</p>
-                      </div>
-                      <span className="text-zinc-600 group-hover:text-violet-400 transition">→</span>
-                    </Link>
-                  ))}
-                </div>
+                <>
+                  <div className="relative mb-4 shrink-0">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">🔍</span>
+                    <input
+                      type="text"
+                      placeholder="Buscar jogador ou holding..."
+                      value={playerSearchQuery}
+                      onChange={e => setPlayerSearchQuery(e.target.value)}
+                      className="w-full bg-zinc-950/80 border border-zinc-800 text-sm text-white rounded-xl pl-9 pr-3 py-2.5 outline-none focus:border-indigo-500/70 transition-colors placeholder:text-zinc-600"
+                    />
+                  </div>
+
+                  <div className="space-y-2 overflow-y-auto pr-1 flex-1 custom-scrollbar min-h-[200px]">
+                    {state.players.filter(p => p.isActive && p.name.toLowerCase().includes(playerSearchQuery.toLowerCase())).map(p => (
+                      <Link
+                        key={p.id}
+                        href={`/master/player/${encodeURIComponent(p.id)}?type=player`}
+                        className="flex items-center gap-3 p-3 bg-zinc-950/60 border border-zinc-800 rounded-xl hover:border-indigo-500/60 hover:bg-zinc-800/50 transition group"
+                      >
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-600 to-violet-600 flex items-center justify-center text-xs font-black text-white shrink-0">
+                          {p.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm text-white truncate">{p.name}</p>
+                          <p className="text-xs text-zinc-500">Jogador • {formatCurrency(p.cash)} disponível</p>
+                        </div>
+                        <span className="text-zinc-600 group-hover:text-indigo-400 transition">→</span>
+                      </Link>
+                    ))}
+                    {state.holdings.filter(h => h.isActive && h.name.toLowerCase().includes(playerSearchQuery.toLowerCase())).map(h => (
+                      <Link
+                        key={h.id}
+                        href={`/master/player/${encodeURIComponent(h.id)}?type=holding`}
+                        className="flex items-center gap-3 p-3 bg-zinc-950/60 border border-zinc-800 rounded-xl hover:border-violet-500/60 hover:bg-zinc-800/50 transition group"
+                      >
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-700 flex items-center justify-center text-xs font-black text-white shrink-0">
+                          {h.name.substring(0, 2).toUpperCase()}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="font-semibold text-sm text-white truncate">{h.name}</p>
+                          <p className="text-xs text-zinc-500">Holding • {formatCurrency(h.cash)} disponível</p>
+                        </div>
+                        <span className="text-zinc-600 group-hover:text-violet-400 transition">→</span>
+                      </Link>
+                    ))}
+
+                    {state.players.filter(p => p.isActive && p.name.toLowerCase().includes(playerSearchQuery.toLowerCase())).length === 0 &&
+                      state.holdings.filter(h => h.isActive && h.name.toLowerCase().includes(playerSearchQuery.toLowerCase())).length === 0 && (
+                        <div className="text-center py-6 text-sm text-zinc-500 italic">Nenhum resultado encontrado para "{playerSearchQuery}"</div>
+                      )}
+                  </div>
+                </>
               ) : (
                 <div className="text-center py-8">
                   <p className="text-4xl mb-3">👤</p>

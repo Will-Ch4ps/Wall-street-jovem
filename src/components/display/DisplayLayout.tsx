@@ -22,6 +22,8 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
     const [activeTab, setActiveTab] = useState<TabType>('geral')
     const [selectedTicker, setSelectedTicker] = useState<string | null>(null)
     const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null)
+    const [playerSearchQuery, setPlayerSearchQuery] = useState('')
+    const [isPlayerDropdownOpen, setIsPlayerDropdownOpen] = useState(false)
     const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
     useEffect(() => {
@@ -248,9 +250,10 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
         }, {} as Record<string, Stock[]>)
 
         return (
-            <div className="grid grid-cols-1 gap-3 px-3 lg:grid-cols-4 max-w-[1920px] mx-auto">
-                <div className="space-y-3 lg:col-span-3">
-                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm">
+            <div className="flex flex-col xl:flex-row gap-2 px-2 max-w-[1920px] mx-auto items-start">
+                {/* Coluna 1: Ações */}
+                <div className="flex-1 w-full min-w-0">
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm mb-2 xl:mb-0">
                         <div className="flex items-center justify-between mb-2">
                             <h2 className="text-lg font-bold text-slate-800 dark:text-white">Mercados e Setores da Economia</h2>
                             {game.config.marketMood && game.config.marketMood !== 'neutral' && (
@@ -260,14 +263,14 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                             )}
                         </div>
 
-                        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 space-y-3">
+                        <div className="columns-2 sm:columns-3 lg:columns-4 2xl:columns-5 gap-2 space-y-2">
                             {Object.entries(stocksBySector).map(([sector, sectorStocks]) => (
-                                <div key={sector} className="p-2.5 rounded-lg bg-slate-50 dark:bg-zinc-800/40 border border-slate-100 dark:border-zinc-700/50 inline-block w-full">
+                                <div key={sector} className="p-1.5 rounded-lg bg-slate-50 dark:bg-zinc-800/40 border border-slate-100 dark:border-zinc-700/50 inline-block w-full">
                                     <h3 className="text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
                                         {sector}
                                     </h3>
-                                    <div className="flex flex-col gap-2">
+                                    <div className="flex flex-col gap-1.5">
                                         {sectorStocks.map((a) => (
                                             <AssetCard key={a.ticker} asset={a} compact />
                                         ))}
@@ -276,16 +279,25 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                             ))}
                         </div>
                     </div>
-                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm mt-3">
-                        <h2 className="mb-2 text-lg font-bold text-slate-800 dark:text-white">Fundos Imobiliários (FIIs)</h2>
-                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
+                </div>
+
+                {/* Coluna 2: FIIs */}
+                <div className="w-full xl:w-[260px] 2xl:w-[300px] shrink-0 mb-2 xl:mb-0">
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm h-full">
+                        <h2 className="mb-3 text-sm font-bold text-slate-800 dark:text-white uppercase tracking-widest flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-amber-500" />
+                            Fundos Imobiliários
+                        </h2>
+                        <div className="flex flex-col gap-1.5">
                             {fiis.map((a) => (
                                 <AssetCard key={a.ticker} asset={a} compact />
                             ))}
                         </div>
                     </div>
                 </div>
-                <div className="space-y-3 lg:col-span-1">
+
+                {/* Coluna 3: Ranking */}
+                <div className="w-full xl:w-[320px] shrink-0">
                     <div className="sticky top-[90px] rounded-xl border border-slate-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/90 shadow-sm overflow-hidden">
                         <Ranking
                             players={players}
@@ -506,17 +518,55 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                         <h2 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Consultar Investidor</h2>
                         <p className="text-zinc-400 mt-1">Veja a carteira detalhada de jogadores e holdings.</p>
                     </div>
-                    <select
-                        value={activeId ?? ''}
-                        onChange={(e) => setSelectedPlayerId(e.target.value)}
-                        className="rounded-lg border border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-950 px-4 py-3 text-base font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-purple-500 outline-none w-full md:w-80"
-                    >
-                        {combinedEntities.map((e) => (
-                            <option key={e.id} value={e.id}>
-                                {e.name} ({e.type})
-                            </option>
-                        ))}
-                    </select>
+
+                    <div className="relative w-full md:w-80">
+                        <div
+                            className="rounded-lg border border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-950 px-4 py-3 text-base font-semibold text-slate-800 dark:text-white focus-within:ring-2 focus-within:ring-purple-500 flex items-center gap-2 cursor-text"
+                            onClick={() => setIsPlayerDropdownOpen(true)}
+                        >
+                            <span className="text-slate-400">🔍</span>
+                            <input
+                                type="text"
+                                placeholder="Buscar investidor..."
+                                className="bg-transparent border-none outline-none w-full placeholder-slate-400 dark:placeholder-zinc-600"
+                                value={playerSearchQuery}
+                                onChange={(e) => {
+                                    setPlayerSearchQuery(e.target.value)
+                                    setIsPlayerDropdownOpen(true)
+                                }}
+                                onFocus={() => setIsPlayerDropdownOpen(true)}
+                                onBlur={() => {
+                                    // small delay to allow click on option
+                                    setTimeout(() => setIsPlayerDropdownOpen(false), 200)
+                                }}
+                            />
+                            {isPlayerDropdownOpen ? '▲' : '▼'}
+                        </div>
+
+                        {isPlayerDropdownOpen && (
+                            <div className="absolute z-50 top-full left-0 right-0 mt-2 max-h-64 overflow-y-auto bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 rounded-lg shadow-xl custom-scrollbar">
+                                {combinedEntities.filter(e => e.name.toLowerCase().includes(playerSearchQuery.toLowerCase())).length === 0 ? (
+                                    <div className="p-4 text-center text-sm text-slate-500 dark:text-zinc-500">Nenhum resultado encontrado.</div>
+                                ) : (
+                                    combinedEntities
+                                        .filter(e => e.name.toLowerCase().includes(playerSearchQuery.toLowerCase()))
+                                        .map(e => (
+                                            <div
+                                                key={e.id}
+                                                className={`px-4 py-3 cursor-pointer hover:bg-slate-100 dark:hover:bg-zinc-800 border-b border-slate-100 dark:border-zinc-800/50 last:border-0 ${activeId === e.id ? 'bg-purple-50/50 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300 font-bold' : 'text-slate-700 dark:text-zinc-300'}`}
+                                                onMouseDown={() => {
+                                                    setSelectedPlayerId(e.id)
+                                                    setPlayerSearchQuery('')
+                                                    setIsPlayerDropdownOpen(false)
+                                                }}
+                                            >
+                                                {e.name} <span className="text-xs font-normal text-slate-400 dark:text-zinc-500 ml-1">({e.type})</span>
+                                            </div>
+                                        ))
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {entity && (
@@ -655,7 +705,8 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                             </div>
                         </div>
                     </div>
-                )}</div>
+                )
+                }</div >
         )
     }
 

@@ -24,12 +24,12 @@ export function AssetCard({ asset, className, compact }: AssetCardProps) {
     return (
       <div
         className={cn(
-          'rounded shadow-sm border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-2 hover:border-slate-300 dark:hover:border-zinc-700 transition-colors',
+          'rounded shadow-sm border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-1.5 hover:border-slate-300 dark:hover:border-zinc-700 transition-colors',
           className
         )}
       >
-        <div className="flex items-center justify-between pb-1 border-b border-slate-100 dark:border-zinc-800 mb-1">
-          <span className="flex items-center gap-1 font-mono font-bold text-sm text-slate-800 dark:text-zinc-200 truncate">
+        <div className="flex items-center justify-between pb-0.5 border-b border-slate-100 dark:border-zinc-800 mb-0.5">
+          <span className="flex items-center gap-1 font-mono font-bold text-xs text-slate-800 dark:text-zinc-200 truncate">
             {asset.ticker}
             <GlossaryTooltip term={asset.name} customText={descriptionText} />
           </span>
@@ -40,7 +40,7 @@ export function AssetCard({ asset, className, compact }: AssetCardProps) {
             {formatPercent(Math.abs(variation))}
           </span>
         </div>
-        <div className="text-base font-black text-slate-900 dark:text-white tracking-tight">{formatCurrency(asset.currentPrice)}</div>
+        <div className="text-sm font-black text-slate-900 dark:text-white tracking-tight">{formatCurrency(asset.currentPrice)}</div>
       </div>
     )
   }
