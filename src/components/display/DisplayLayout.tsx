@@ -9,7 +9,8 @@ import { CandlestickChart } from '@/components/shared/CandlestickChart'
 import { Ranking } from '@/components/display/Ranking'
 import { formatCurrency, formatPercent } from '@/lib/formatters'
 import { EventRevealModal } from '@/components/display/EventRevealModal'
-import type { GameEvent, GameState, FII, News, Stock } from '@/types'
+import { ExecuteOfferModal } from '@/components/display/ExecuteOfferModal'
+import type { GameEvent, GameState, FII, News, Stock, MarketOffer } from '@/types'
 
 interface DisplayLayoutProps {
     initialState?: GameState | null
@@ -24,6 +25,7 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
     const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null)
     const [playerSearchQuery, setPlayerSearchQuery] = useState('')
     const [isPlayerDropdownOpen, setIsPlayerDropdownOpen] = useState(false)
+    const [executingOffer, setExecutingOffer] = useState<MarketOffer | null>(null)
     const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
     useEffect(() => {
@@ -756,8 +758,18 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                     <ActiveOffer
                         offer={topOffer}
                         currentPrice={assets.find((a) => a.ticker === topOffer.ticker)?.currentPrice}
+                        onExecute={(o) => setExecutingOffer(o)}
                     />
                 </div>
+            )}
+
+            {executingOffer && (
+                <ExecuteOfferModal
+                    offer={executingOffer}
+                    state={state}
+                    onClose={() => setExecutingOffer(null)}
+                    onSuccess={() => fetchFullState()}
+                />
             )}
 
             <div className="border-b border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 px-4 py-2 flex gap-2 justify-center sticky top-[38px] z-40 backdrop-blur-md overflow-x-auto whitespace-nowrap custom-scrollbar shadow-sm">

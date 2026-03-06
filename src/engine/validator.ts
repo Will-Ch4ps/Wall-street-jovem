@@ -14,9 +14,10 @@ export function validateTransaction(params: {
   availableShares: number
   isSameRoundAsBuy?: boolean   // true se o vendedor já comprou esse ativo nesta rodada
   isP2P?: boolean              // true se o vendedor não é 'market'
+  offerQuantity?: number       // Quantidade disponível em uma oferta específica
 }): TransactionValidation {
   const errors: string[] = []
-  const { tx, config, asset, buyerCash, sellerPosition, availableShares, isSameRoundAsBuy, isP2P } = params
+  const { tx, config, asset, buyerCash, sellerPosition, availableShares, isSameRoundAsBuy, isP2P, offerQuantity } = params
 
   if (asset.status === 'suspended') {
     errors.push('Empresa suspensa (circuit breaker)')
@@ -29,6 +30,9 @@ export function validateTransaction(params: {
     const total = (tx.price ?? 0) * (tx.quantity ?? 0)
     if (buyerCash < total) errors.push('Saldo insuficiente')
     if (availableShares < (tx.quantity ?? 0)) errors.push('Ações insuficientes no mercado')
+    if (offerQuantity !== undefined && offerQuantity < (tx.quantity ?? 0)) {
+      errors.push(`Quantidade superior ao disponível na oferta (${offerQuantity})`)
+    }
 
     // P2P: compra de outro jogador (não do mercado)
     if (isP2P && !config.allowP2PTrade) {

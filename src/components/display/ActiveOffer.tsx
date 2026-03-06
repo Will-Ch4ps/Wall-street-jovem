@@ -8,9 +8,10 @@ interface ActiveOfferProps {
   currentPrice?: number
   className?: string
   onCancel?: (id: string) => void
+  onExecute?: (offer: MarketOffer) => void
 }
 
-export function ActiveOffer({ offer, currentPrice, className = '', onCancel }: ActiveOfferProps) {
+export function ActiveOffer({ offer, currentPrice, className = '', onCancel, onExecute }: ActiveOfferProps) {
   const price = currentPrice ?? offer.currentPriceAtCreation
   const diffPct =
     price > 0
@@ -42,6 +43,14 @@ export function ActiveOffer({ offer, currentPrice, className = '', onCancel }: A
               className="text-[10px] font-bold bg-red-100 hover:bg-red-600 text-red-700 hover:text-white dark:bg-red-600/20 dark:hover:bg-red-600 dark:text-red-500 dark:hover:text-white px-2 py-1 rounded transition-colors"
             >
               CANCELAR
+            </button>
+          )}
+          {onExecute && offer.remainingQuantity > 0 && (
+            <button
+              onClick={() => onExecute(offer)}
+              className="text-[10px] font-bold bg-indigo-100 hover:bg-indigo-600 text-indigo-700 hover:text-white dark:bg-indigo-600/20 dark:hover:bg-indigo-600 dark:text-indigo-400 dark:hover:text-white px-3 py-1 rounded transition-colors shadow-sm"
+            >
+              {offer.type === 'sell' ? 'COMPRAR JÁ' : 'VENDER JÁ'}
             </button>
           )}
         </div>

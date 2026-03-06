@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { type, buyerId, buyerType, sellerId, sellerType, ticker, quantity, price } = body
+    const { type, buyerId, buyerType, sellerId, sellerType, ticker, quantity, price, offerId } = body
 
     if (type !== 'buy' && type !== 'sell') {
       return NextResponse.json({ error: 'Invalid transaction type' }, { status: 400 })
@@ -30,6 +30,9 @@ export async function POST(request: NextRequest) {
 
     const asset = state.assets.find((a) => a.ticker === ticker)
     if (!asset) return NextResponse.json({ error: 'Asset not found' }, { status: 404 })
+
+    // Find offer if provided
+    const offer = offerId ? state.marketOffers.find(o => o.id === offerId) : null
 
     // After-hours trading check
     const currentRoundData = state.rounds.find(r => r.number === state.game.currentRound)
@@ -45,12 +48,14 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Determine execution price: custom price for P2P, or fixed last close after hours
-    let execPriceOverride: number | undefined = price
-    if ((gameNotRunning || roundEnded) && state.game.config.allowAfterHours && state.game.config.afterHoursFixedPrice) {
-      // After-hours fixed: use last candle close
+    // Determine execution price
+    let execPrice = price ?? asset.currentPrice
+
+    // If it's an offer transaction, use exactly the price from the body/offer (already locked in price variable)
+    // If it's after hours and NOT an offer, use after-hours logic
+    if (!offerId && (gameNotRunning || roundEnded) && state.game.config.allowAfterHours && state.game.config.afterHoursFixedPrice) {
       const hist = state.priceHistories[ticker]
-      execPriceOverride = hist?.candles.slice(-1)[0]?.close ?? asset.currentPrice
+      execPrice = hist?.candles.slice(-1)[0]?.close ?? asset.currentPrice
     }
 
     const currentRound = state.game.currentRound
@@ -65,7 +70,8 @@ export async function POST(request: NextRequest) {
     )
     const sellerPosition = sellerPortfolio.positions.find((p) => p.ticker === ticker)
 
-    const total = (price ?? asset.currentPrice) * (quantity ?? 0)
+    const execQty = quantity ?? 0
+    const execTotal = execPrice * execQty
 
     // Detect P2P: seller is not market (for buys); buyer is not market (for sells)
     const isP2P = type === 'buy'
@@ -78,13 +84,14 @@ export async function POST(request: NextRequest) {
     )
 
     const validation = validateTransaction({
-      tx: { type, price: price ?? asset.currentPrice, quantity, total },
+      tx: { type, price: execPrice, quantity: execQty, total: execTotal },
       config: state.game.config,
       asset,
       buyerCash,
       sellerPosition,
       availableShares: asset.availableShares,
       isP2P,
+      offerQuantity: offer?.remainingQuantity, // Add support for offer qty check if needed, or rely on manual check here
       isSameRoundAsBuy,
     })
 
@@ -94,10 +101,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
-
-    const execPrice = execPriceOverride ?? asset.currentPrice
-    const execQty = quantity ?? 0
-    const execTotal = execPrice * execQty
 
     const now = new Date().toISOString()
     const txId = nanoid()
@@ -118,6 +121,7 @@ export async function POST(request: NextRequest) {
         type === 'buy'
           ? `${buyerId} comprou ${execQty} ${ticker} @ R$${execPrice.toFixed(2)}`
           : `${sellerId} vendeu ${execQty} ${ticker} @ R$${execPrice.toFixed(2)}`,
+      metadata: offerId ? { offerId } : undefined
     }
 
     const portfolios = [...state.portfolios]
@@ -125,6 +129,20 @@ export async function POST(request: NextRequest) {
     const holdings = state.holdings.map((h) => ({ ...h }))
     const assets = state.assets.map((a) => (a.ticker === ticker ? { ...a } : a))
     const updatedAsset = assets.find((a) => a.ticker === ticker)!
+    const marketOffers = state.marketOffers.map(o => ({ ...o }))
+
+    // Deplete offer if exists
+    if (offerId) {
+      const oIdx = marketOffers.findIndex(o => o.id === offerId)
+      if (oIdx >= 0) {
+        const mOffer = marketOffers[oIdx]
+        mOffer.remainingQuantity = Math.max(0, mOffer.remainingQuantity - execQty)
+        mOffer.transactions = [...(mOffer.transactions || []), txId]
+        if (mOffer.remainingQuantity <= 0) {
+          mOffer.isActive = false
+        }
+      }
+    }
 
     if (type === 'buy') {
       const buyerIdx = buyerType === 'player'
@@ -230,10 +248,6 @@ export async function POST(request: NextRequest) {
     }
 
     // --- MARKET REACTION TO STUDENT TRADES (PRICE IMPACT) ---
-    // User Request: "a compra dos alunos deve impactar no valor das ações depois"
-    // Buying from "market" removes supply -> Target UP
-    // Selling to "market" dumps supply -> Target DOWN
-    // P2P -> Driven by premium/discount of the negotiated price compared to current list price.
     const baseImpactFactor = 0.00002 // 0.002% per share executed
 
     if (isP2P) {
@@ -244,7 +258,6 @@ export async function POST(request: NextRequest) {
       const volumeImpact = execQty * asset.currentPrice * baseImpactFactor
       if (type === 'buy') {
         updatedAsset.targetClose += volumeImpact
-        // Boost momentum temporarily to quickly react to the large volume
         updatedAsset.momentum = Math.min(0.5, (updatedAsset.momentum || 0.08) + 0.02)
       } else {
         updatedAsset.targetClose = Math.max(0.01, updatedAsset.targetClose - volumeImpact)
@@ -258,6 +271,7 @@ export async function POST(request: NextRequest) {
       players,
       holdings,
       portfolios,
+      marketOffers,
       transactions: [...state.transactions, tx],
     }
     await saveGameState(updatedState)

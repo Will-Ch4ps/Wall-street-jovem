@@ -38,9 +38,8 @@ export function TransactionPanel({ state, onSuccess }: TransactionPanelProps) {
   const marketPrice = asset?.currentPrice ?? 0
   const qty = parseInt(quantity, 10) || 0
 
-  const isP2P = type === 'buy' ? sellerId !== 'market' : buyerId !== 'market'
   const isCustomPriceValid = customPrice.trim() !== '' && !isNaN(parseFloat(customPrice))
-  const execPrice = isP2P && isCustomPriceValid ? parseFloat(customPrice) : marketPrice
+  const execPrice = isCustomPriceValid ? parseFloat(customPrice) : marketPrice
   const total = execPrice * qty
 
   const buyer = buyers.find((b) => b.id === buyerId)
@@ -199,24 +198,33 @@ export function TransactionPanel({ state, onSuccess }: TransactionPanelProps) {
           </select>
         </div>
         <div>
-          <span className="text-sm text-zinc-400">Preço Mercado: </span>
+          <span className="text-sm text-zinc-400">Preço Mercado (Realtime): </span>
           <span className="font-mono font-semibold">{formatCurrency(marketPrice)}</span>
+          <button
+            type="button"
+            onClick={() => setCustomPrice(marketPrice.toFixed(2))}
+            className="ml-3 text-[10px] bg-zinc-700 hover:bg-zinc-600 px-2 py-0.5 rounded text-white"
+          >
+            FIXAR ESTE PREÇO
+          </button>
         </div>
-        {isP2P && (
-          <div>
-            <label className="block text-sm text-zinc-400">Preço Negociado (P2P) - Opcional</label>
-            <input
-              type="number"
-              min={0.01}
-              step={0.01}
-              value={customPrice}
-              placeholder={marketPrice.toFixed(2)}
-              onChange={(e) => setCustomPrice(e.target.value)}
-              className="mt-1 w-full rounded border border-zinc-600 bg-zinc-800 px-3 py-2"
-            />
-            <p className="text-xs text-zinc-500 mt-1">Se deixado em branco, usará o preço de mercado.</p>
-          </div>
-        )}
+        <div>
+          <label className="block text-sm text-zinc-400">Preço de Execução {isCustomPriceValid ? '🔒 (FIXADO)' : '(Dinâmico)'}</label>
+          <input
+            type="number"
+            min={0.01}
+            step={0.01}
+            value={customPrice}
+            placeholder={marketPrice.toFixed(2)}
+            onChange={(e) => setCustomPrice(e.target.value)}
+            className={`mt-1 w-full rounded border px-3 py-2 bg-zinc-800 ${isCustomPriceValid ? 'border-indigo-500 text-indigo-300' : 'border-zinc-600 text-white'}`}
+          />
+          <p className="text-[10px] text-zinc-500 mt-1">
+            {isCustomPriceValid
+              ? 'Preço travado manualmente. Apague para voltar ao preço de mercado.'
+              : 'Usando preço de mercado (o valor pode mudar até o momento do clique).'}
+          </p>
+        </div>
         <div>
           <label className="block text-sm text-zinc-400">Quantidade</label>
           <input

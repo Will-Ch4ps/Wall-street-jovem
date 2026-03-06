@@ -59,16 +59,39 @@ export function HoldingsPanel({ state, onUpdate }: HoldingsPanelProps) {
     if (!holding || !player || player.cash < amount) return
     setLoading(true)
     try {
+      // --- Lógica de Participação Justa (Equity Units) ---
+      // 1. Calcular o Patrimônio Líquido (PL) atual antes do novo aporte
+      const portfolio = state.portfolios.find(
+        (p) => p.ownerId === holdingId && p.ownerType === 'holding'
+      ) ?? { ownerId: holdingId, ownerType: 'holding' as OwnerType, positions: [] }
+
+      const { netWorth } = calculateNetWorth(
+        holding, portfolio, state.assets,
+        state.fixedIncomeInvestments, state.fixedIncomeProducts,
+        state.loans, state.game.currentRound, state.game.config.taxRate
+      )
+
+      // 2. Determinar quanto de "crédito de participação" o novo aporte gera.
+      // Se a holding já valorizou, o real investido "vale menos" em porcentagem do que no início.
+      // Se a holding não tem valor/aporte (início), o crédito é o próprio valor.
+      let participationCredit = amount
+      if (holding.totalContributed > 0 && netWorth > 0) {
+        // Regra de Três:
+        // netWorth (Valor Real)      -> holding.totalContributed (Crédito Total Atual)
+        // amount (Dinheiro Novo)    -> participationCredit (Novo Crédito)
+        participationCredit = (amount * holding.totalContributed) / netWorth
+      }
+
       const updatedHoldings = state.holdings.map((h) =>
         h.id === holdingId
           ? {
             ...h,
             memberIds: h.memberIds.includes(playerId) ? h.memberIds : [...h.memberIds, playerId],
-            cash: h.cash + amount,
-            totalContributed: h.totalContributed + amount,
+            cash: h.cash + amount, // O caixa aumenta pelo valor REAL
+            totalContributed: h.totalContributed + participationCredit, // A base de cálculo aumenta pelo crédito proporcional
             contributions: {
               ...h.contributions,
-              [playerId]: (h.contributions[playerId] ?? 0) + amount,
+              [playerId]: (h.contributions[playerId] ?? 0) + participationCredit,
             },
           }
           : h

@@ -1,38 +1,6000 @@
 {
   "game": {
-    "id": "",
-    "name": "",
-    "status": "setup",
-    "currentRound": 0,
+    "id": "wKzLGnGNvZPNin5f5jRwd",
+    "name": "InvestQuest",
+    "status": "running",
+    "currentRound": 2,
     "maxRounds": 10,
     "initialCapital": 10000,
-    "createdAt": "",
+    "createdAt": "2026-03-06T12:51:09.818Z",
     "config": {
       "allowLoans": true,
       "allowShort": false,
-      "allowDayTrade": false,
-      "allowP2PTrade": false,
+      "allowDayTrade": true,
+      "allowP2PTrade": true,
       "maxLoanPercent": 0.4,
-      "defaultLoanInterest": 0.03,
+      "defaultLoanInterest": 0.05,
       "taxRate": 0.15,
-      "tickIntervalMs": 7000,
-      "candleIntervalMs": 12000,
+      "tickIntervalMs": 25000,
+      "candleIntervalMs": 60000,
       "cardDrawIntervalMs": 120000,
       "maxCardsPerRound": 3,
       "autoRevealNews": true,
+      "scheduledEvents": [],
       "allowAfterHours": true,
       "afterHoursFixedPrice": false,
-      "marketMood": "neutral",
-      "scheduledEvents": []
+      "marketMood": "neutral"
     }
   },
-  "rounds": [],
-  "assets": [],
-  "players": [],
-  "holdings": [],
-  "portfolios": [],
-  "transactions": [],
-  "priceHistories": {},
+  "rounds": [
+    {
+      "number": 1,
+      "status": "completed",
+      "theme": "Rodada 1",
+      "startedAt": "2026-03-06T13:05:53.474Z",
+      "roundEndsAt": "2026-03-06T13:15:53.474Z",
+      "lastUpdateAt": "2026-03-06T13:16:02.794Z",
+      "totalPausedMs": 0,
+      "config": {
+        "description": "",
+        "allowLoans": true,
+        "allowShort": false,
+        "allowDayTrade": true,
+        "tickIntervalMs": 25000,
+        "candleIntervalMs": 60000,
+        "cardDrawIntervalMs": 120000,
+        "maxCardsPerRound": 3,
+        "assets": [
+          {
+            "ticker": "TNOV3",
+            "targetClose": 45,
+            "trend": "neutral",
+            "volatility": 0.06,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "BRIS3",
+            "targetClose": 18,
+            "trend": "neutral",
+            "volatility": 0.14,
+            "momentum": 0.05,
+            "status": "ipo_pending"
+          },
+          {
+            "ticker": "DGCR3",
+            "targetClose": 72,
+            "trend": "neutral",
+            "volatility": 0.04,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "ENVD3",
+            "targetClose": 28,
+            "trend": "neutral",
+            "volatility": 0.07,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "PMAX3",
+            "targetClose": 55,
+            "trend": "neutral",
+            "volatility": 0.12,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "NUCL3",
+            "targetClose": 90,
+            "trend": "neutral",
+            "volatility": 0.03,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "MCFC3",
+            "targetClose": 22,
+            "trend": "neutral",
+            "volatility": 0.08,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "LUXM3",
+            "targetClose": 110,
+            "trend": "neutral",
+            "volatility": 0.05,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "ONLS3",
+            "targetClose": 12,
+            "trend": "neutral",
+            "volatility": 0.13,
+            "momentum": 0.05,
+            "status": "ipo_pending"
+          },
+          {
+            "ticker": "BSOL3",
+            "targetClose": 85,
+            "trend": "neutral",
+            "volatility": 0.04,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "FTPY3",
+            "targetClose": 15,
+            "trend": "neutral",
+            "volatility": 0.15,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "INVS3",
+            "targetClose": 35,
+            "trend": "neutral",
+            "volatility": 0.09,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "VSAU3",
+            "targetClose": 48,
+            "trend": "neutral",
+            "volatility": 0.05,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "BLAB3",
+            "targetClose": 20,
+            "trend": "neutral",
+            "volatility": 0.16,
+            "momentum": 0.05,
+            "status": "ipo_pending"
+          },
+          {
+            "ticker": "HOSP3",
+            "targetClose": 38,
+            "trend": "neutral",
+            "volatility": 0.07,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "AGFT3",
+            "targetClose": 62,
+            "trend": "neutral",
+            "volatility": 0.09,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "FRIG3",
+            "targetClose": 30,
+            "trend": "neutral",
+            "volatility": 0.1,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "TRTR3",
+            "targetClose": 44,
+            "trend": "neutral",
+            "volatility": 0.08,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "AERV3",
+            "targetClose": 25,
+            "trend": "neutral",
+            "volatility": 0.11,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "MOVB3",
+            "targetClose": 32,
+            "trend": "neutral",
+            "volatility": 0.08,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "HOTE3",
+            "targetClose": 28,
+            "trend": "neutral",
+            "volatility": 0.09,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "LOGI11",
+            "targetClose": 95,
+            "trend": "neutral",
+            "volatility": 0.024,
+            "momentum": 0.04,
+            "status": "active"
+          },
+          {
+            "ticker": "GLOG11",
+            "targetClose": 78,
+            "trend": "neutral",
+            "volatility": 0.035,
+            "momentum": 0.04,
+            "status": "active"
+          },
+          {
+            "ticker": "SHOP11",
+            "targetClose": 120,
+            "trend": "neutral",
+            "volatility": 0.03,
+            "momentum": 0.03,
+            "status": "active"
+          },
+          {
+            "ticker": "MALL11",
+            "targetClose": 88,
+            "trend": "neutral",
+            "volatility": 0.025,
+            "momentum": 0.03,
+            "status": "active"
+          },
+          {
+            "ticker": "PAPF11",
+            "targetClose": 98,
+            "trend": "neutral",
+            "volatility": 0.015,
+            "momentum": 0.04,
+            "status": "active"
+          },
+          {
+            "ticker": "HGLG11",
+            "targetClose": 65,
+            "trend": "neutral",
+            "volatility": 0.04,
+            "momentum": 0.04,
+            "status": "active"
+          }
+        ],
+        "scheduledEvents": [],
+        "fixedIncomeRates": []
+      },
+      "completedAt": "2026-03-06T13:17:15.623Z"
+    },
+    {
+      "number": 2,
+      "status": "active",
+      "theme": "Rodada 2",
+      "startedAt": "2026-03-06T13:17:15.623Z",
+      "roundEndsAt": "2026-03-06T13:27:15.623Z",
+      "lastUpdateAt": "2026-03-06T13:27:16.074Z",
+      "totalPausedMs": 0,
+      "config": {
+        "description": "",
+        "allowLoans": true,
+        "allowShort": false,
+        "allowDayTrade": true,
+        "tickIntervalMs": 25000,
+        "candleIntervalMs": 60000,
+        "cardDrawIntervalMs": 120000,
+        "maxCardsPerRound": 3,
+        "assets": [
+          {
+            "ticker": "TNOV3",
+            "targetClose": 43.4144407029115,
+            "trend": "bearish",
+            "volatility": 0.0716496161634223,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "BRIS3",
+            "targetClose": 18,
+            "trend": "neutral",
+            "volatility": 0.14,
+            "momentum": 0.05,
+            "status": "ipo_pending"
+          },
+          {
+            "ticker": "DGCR3",
+            "targetClose": 68.8596068314359,
+            "trend": "bearish",
+            "volatility": 0.048852707703415404,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "ENVD3",
+            "targetClose": 25.686603442044383,
+            "trend": "bearish",
+            "volatility": 0.09433851211944051,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "PMAX3",
+            "targetClose": 52.547939310588696,
+            "trend": "bearish",
+            "volatility": 0.14693383992805664,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "NUCL3",
+            "targetClose": 88.76971514758594,
+            "trend": "bearish",
+            "volatility": 0.03372870764060719,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "MCFC3",
+            "targetClose": 20.35255119165883,
+            "trend": "bearish",
+            "volatility": 0.10580994232372869,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "LUXM3",
+            "targetClose": 107.10990226686981,
+            "trend": "bearish",
+            "volatility": 0.058256325752428104,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "ONLS3",
+            "targetClose": 12,
+            "trend": "neutral",
+            "volatility": 0.13,
+            "momentum": 0.05,
+            "status": "ipo_pending"
+          },
+          {
+            "ticker": "BSOL3",
+            "targetClose": 83.56979058283336,
+            "trend": "bearish",
+            "volatility": 0.04538064871135055,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "FTPY3",
+            "targetClose": 12.66879603792961,
+            "trend": "bearish",
+            "volatility": 0.23753100837108065,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "INVS3",
+            "targetClose": 32.370292832275254,
+            "trend": "bearish",
+            "volatility": 0.11910921743167248,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "VSAU3",
+            "targetClose": 44.1829798401127,
+            "trend": "bearish",
+            "volatility": 0.06688244303961963,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "BLAB3",
+            "targetClose": 18.306526049630936,
+            "trend": "bearish",
+            "volatility": 0.22443092799356618,
+            "momentum": 0.11000000000000001,
+            "status": "active"
+          },
+          {
+            "ticker": "HOSP3",
+            "targetClose": 35.23507034866044,
+            "trend": "bearish",
+            "volatility": 0.09210226434010031,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "AGFT3",
+            "targetClose": 58.61467113280992,
+            "trend": "bearish",
+            "volatility": 0.11312196609149398,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "FRIG3",
+            "targetClose": 27.63033660596444,
+            "trend": "bearish",
+            "volatility": 0.13359236465558408,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "TRTR3",
+            "targetClose": 41.43191203966351,
+            "trend": "bearish",
+            "volatility": 0.10152837271180044,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "AERV3",
+            "targetClose": 22.247895851808163,
+            "trend": "bearish",
+            "volatility": 0.15803399673662283,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "MOVB3",
+            "targetClose": 29.831775039532722,
+            "trend": "bearish",
+            "volatility": 0.10396262217978496,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "HOTE3",
+            "targetClose": 25.68001644543677,
+            "trend": "bearish",
+            "volatility": 0.12136097158966566,
+            "momentum": 0.05,
+            "status": "active"
+          },
+          {
+            "ticker": "LOGI11",
+            "targetClose": 91.77345071344365,
+            "trend": "bearish",
+            "volatility": 0.02856101550023812,
+            "momentum": 0.04,
+            "status": "active"
+          },
+          {
+            "ticker": "GLOG11",
+            "targetClose": 74.98779286969084,
+            "trend": "bearish",
+            "volatility": 0.042179285750987956,
+            "momentum": 0.04,
+            "status": "active"
+          },
+          {
+            "ticker": "SHOP11",
+            "targetClose": 114.36227763589237,
+            "trend": "bearish",
+            "volatility": 0.036966555114927184,
+            "momentum": 0.03,
+            "status": "active"
+          },
+          {
+            "ticker": "MALL11",
+            "targetClose": 84.60650963402418,
+            "trend": "bearish",
+            "volatility": 0.03012355363231866,
+            "momentum": 0.03,
+            "status": "active"
+          },
+          {
+            "ticker": "PAPF11",
+            "targetClose": 97.12755986661479,
+            "trend": "bullish",
+            "volatility": 0.020089152670883317,
+            "momentum": 0.04,
+            "status": "active"
+          },
+          {
+            "ticker": "HGLG11",
+            "targetClose": 63.48139329151774,
+            "trend": "bearish",
+            "volatility": 0.046227868144912324,
+            "momentum": 0.04,
+            "status": "active"
+          }
+        ],
+        "scheduledEvents": [],
+        "fixedIncomeRates": []
+      }
+    }
+  ],
+  "assets": [
+    {
+      "ticker": "TNOV3",
+      "name": "TechNova",
+      "type": "stock",
+      "sector": "Tecnologia",
+      "profile": "Líder consolidada",
+      "status": "active",
+      "initialPrice": 45,
+      "currentPrice": 48.14,
+      "openPrice": 45,
+      "previousClose": 45,
+      "totalShares": 10000,
+      "availableShares": 9950,
+      "trend": "bullish",
+      "volatility": 0.09681843440383758,
+      "momentum": 0.07,
+      "targetClose": 44.618094237800264,
+      "tags": [
+        "Tecnologia",
+        "tech",
+        "cloud",
+        "lider",
+        "dividendos",
+        "exportadora"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.03,
+      "peRatio": 15,
+      "marketCap": 450000
+    },
+    {
+      "ticker": "BRIS3",
+      "name": "ByteRise",
+      "type": "stock",
+      "sector": "Tecnologia",
+      "profile": "Startup agressiva, volátil",
+      "status": "ipo_pending",
+      "initialPrice": 18,
+      "currentPrice": 18,
+      "openPrice": 18,
+      "previousClose": 18,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "neutral",
+      "volatility": 0.14,
+      "momentum": 0.05,
+      "targetClose": 18,
+      "tags": [
+        "Tecnologia",
+        "tech",
+        "IA",
+        "growth",
+        "especulativo"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0,
+      "peRatio": 15,
+      "marketCap": 180000
+    },
+    {
+      "ticker": "DGCR3",
+      "name": "DigiCore",
+      "type": "stock",
+      "sector": "Tecnologia",
+      "profile": "Madura, bons dividendos",
+      "status": "active",
+      "initialPrice": 72,
+      "currentPrice": 79.41,
+      "openPrice": 72,
+      "previousClose": 72,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.06936976480316762,
+      "momentum": 0.05,
+      "targetClose": 73.06834236917587,
+      "tags": [
+        "Tecnologia",
+        "tech",
+        "dividendos",
+        "defensivo",
+        "infra"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.06,
+      "peRatio": 15,
+      "marketCap": 720000
+    },
+    {
+      "ticker": "ENVD3",
+      "name": "EnergiaVerde",
+      "type": "stock",
+      "sector": "Energia",
+      "profile": "Renovável, tendência de alta",
+      "status": "active",
+      "initialPrice": 28,
+      "currentPrice": 29.73,
+      "openPrice": 28,
+      "previousClose": 28,
+      "totalShares": 10000,
+      "availableShares": 9700,
+      "trend": "bullish",
+      "volatility": 0.179968339695835,
+      "momentum": 0.07,
+      "targetClose": 28.021178447671616,
+      "tags": [
+        "Energia",
+        "energia",
+        "esg",
+        "renovavel",
+        "crescimento"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.04,
+      "peRatio": 15,
+      "marketCap": 280000
+    },
+    {
+      "ticker": "PMAX3",
+      "name": "PetroMax",
+      "type": "stock",
+      "sector": "Energia",
+      "profile": "Petróleo, alta volatilidade",
+      "status": "active",
+      "initialPrice": 55,
+      "currentPrice": 72.89,
+      "openPrice": 55,
+      "previousClose": 55,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.25,
+      "momentum": 0.05,
+      "targetClose": 62.52911761189052,
+      "tags": [
+        "Energia",
+        "energia",
+        "exportadora",
+        "commodities",
+        "petroleo",
+        "dividendos"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.08,
+      "peRatio": 15,
+      "marketCap": 550000
+    },
+    {
+      "ticker": "NUCL3",
+      "name": "NuclearBR",
+      "type": "stock",
+      "sector": "Energia",
+      "profile": "Estável, estatal",
+      "status": "active",
+      "initialPrice": 90,
+      "currentPrice": 100.01,
+      "openPrice": 90,
+      "previousClose": 90,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.044663191866638544,
+      "momentum": 0.05,
+      "targetClose": 92.83134745145087,
+      "tags": [
+        "Energia",
+        "energia",
+        "estatal",
+        "dividendos",
+        "defensivo",
+        "monopolio"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.05,
+      "peRatio": 15,
+      "marketCap": 900000
+    },
+    {
+      "ticker": "MCFC3",
+      "name": "MercaFácil",
+      "type": "stock",
+      "sector": "Consumo",
+      "profile": "Varejo popular",
+      "status": "active",
+      "initialPrice": 22,
+      "currentPrice": 30.81,
+      "openPrice": 22,
+      "previousClose": 22,
+      "totalShares": 10000,
+      "availableShares": 9950,
+      "trend": "bullish",
+      "volatility": 0.25,
+      "momentum": 0.07,
+      "targetClose": 27.92692564283872,
+      "tags": [
+        "Consumo",
+        "consumo",
+        "varejo",
+        "importadora",
+        "ciclica"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.02,
+      "peRatio": 15,
+      "marketCap": 220000
+    },
+    {
+      "ticker": "LUXM3",
+      "name": "LuxMart",
+      "type": "stock",
+      "sector": "Consumo",
+      "profile": "Varejo premium",
+      "status": "active",
+      "initialPrice": 110,
+      "currentPrice": 138.25,
+      "openPrice": 110,
+      "previousClose": 110,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.13494694984441943,
+      "momentum": 0.05,
+      "targetClose": 123.43308366186615,
+      "tags": [
+        "Consumo",
+        "consumo",
+        "premium",
+        "defensivo",
+        "luxo"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.03,
+      "peRatio": 15,
+      "marketCap": 1100000
+    },
+    {
+      "ticker": "ONLS3",
+      "name": "OnlineShop",
+      "type": "stock",
+      "sector": "Consumo",
+      "profile": "E-commerce agressivo",
+      "status": "ipo_pending",
+      "initialPrice": 12,
+      "currentPrice": 12,
+      "openPrice": 12,
+      "previousClose": 12,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "neutral",
+      "volatility": 0.13,
+      "momentum": 0.05,
+      "targetClose": 12,
+      "tags": [
+        "Consumo",
+        "consumo",
+        "growth",
+        "especulativo",
+        "importadora"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0,
+      "peRatio": 15,
+      "marketCap": 120000
+    },
+    {
+      "ticker": "BSOL3",
+      "name": "BancoSólido",
+      "type": "stock",
+      "sector": "Financeiro",
+      "profile": "Conservador, bons dividendos",
+      "status": "active",
+      "initialPrice": 85,
+      "currentPrice": 98.13,
+      "openPrice": 85,
+      "previousClose": 85,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.06560717660955226,
+      "momentum": 0.05,
+      "targetClose": 88.5430477898156,
+      "tags": [
+        "Financeiro",
+        "financeiro",
+        "dividendos",
+        "defensivo",
+        "banco"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.07,
+      "peRatio": 15,
+      "marketCap": 850000
+    },
+    {
+      "ticker": "FTPY3",
+      "name": "FinTechPay",
+      "type": "stock",
+      "sector": "Financeiro",
+      "profile": "Disruptivo, volátil",
+      "status": "active",
+      "initialPrice": 15,
+      "currentPrice": 16.29,
+      "openPrice": 15,
+      "previousClose": 15,
+      "totalShares": 10000,
+      "availableShares": 9234,
+      "trend": "bullish",
+      "volatility": 0.25,
+      "momentum": 0.09000000000000001,
+      "targetClose": 15.14015478215525,
+      "tags": [
+        "Financeiro",
+        "financeiro",
+        "growth",
+        "fintech",
+        "especulativo"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0,
+      "peRatio": 15,
+      "marketCap": 150000
+    },
+    {
+      "ticker": "INVS3",
+      "name": "InvestCorp",
+      "type": "stock",
+      "sector": "Financeiro",
+      "profile": "Corretora, ganha no volume",
+      "status": "active",
+      "initialPrice": 35,
+      "currentPrice": 37.53,
+      "openPrice": 35,
+      "previousClose": 35,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.25,
+      "momentum": 0.05,
+      "targetClose": 35.80039874426005,
+      "tags": [
+        "Financeiro",
+        "financeiro",
+        "corretagem",
+        "bolsa",
+        "ciclica"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.04,
+      "peRatio": 15,
+      "marketCap": 350000
+    },
+    {
+      "ticker": "VSAU3",
+      "name": "VidaSaúde",
+      "type": "stock",
+      "sector": "Saúde",
+      "profile": "Defensiva, estável",
+      "status": "active",
+      "initialPrice": 48,
+      "currentPrice": 56.44,
+      "openPrice": 48,
+      "previousClose": 48,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.11743881293636207,
+      "momentum": 0.05,
+      "targetClose": 50.00109689231503,
+      "tags": [
+        "Saúde",
+        "saude",
+        "farmaceutico",
+        "defensivo",
+        "recorrencia"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.04,
+      "peRatio": 15,
+      "marketCap": 480000
+    },
+    {
+      "ticker": "BLAB3",
+      "name": "BioLab",
+      "type": "stock",
+      "sector": "Saúde",
+      "profile": "R&D farmacêutica, binária",
+      "status": "active",
+      "initialPrice": 12,
+      "currentPrice": 22.46,
+      "openPrice": 12,
+      "previousClose": 20,
+      "totalShares": 10000,
+      "availableShares": 9300,
+      "trend": "bullish",
+      "volatility": 0.25,
+      "momentum": 0.13,
+      "targetClose": 21.452693456078677,
+      "tags": [
+        "Saúde",
+        "saude",
+        "biotech",
+        "growth",
+        "especulativo"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0,
+      "peRatio": 15,
+      "marketCap": 200000
+    },
+    {
+      "ticker": "HOSP3",
+      "name": "RedeHosp",
+      "type": "stock",
+      "sector": "Saúde",
+      "profile": "Hospitais, margem apertada",
+      "status": "active",
+      "initialPrice": 38,
+      "currentPrice": 45.31,
+      "openPrice": 38,
+      "previousClose": 38,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.15405727712927408,
+      "momentum": 0.05,
+      "targetClose": 38.519501851285256,
+      "tags": [
+        "Saúde",
+        "saude",
+        "hospitais",
+        "servicos",
+        "defensivo"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.03,
+      "peRatio": 15,
+      "marketCap": 380000
+    },
+    {
+      "ticker": "AGFT3",
+      "name": "AgroForte",
+      "type": "stock",
+      "sector": "Agro",
+      "profile": "Exportadora de grãos",
+      "status": "active",
+      "initialPrice": 62,
+      "currentPrice": 73.38,
+      "openPrice": 62,
+      "previousClose": 62,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.217773738583809,
+      "momentum": 0.05,
+      "targetClose": 67.2150422362833,
+      "tags": [
+        "Agro",
+        "agro",
+        "exportadora",
+        "commodities",
+        "soja"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.05,
+      "peRatio": 15,
+      "marketCap": 620000
+    },
+    {
+      "ticker": "FRIG3",
+      "name": "BoiGlobal",
+      "type": "stock",
+      "sector": "Agro",
+      "profile": "Frigorífico exportador",
+      "status": "active",
+      "initialPrice": 30,
+      "currentPrice": 31.18,
+      "openPrice": 30,
+      "previousClose": 30,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.24765078914806302,
+      "momentum": 0.05,
+      "targetClose": 28.50152568552091,
+      "tags": [
+        "Agro",
+        "agro",
+        "frigorifico",
+        "exportadora",
+        "ciclica"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.03,
+      "peRatio": 15,
+      "marketCap": 300000
+    },
+    {
+      "ticker": "TRTR3",
+      "name": "TerraTech",
+      "type": "stock",
+      "sector": "Agro",
+      "profile": "Máquinas agrícolas",
+      "status": "active",
+      "initialPrice": 44,
+      "currentPrice": 54.51,
+      "openPrice": 44,
+      "previousClose": 44,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.2327789630615316,
+      "momentum": 0.05,
+      "targetClose": 46.86189542720976,
+      "tags": [
+        "Agro",
+        "agro",
+        "maquinas",
+        "crescimento"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.02,
+      "peRatio": 15,
+      "marketCap": 440000
+    },
+    {
+      "ticker": "AERV3",
+      "name": "AeroViagem",
+      "type": "stock",
+      "sector": "Mobilidade",
+      "profile": "Cíclica, sensível",
+      "status": "active",
+      "initialPrice": 25,
+      "currentPrice": 29.02,
+      "openPrice": 25,
+      "previousClose": 25,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.25,
+      "momentum": 0.05,
+      "targetClose": 25.64074551970065,
+      "tags": [
+        "Mobilidade",
+        "turismo",
+        "aviacao",
+        "importadora",
+        "ciclica",
+        "endividada"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0,
+      "peRatio": 15,
+      "marketCap": 250000
+    },
+    {
+      "ticker": "MOVB3",
+      "name": "RotaLivre",
+      "type": "stock",
+      "sector": "Mobilidade",
+      "profile": "Locadora de veículos",
+      "status": "active",
+      "initialPrice": 32,
+      "currentPrice": 32.67,
+      "openPrice": 32,
+      "previousClose": 32,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.2088327106874005,
+      "momentum": 0.05,
+      "targetClose": 30.85493403934182,
+      "tags": [
+        "Mobilidade",
+        "turismo",
+        "mobilidade",
+        "locadoras",
+        "servicos"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.02,
+      "peRatio": 15,
+      "marketCap": 320000
+    },
+    {
+      "ticker": "HOTE3",
+      "name": "HotelBrasil",
+      "type": "stock",
+      "sector": "Mobilidade",
+      "profile": "Rede de hotéis, sazonal",
+      "status": "active",
+      "initialPrice": 28,
+      "currentPrice": 34.52,
+      "openPrice": 28,
+      "previousClose": 28,
+      "totalShares": 10000,
+      "availableShares": 10000,
+      "trend": "bullish",
+      "volatility": 0.24891962179969995,
+      "momentum": 0.05,
+      "targetClose": 30.483810087842475,
+      "tags": [
+        "Mobilidade",
+        "turismo",
+        "hotelaria",
+        "servicos"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 ação no mercado",
+        "variacao": "Diferença percentual desde a abertura do pregão",
+        "volatilidade": "Quão rápido o preço oscila — maior = mais arriscado",
+        "tendencia": "Direção esperada do preço a médio prazo",
+        "dividendos": "Percentual do lucro distribuído aos acionistas",
+        "pe": "Preço/Lucro: quantas vezes o lucro anual está embutido no preço"
+      },
+      "dividendYield": 0.01,
+      "peRatio": 15,
+      "marketCap": 280000
+    },
+    {
+      "ticker": "LOGI11",
+      "name": "LogisBR",
+      "type": "fii",
+      "sector": "FIIs",
+      "segment": "logistica",
+      "profile": "Galpões logísticos SP, estável",
+      "status": "active",
+      "initialPrice": 95,
+      "currentPrice": 103.74,
+      "openPrice": 95,
+      "previousClose": 95,
+      "totalShares": 5000,
+      "availableShares": 5000,
+      "trend": "bullish",
+      "volatility": 0.05907499995592026,
+      "momentum": 0.04,
+      "targetClose": 99.77129792740456,
+      "tags": [
+        "fii",
+        "logistica",
+        "ecommerce",
+        "aaa"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 cota no mercado",
+        "pvp": "Preço / Valor Patrimonial — abaixo de 1 = barato, acima de 1 = caro",
+        "dy": "Dividend Yield mensal. Ex: 0,8% ao mês = 9,6% ao ano",
+        "vacancia": "% do imóvel vazio. Mais vacância = menos dividendo"
+      },
+      "patrimonyValue": 96.93877551020408,
+      "pvpRatio": 1.07016,
+      "dividendPerRound": 0.76,
+      "dividendYield": 9.6,
+      "vacancyRate": 0.03,
+      "totalProperties": 10,
+      "netArea": 50000
+    },
+    {
+      "ticker": "GLOG11",
+      "name": "GalpãoMG",
+      "type": "fii",
+      "sector": "FIIs",
+      "segment": "logistica",
+      "profile": "Galpões logísticos MG, crescimento",
+      "status": "active",
+      "initialPrice": 78,
+      "currentPrice": 84.25,
+      "openPrice": 78,
+      "previousClose": 78,
+      "totalShares": 5000,
+      "availableShares": 5000,
+      "trend": "bullish",
+      "volatility": 0.08181602609608901,
+      "momentum": 0.04,
+      "targetClose": 77.26573739686049,
+      "tags": [
+        "fii",
+        "logistica",
+        "crescimento",
+        "risco_medio"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 cota no mercado",
+        "pvp": "Preço / Valor Patrimonial — abaixo de 1 = barato, acima de 1 = caro",
+        "dy": "Dividend Yield mensal. Ex: 0,8% ao mês = 9,6% ao ano",
+        "vacancia": "% do imóvel vazio. Mais vacância = menos dividendo"
+      },
+      "patrimonyValue": 79.59183673469389,
+      "pvpRatio": 1.058525641025641,
+      "dividendPerRound": 0.572,
+      "dividendYield": 8.799999999999999,
+      "vacancyRate": 0.03,
+      "totalProperties": 10,
+      "netArea": 50000
+    },
+    {
+      "ticker": "SHOP11",
+      "name": "ShopMax",
+      "type": "fii",
+      "sector": "FIIs",
+      "segment": "shopping",
+      "profile": "Shopping capitais, sensível ao varejo",
+      "status": "active",
+      "initialPrice": 120,
+      "currentPrice": 130.83,
+      "openPrice": 120,
+      "previousClose": 120,
+      "totalShares": 5000,
+      "availableShares": 5000,
+      "trend": "bullish",
+      "volatility": 0.06963571975776002,
+      "momentum": 0.03,
+      "targetClose": 125.20571277112474,
+      "tags": [
+        "fii",
+        "shopping",
+        "varejo",
+        "ciclico"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 cota no mercado",
+        "pvp": "Preço / Valor Patrimonial — abaixo de 1 = barato, acima de 1 = caro",
+        "dy": "Dividend Yield mensal. Ex: 0,8% ao mês = 9,6% ao ano",
+        "vacancia": "% do imóvel vazio. Mais vacância = menos dividendo"
+      },
+      "patrimonyValue": 114.28571428571428,
+      "pvpRatio": 1.1447625000000001,
+      "dividendPerRound": 0.84,
+      "dividendYield": 8.4,
+      "vacancyRate": 0.08,
+      "totalProperties": 10,
+      "netArea": 50000
+    },
+    {
+      "ticker": "MALL11",
+      "name": "MallInterior",
+      "type": "fii",
+      "sector": "FIIs",
+      "segment": "shopping",
+      "profile": "Shopping interior, defensivo",
+      "status": "active",
+      "initialPrice": 88,
+      "currentPrice": 91.12,
+      "openPrice": 88,
+      "previousClose": 88,
+      "totalShares": 5000,
+      "availableShares": 5000,
+      "trend": "bullish",
+      "volatility": 0.046655991662626926,
+      "momentum": 0.03,
+      "targetClose": 85.07868142495575,
+      "tags": [
+        "fii",
+        "shopping",
+        "defensivo",
+        "interior"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 cota no mercado",
+        "pvp": "Preço / Valor Patrimonial — abaixo de 1 = barato, acima de 1 = caro",
+        "dy": "Dividend Yield mensal. Ex: 0,8% ao mês = 9,6% ao ano",
+        "vacancia": "% do imóvel vazio. Mais vacância = menos dividendo"
+      },
+      "patrimonyValue": 83.80952380952381,
+      "pvpRatio": 1.0872272727272727,
+      "dividendPerRound": 0.572,
+      "dividendYield": 7.8,
+      "vacancyRate": 0.08,
+      "totalProperties": 10,
+      "netArea": 50000
+    },
+    {
+      "ticker": "PAPF11",
+      "name": "PapelFix",
+      "type": "fii",
+      "sector": "FIIs",
+      "segment": "papel",
+      "profile": "Fundo de papel IPCA, renda passiva",
+      "status": "active",
+      "initialPrice": 98,
+      "currentPrice": 110.45,
+      "openPrice": 98,
+      "previousClose": 98,
+      "totalShares": 5000,
+      "availableShares": 5000,
+      "trend": "bullish",
+      "volatility": 0.03007314964047132,
+      "momentum": 0.04,
+      "targetClose": 104.70670338129699,
+      "tags": [
+        "fii",
+        "papel",
+        "cri",
+        "ipca",
+        "defensivo"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 cota no mercado",
+        "pvp": "Preço / Valor Patrimonial — abaixo de 1 = barato, acima de 1 = caro",
+        "dy": "Dividend Yield mensal. Ex: 0,8% ao mês = 9,6% ao ano",
+        "vacancia": "% do imóvel vazio. Mais vacância = menos dividendo"
+      },
+      "patrimonyValue": 98,
+      "pvpRatio": 1.1270408163265306,
+      "dividendPerRound": 1.078,
+      "dividendYield": 13.200000000000001,
+      "vacancyRate": 0,
+      "totalProperties": 0,
+      "netArea": 0
+    },
+    {
+      "ticker": "HGLG11",
+      "name": "HighYield",
+      "type": "fii",
+      "sector": "FIIs",
+      "segment": "papel",
+      "profile": "CRI de alto risco, dividend yield altíssimo",
+      "status": "active",
+      "initialPrice": 65,
+      "currentPrice": 76.57,
+      "openPrice": 65,
+      "previousClose": 65,
+      "totalShares": 5000,
+      "availableShares": 5000,
+      "trend": "bullish",
+      "volatility": 0.08505193540093735,
+      "momentum": 0.04,
+      "targetClose": 71.76990793844266,
+      "tags": [
+        "fii",
+        "papel",
+        "cri",
+        "alto_risco"
+      ],
+      "glossary": {
+        "preco": "Valor atual de 1 cota no mercado",
+        "pvp": "Preço / Valor Patrimonial — abaixo de 1 = barato, acima de 1 = caro",
+        "dy": "Dividend Yield mensal. Ex: 0,8% ao mês = 9,6% ao ano",
+        "vacancia": "% do imóvel vazio. Mais vacância = menos dividendo"
+      },
+      "patrimonyValue": 65,
+      "pvpRatio": 1.178,
+      "dividendPerRound": 0.975,
+      "dividendYield": 18,
+      "vacancyRate": 0,
+      "totalProperties": 0,
+      "netArea": 0
+    }
+  ],
+  "players": [
+    {
+      "id": "9VFhUKQvBjV7oi1MSJr6g",
+      "name": "teste",
+      "profile": "moderado",
+      "cash": 189,
+      "initialCash": 10000,
+      "isActive": true,
+      "createdAt": "2026-03-06T13:03:33.077Z"
+    },
+    {
+      "id": "yLtxkX70odfKhxpl7nJmQ",
+      "name": "teste  2",
+      "profile": "moderado",
+      "cash": 3581.220000000001,
+      "initialCash": 10000,
+      "isActive": true,
+      "createdAt": "2026-03-06T13:03:36.089Z"
+    },
+    {
+      "id": "YPN0hHpimRId6bBflTY9B",
+      "name": "teste 3",
+      "profile": "moderado",
+      "cash": 2812.67,
+      "initialCash": 10000,
+      "isActive": true,
+      "createdAt": "2026-03-06T13:03:38.444Z"
+    }
+  ],
+  "holdings": [
+    {
+      "id": "B8S4Ot6UrKEFlHb-I5JqZ",
+      "name": "teste em massa",
+      "memberIds": [
+        "9VFhUKQvBjV7oi1MSJr6g",
+        "yLtxkX70odfKhxpl7nJmQ",
+        "YPN0hHpimRId6bBflTY9B"
+      ],
+      "cash": 6100,
+      "totalContributed": 4772.974490765145,
+      "contributions": {
+        "9VFhUKQvBjV7oi1MSJr6g": 1279.528866139519,
+        "yLtxkX70odfKhxpl7nJmQ": 2920.749620588638,
+        "YPN0hHpimRId6bBflTY9B": 572.6960040369879
+      },
+      "isActive": true,
+      "createdAt": "2026-03-06T13:03:45.602Z"
+    },
+    {
+      "id": "T1_-poMDgCTQUOg0D5AV5",
+      "name": "teste em massa 2",
+      "memberIds": [
+        "yLtxkX70odfKhxpl7nJmQ",
+        "YPN0hHpimRId6bBflTY9B"
+      ],
+      "cash": 5033.74,
+      "totalContributed": 7500,
+      "contributions": {
+        "yLtxkX70odfKhxpl7nJmQ": 2500,
+        "YPN0hHpimRId6bBflTY9B": 5000
+      },
+      "isActive": true,
+      "createdAt": "2026-03-06T13:04:02.937Z"
+    }
+  ],
+  "portfolios": [
+    {
+      "ownerId": "9VFhUKQvBjV7oi1MSJr6g",
+      "ownerType": "player",
+      "positions": [
+        {
+          "ticker": "FTPY3",
+          "quantity": 650,
+          "avgPrice": 13.06,
+          "totalInvested": 8489
+        }
+      ]
+    },
+    {
+      "ownerId": "yLtxkX70odfKhxpl7nJmQ",
+      "ownerType": "player",
+      "positions": []
+    },
+    {
+      "ownerId": "YPN0hHpimRId6bBflTY9B",
+      "ownerType": "player",
+      "positions": [
+        {
+          "ticker": "BLAB3",
+          "quantity": 200,
+          "avgPrice": 12,
+          "totalInvested": 2400
+        },
+        {
+          "ticker": "TNOV3",
+          "quantity": 50,
+          "avgPrice": 48.08,
+          "totalInvested": 2404
+        }
+      ]
+    },
+    {
+      "ownerId": "B8S4Ot6UrKEFlHb-I5JqZ",
+      "ownerType": "holding",
+      "positions": [
+        {
+          "ticker": "ENVD3",
+          "quantity": 62,
+          "avgPrice": 23.45,
+          "totalInvested": 1453.9
+        },
+        {
+          "ticker": "FTPY3",
+          "quantity": 24,
+          "avgPrice": 11.45,
+          "totalInvested": 274.79999999999995
+        }
+      ]
+    },
+    {
+      "ownerId": "T1_-poMDgCTQUOg0D5AV5",
+      "ownerType": "holding",
+      "positions": [
+        {
+          "ticker": "BLAB3",
+          "quantity": 167,
+          "avgPrice": 12,
+          "totalInvested": 2004.0000000000002
+        },
+        {
+          "ticker": "MCFC3",
+          "quantity": 17,
+          "avgPrice": 26.91,
+          "totalInvested": 457.47
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "id": "RrepppC_0GScxl0UksJn4",
+      "timestamp": "2026-03-06T13:15:24.044Z",
+      "round": 1,
+      "type": "buy",
+      "buyerId": "B8S4Ot6UrKEFlHb-I5JqZ",
+      "buyerType": "holding",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "BLAB3",
+      "quantity": 300,
+      "price": 12,
+      "total": 3600,
+      "description": "B8S4Ot6UrKEFlHb-I5JqZ comprou 300 BLAB3 @ R$12.00",
+      "metadata": {
+        "offerId": "5f6c74e4-3b49-4e66-a15a-79a6c6939286"
+      }
+    },
+    {
+      "id": "L6badP-bgWpIqVs2ZY0uj",
+      "timestamp": "2026-03-06T13:16:01.169Z",
+      "round": 1,
+      "type": "buy",
+      "buyerId": "YPN0hHpimRId6bBflTY9B",
+      "buyerType": "player",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "BLAB3",
+      "quantity": 200,
+      "price": 12,
+      "total": 2400,
+      "description": "YPN0hHpimRId6bBflTY9B comprou 200 BLAB3 @ R$12.00",
+      "metadata": {
+        "offerId": "5f6c74e4-3b49-4e66-a15a-79a6c6939286"
+      }
+    },
+    {
+      "id": "ivPRKBxm54P9YP48Fe0XW",
+      "timestamp": "2026-03-06T13:16:23.133Z",
+      "round": 1,
+      "type": "buy",
+      "buyerId": "T1_-poMDgCTQUOg0D5AV5",
+      "buyerType": "holding",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "BLAB3",
+      "quantity": 500,
+      "price": 12,
+      "total": 6000,
+      "description": "T1_-poMDgCTQUOg0D5AV5 comprou 500 BLAB3 @ R$12.00",
+      "metadata": {
+        "offerId": "5f6c74e4-3b49-4e66-a15a-79a6c6939286"
+      }
+    },
+    {
+      "id": "t96tkji3wZXoQRbpFbFaL",
+      "timestamp": "2026-03-06T13:22:04.194Z",
+      "round": 2,
+      "type": "sell",
+      "buyerId": "market",
+      "buyerType": "market",
+      "sellerId": "B8S4Ot6UrKEFlHb-I5JqZ",
+      "sellerType": "holding",
+      "ticker": "BLAB3",
+      "quantity": 300,
+      "price": 19.16,
+      "total": 5748,
+      "description": "B8S4Ot6UrKEFlHb-I5JqZ vendeu 300 BLAB3 @ R$19.16"
+    },
+    {
+      "id": "YVkFi9ljXlBePpMTcyNz6",
+      "timestamp": "2026-03-06T13:22:28.391Z",
+      "round": 2,
+      "type": "buy",
+      "buyerId": "B8S4Ot6UrKEFlHb-I5JqZ",
+      "buyerType": "holding",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "ENVD3",
+      "quantity": 300,
+      "price": 23.45,
+      "total": 7035,
+      "description": "B8S4Ot6UrKEFlHb-I5JqZ comprou 300 ENVD3 @ R$23.45"
+    },
+    {
+      "id": "SUUXc_ESqFQ9k0CFRJzC-",
+      "timestamp": "2026-03-06T13:22:55.095Z",
+      "round": 2,
+      "type": "buy",
+      "buyerId": "B8S4Ot6UrKEFlHb-I5JqZ",
+      "buyerType": "holding",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "FTPY3",
+      "quantity": 116,
+      "price": 11.45,
+      "total": 1328.1999999999998,
+      "description": "B8S4Ot6UrKEFlHb-I5JqZ comprou 116 FTPY3 @ R$11.45"
+    },
+    {
+      "id": "BIcRzsNxQO0-sIAMwIGVc",
+      "timestamp": "2026-03-06T13:23:38.411Z",
+      "round": 2,
+      "type": "buy",
+      "buyerId": "T1_-poMDgCTQUOg0D5AV5",
+      "buyerType": "holding",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "MCFC3",
+      "quantity": 50,
+      "price": 26.91,
+      "total": 1345.5,
+      "description": "T1_-poMDgCTQUOg0D5AV5 comprou 50 MCFC3 @ R$26.91"
+    },
+    {
+      "id": "r2H0aFchFiPm0pwTVZbJK",
+      "timestamp": "2026-03-06T13:23:59.289Z",
+      "round": 2,
+      "type": "buy",
+      "buyerId": "YPN0hHpimRId6bBflTY9B",
+      "buyerType": "player",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "TNOV3",
+      "quantity": 50,
+      "price": 48.08,
+      "total": 2404,
+      "description": "YPN0hHpimRId6bBflTY9B comprou 50 TNOV3 @ R$48.08"
+    },
+    {
+      "id": "iUcMq1lfdA50fa098j7VC",
+      "timestamp": "2026-03-06T13:24:43.814Z",
+      "round": 2,
+      "type": "buy",
+      "buyerId": "9VFhUKQvBjV7oi1MSJr6g",
+      "buyerType": "player",
+      "sellerId": "market",
+      "sellerType": "market",
+      "ticker": "FTPY3",
+      "quantity": 650,
+      "price": 13.06,
+      "total": 8489,
+      "description": "9VFhUKQvBjV7oi1MSJr6g comprou 650 FTPY3 @ R$13.06"
+    },
+    {
+      "id": "nioaiEP-T5NTB4EYvVR-D",
+      "timestamp": "2026-03-06T13:25:06.100Z",
+      "round": 2,
+      "type": "fixed_income_invest",
+      "buyerId": "yLtxkX70odfKhxpl7nJmQ",
+      "buyerType": "player",
+      "sellerId": "cmmbvf8kz001pot8hrcrfxg4v",
+      "sellerType": "market",
+      "total": 2500,
+      "description": "yLtxkX70odfKhxpl7nJmQ investiu R$2500.00 em LCA AgroForte Verde"
+    }
+  ],
+  "priceHistories": {
+    "TNOV3": {
+      "ticker": "TNOV3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 45,
+          "high": 45.36,
+          "low": 43.74,
+          "close": 44.12,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 44.12,
+          "high": 45.18,
+          "low": 43.35,
+          "close": 44.15,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 44.15,
+          "high": 46.19,
+          "low": 41.06,
+          "close": 41.06,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 41.06,
+          "high": 41.3,
+          "low": 38.15,
+          "close": 38.15,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 38.15,
+          "high": 39.21,
+          "low": 38,
+          "close": 38.8,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 38.8,
+          "high": 39.54,
+          "low": 37.39,
+          "close": 37.96,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 37.96,
+          "high": 40.67,
+          "low": 37.65,
+          "close": 39.11,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 39.11,
+          "high": 40.16,
+          "low": 39.04,
+          "close": 40.16,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 40.16,
+          "high": 40.2,
+          "low": 40.16,
+          "close": 40.2,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 40.2,
+          "high": 40.44,
+          "low": 38.53,
+          "close": 38.53,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 38.53,
+          "high": 39.46,
+          "low": 35.35,
+          "close": 35.36,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 35.36,
+          "high": 37.13,
+          "low": 35.23,
+          "close": 36.77,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 36.77,
+          "high": 41.17,
+          "low": 36.77,
+          "close": 41.17,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 41.17,
+          "high": 47.23,
+          "low": 41.17,
+          "close": 47.23,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 47.23,
+          "high": 51.49,
+          "low": 47.23,
+          "close": 51.49,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 51.49,
+          "high": 52.29,
+          "low": 48.52,
+          "close": 48.52,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 48.52,
+          "high": 49.32,
+          "low": 47.99,
+          "close": 48.14,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 48.14,
+        "high": 48.74,
+        "low": 48.12,
+        "close": 48.14,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "BRIS3": {
+      "ticker": "BRIS3",
+      "ticks": [],
+      "candles": []
+    },
+    "DGCR3": {
+      "ticker": "DGCR3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 72,
+          "high": 76.07,
+          "low": 71.97,
+          "close": 75.84,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 75.84,
+          "high": 81.38,
+          "low": 75.84,
+          "close": 80.54,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 80.54,
+          "high": 80.71,
+          "low": 76.78,
+          "close": 76.78,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 76.78,
+          "high": 76.78,
+          "low": 71.25,
+          "close": 71.57,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 71.57,
+          "high": 71.57,
+          "low": 67.03,
+          "close": 67.03,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 67.03,
+          "high": 67.03,
+          "low": 62.43,
+          "close": 62.43,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 62.43,
+          "high": 63.17,
+          "low": 61.82,
+          "close": 63.17,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 63.17,
+          "high": 64.74,
+          "low": 63.17,
+          "close": 63.78,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 63.78,
+          "high": 63.78,
+          "low": 63.63,
+          "close": 63.63,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 63.63,
+          "high": 64.59,
+          "low": 59.98,
+          "close": 59.98,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 59.98,
+          "high": 59.98,
+          "low": 55,
+          "close": 55,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 55,
+          "high": 60.06,
+          "low": 53.98,
+          "close": 59.39,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 59.39,
+          "high": 64.89,
+          "low": 59.39,
+          "close": 64.89,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 64.89,
+          "high": 74.23,
+          "low": 64.73,
+          "close": 72.66,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 72.66,
+          "high": 80.72,
+          "low": 72.58,
+          "close": 80.72,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 80.72,
+          "high": 82.54,
+          "low": 80.72,
+          "close": 81.4,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 81.4,
+          "high": 83.11,
+          "low": 79.36,
+          "close": 79.36,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 79.36,
+        "high": 79.78,
+        "low": 78.93,
+        "close": 79.41,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "ENVD3": {
+      "ticker": "ENVD3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 28,
+          "high": 28.12,
+          "low": 26.77,
+          "close": 26.85,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 26.85,
+          "high": 28.28,
+          "low": 26.85,
+          "close": 27.31,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 27.31,
+          "high": 28.08,
+          "low": 26.88,
+          "close": 26.92,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 26.92,
+          "high": 27.06,
+          "low": 23.66,
+          "close": 23.66,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 23.66,
+          "high": 23.69,
+          "low": 21.96,
+          "close": 22.71,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 22.71,
+          "high": 23.84,
+          "low": 22.71,
+          "close": 23.48,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 23.48,
+          "high": 23.63,
+          "low": 22.72,
+          "close": 23.07,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 23.07,
+          "high": 23.24,
+          "low": 22.65,
+          "close": 22.97,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 22.97,
+          "high": 22.99,
+          "low": 22.97,
+          "close": 22.98,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 22.98,
+          "high": 23.02,
+          "low": 20.18,
+          "close": 20.18,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 20.18,
+          "high": 20.41,
+          "low": 19.87,
+          "close": 19.94,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 19.94,
+          "high": 20.47,
+          "low": 18.85,
+          "close": 20.47,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 20.47,
+          "high": 22.88,
+          "low": 20.47,
+          "close": 22.88,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 22.88,
+          "high": 27.47,
+          "low": 22.88,
+          "close": 27.47,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 27.47,
+          "high": 29.18,
+          "low": 27.47,
+          "close": 29.09,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 29.09,
+          "high": 31.64,
+          "low": 29.09,
+          "close": 31.64,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 31.64,
+          "high": 31.98,
+          "low": 29.21,
+          "close": 29.48,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 29.48,
+        "high": 30.56,
+        "low": 29.48,
+        "close": 29.73,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "PMAX3": {
+      "ticker": "PMAX3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 55,
+          "high": 55.95,
+          "low": 52.54,
+          "close": 53.23,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 53.23,
+          "high": 54.53,
+          "low": 52.19,
+          "close": 53.72,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 53.72,
+          "high": 54.92,
+          "low": 49.75,
+          "close": 49.75,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 49.75,
+          "high": 50.05,
+          "low": 46.14,
+          "close": 46.14,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 46.14,
+          "high": 46.87,
+          "low": 44.36,
+          "close": 46.87,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 46.87,
+          "high": 49.48,
+          "low": 46.64,
+          "close": 49.46,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 49.46,
+          "high": 49.93,
+          "low": 46.37,
+          "close": 46.67,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 46.67,
+          "high": 49.87,
+          "low": 46.46,
+          "close": 49.76,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 49.76,
+          "high": 49.76,
+          "low": 49.59,
+          "close": 49.59,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 49.59,
+          "high": 51.03,
+          "low": 49.45,
+          "close": 49.51,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 49.51,
+          "high": 49.82,
+          "low": 44.82,
+          "close": 44.82,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 44.82,
+          "high": 49.9,
+          "low": 43.78,
+          "close": 48.88,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 48.88,
+          "high": 61.75,
+          "low": 48.88,
+          "close": 61.75,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 61.75,
+          "high": 73.88,
+          "low": 61.66,
+          "close": 69.68,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 69.68,
+          "high": 79.03,
+          "low": 68.4,
+          "close": 79.03,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 79.03,
+          "high": 82.91,
+          "low": 78.31,
+          "close": 79.53,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 79.53,
+          "high": 82.04,
+          "low": 74.68,
+          "close": 74.68,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 74.68,
+        "high": 76.18,
+        "low": 72.89,
+        "close": 72.89,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "NUCL3": {
+      "ticker": "NUCL3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 90,
+          "high": 90,
+          "low": 84.68,
+          "close": 84.94,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 84.94,
+          "high": 84.98,
+          "low": 82.86,
+          "close": 83.36,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 83.36,
+          "high": 84.72,
+          "low": 82.58,
+          "close": 82.58,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 82.58,
+          "high": 82.58,
+          "low": 79,
+          "close": 79,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 79,
+          "high": 79,
+          "low": 76.6,
+          "close": 76.6,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 76.6,
+          "high": 77.82,
+          "low": 74.84,
+          "close": 76.51,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 76.51,
+          "high": 84.53,
+          "low": 76.49,
+          "close": 83.04,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 83.04,
+          "high": 83.04,
+          "low": 77.47,
+          "close": 77.59,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 77.59,
+          "high": 77.59,
+          "low": 77.47,
+          "close": 77.47,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 77.47,
+          "high": 77.47,
+          "low": 72.22,
+          "close": 72.22,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 72.22,
+          "high": 72.74,
+          "low": 62.44,
+          "close": 62.46,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 62.46,
+          "high": 67.78,
+          "low": 61.83,
+          "close": 67.78,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 67.78,
+          "high": 77.36,
+          "low": 67.78,
+          "close": 77.36,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 77.36,
+          "high": 87.82,
+          "low": 77.36,
+          "close": 87.19,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 87.19,
+          "high": 92.16,
+          "low": 87.19,
+          "close": 92.16,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 92.16,
+          "high": 94.21,
+          "low": 91.63,
+          "close": 94.21,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 94.21,
+          "high": 98.72,
+          "low": 93.12,
+          "close": 98.72,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 98.72,
+        "high": 100.01,
+        "low": 98.72,
+        "close": 100.01,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "MCFC3": {
+      "ticker": "MCFC3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 22,
+          "high": 22.32,
+          "low": 21.59,
+          "close": 21.72,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 21.72,
+          "high": 21.9,
+          "low": 21.1,
+          "close": 21.15,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 21.15,
+          "high": 21.26,
+          "low": 20.3,
+          "close": 20.3,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 20.3,
+          "high": 20.31,
+          "low": 18.54,
+          "close": 18.54,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 18.54,
+          "high": 19.71,
+          "low": 18.54,
+          "close": 19.65,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 19.65,
+          "high": 20.54,
+          "low": 19.65,
+          "close": 19.95,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 19.95,
+          "high": 19.98,
+          "low": 18.98,
+          "close": 19,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 19,
+          "high": 19.08,
+          "low": 18.43,
+          "close": 18.43,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 18.43,
+          "high": 18.46,
+          "low": 18.43,
+          "close": 18.46,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 18.46,
+          "high": 18.48,
+          "low": 17.2,
+          "close": 17.2,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 17.2,
+          "high": 17.28,
+          "low": 15.69,
+          "close": 15.69,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 15.69,
+          "high": 19.18,
+          "low": 15.69,
+          "close": 19.18,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 19.18,
+          "high": 21.73,
+          "low": 19.18,
+          "close": 21.45,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 21.45,
+          "high": 26.91,
+          "low": 21.45,
+          "close": 26.91,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 26.91,
+          "high": 28.67,
+          "low": 26.88,
+          "close": 28.67,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 28.67,
+          "high": 31.43,
+          "low": 28.67,
+          "close": 30.3,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 30.3,
+          "high": 31.65,
+          "low": 29.73,
+          "close": 30.88,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 30.88,
+        "high": 31.44,
+        "low": 30.62,
+        "close": 30.81,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "LUXM3": {
+      "ticker": "LUXM3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 110,
+          "high": 112.22,
+          "low": 109.48,
+          "close": 111.86,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 111.86,
+          "high": 112.19,
+          "low": 107.34,
+          "close": 108.51,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 108.51,
+          "high": 111.78,
+          "low": 107.95,
+          "close": 107.95,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 107.95,
+          "high": 107.95,
+          "low": 95.22,
+          "close": 95.22,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 95.22,
+          "high": 96.63,
+          "low": 93.32,
+          "close": 96.63,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 96.63,
+          "high": 96.83,
+          "low": 96.14,
+          "close": 96.27,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 96.27,
+          "high": 96.42,
+          "low": 91.5,
+          "close": 93.31,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 93.31,
+          "high": 95.45,
+          "low": 91.84,
+          "close": 94.94,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 94.94,
+          "high": 94.94,
+          "low": 94.72,
+          "close": 94.72,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 94.72,
+          "high": 94.72,
+          "low": 89.74,
+          "close": 89.83,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 89.83,
+          "high": 89.83,
+          "low": 82.98,
+          "close": 82.98,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 82.98,
+          "high": 94.04,
+          "low": 82.98,
+          "close": 93.99,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 93.99,
+          "high": 109.94,
+          "low": 93.99,
+          "close": 109.94,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 109.94,
+          "high": 130.45,
+          "low": 109.94,
+          "close": 130.01,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 130.01,
+          "high": 140.32,
+          "low": 130.01,
+          "close": 140.32,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 140.32,
+          "high": 146.44,
+          "low": 140.32,
+          "close": 141.18,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 141.18,
+          "high": 144.29,
+          "low": 137.44,
+          "close": 137.44,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 137.44,
+        "high": 139.82,
+        "low": 137.44,
+        "close": 138.25,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "ONLS3": {
+      "ticker": "ONLS3",
+      "ticks": [],
+      "candles": []
+    },
+    "BSOL3": {
+      "ticker": "BSOL3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 85,
+          "high": 86.52,
+          "low": 82.45,
+          "close": 86.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 86.38,
+          "high": 90,
+          "low": 84.82,
+          "close": 89.24,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 89.24,
+          "high": 91.57,
+          "low": 88.07,
+          "close": 88.07,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 88.07,
+          "high": 88.07,
+          "low": 80.34,
+          "close": 80.34,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 80.34,
+          "high": 81.41,
+          "low": 76.46,
+          "close": 76.46,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 76.46,
+          "high": 76.46,
+          "low": 72.61,
+          "close": 72.85,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 72.85,
+          "high": 75.65,
+          "low": 72.45,
+          "close": 74.83,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 74.83,
+          "high": 74.83,
+          "low": 70.93,
+          "close": 73.43,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 73.43,
+          "high": 73.43,
+          "low": 73.22,
+          "close": 73.22,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 73.22,
+          "high": 73.22,
+          "low": 66.97,
+          "close": 66.97,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 66.97,
+          "high": 66.97,
+          "low": 58.4,
+          "close": 58.5,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 58.5,
+          "high": 65.6,
+          "low": 56.23,
+          "close": 65.6,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 65.6,
+          "high": 71.81,
+          "low": 65.6,
+          "close": 71.52,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 71.52,
+          "high": 86.14,
+          "low": 71.52,
+          "close": 86.14,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 86.14,
+          "high": 92.62,
+          "low": 86.14,
+          "close": 92.55,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 92.55,
+          "high": 94.12,
+          "low": 90.91,
+          "close": 93.7,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 93.7,
+          "high": 98.49,
+          "low": 93.7,
+          "close": 97.82,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 97.82,
+        "high": 98.13,
+        "low": 97.34,
+        "close": 98.13,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "FTPY3": {
+      "ticker": "FTPY3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 15,
+          "high": 15.38,
+          "low": 14.36,
+          "close": 14.48,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 14.48,
+          "high": 14.5,
+          "low": 13.28,
+          "close": 13.47,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 13.47,
+          "high": 14.22,
+          "low": 13.44,
+          "close": 13.74,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 13.74,
+          "high": 13.74,
+          "low": 12.58,
+          "close": 13.04,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 13.04,
+          "high": 13.17,
+          "low": 11.12,
+          "close": 11.13,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 11.13,
+          "high": 11.17,
+          "low": 10.04,
+          "close": 10.21,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 10.21,
+          "high": 10.66,
+          "low": 9.76,
+          "close": 10.44,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 10.44,
+          "high": 10.75,
+          "low": 10.23,
+          "close": 10.39,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 10.39,
+          "high": 10.39,
+          "low": 10.35,
+          "close": 10.35,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 10.35,
+          "high": 10.58,
+          "low": 9.4,
+          "close": 10.58,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 10.58,
+          "high": 11.04,
+          "low": 10.39,
+          "close": 10.48,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 10.48,
+          "high": 11.15,
+          "low": 10.01,
+          "close": 11.15,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 11.15,
+          "high": 11.63,
+          "low": 10.76,
+          "close": 11.48,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 11.48,
+          "high": 12.47,
+          "low": 11.43,
+          "close": 12.47,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 12.47,
+          "high": 13.15,
+          "low": 12.16,
+          "close": 13.04,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 13.04,
+          "high": 15.02,
+          "low": 13.04,
+          "close": 14.81,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 14.81,
+          "high": 16.46,
+          "low": 14.53,
+          "close": 16.46,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 16.46,
+        "high": 16.46,
+        "low": 15.83,
+        "close": 16.29,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "INVS3": {
+      "ticker": "INVS3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 35,
+          "high": 36.35,
+          "low": 35,
+          "close": 35.12,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 35.12,
+          "high": 36.29,
+          "low": 35.12,
+          "close": 35.77,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 35.77,
+          "high": 35.99,
+          "low": 33.97,
+          "close": 33.98,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 33.98,
+          "high": 34.67,
+          "low": 28.96,
+          "close": 28.96,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 28.96,
+          "high": 29.68,
+          "low": 28.96,
+          "close": 29.67,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 29.67,
+          "high": 30.08,
+          "low": 28.57,
+          "close": 28.68,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 28.68,
+          "high": 29.65,
+          "low": 28,
+          "close": 28.42,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 28.42,
+          "high": 28.5,
+          "low": 26.89,
+          "close": 26.89,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 26.89,
+          "high": 26.93,
+          "low": 26.89,
+          "close": 26.93,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 26.93,
+          "high": 27.03,
+          "low": 25.76,
+          "close": 25.76,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 25.76,
+          "high": 25.89,
+          "low": 23.22,
+          "close": 23.22,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 23.22,
+          "high": 24.91,
+          "low": 22.61,
+          "close": 24.91,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 24.91,
+          "high": 30,
+          "low": 24.91,
+          "close": 30,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 30,
+          "high": 36.13,
+          "low": 30,
+          "close": 35.85,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 35.85,
+          "high": 37.34,
+          "low": 35.75,
+          "close": 37.31,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 37.31,
+          "high": 39.16,
+          "low": 37.31,
+          "close": 37.82,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 37.82,
+          "high": 38.76,
+          "low": 36.66,
+          "close": 37.26,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 37.26,
+        "high": 38.06,
+        "low": 37.19,
+        "close": 37.53,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "VSAU3": {
+      "ticker": "VSAU3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 48,
+          "high": 51.75,
+          "low": 47.02,
+          "close": 51.43,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 51.43,
+          "high": 51.43,
+          "low": 49.19,
+          "close": 49.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 49.38,
+          "high": 49.39,
+          "low": 41.69,
+          "close": 41.7,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 41.7,
+          "high": 41.7,
+          "low": 36.86,
+          "close": 37.59,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 37.59,
+          "high": 37.72,
+          "low": 36.38,
+          "close": 36.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 36.38,
+          "high": 36.7,
+          "low": 35.33,
+          "close": 36.62,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 36.62,
+          "high": 36.63,
+          "low": 35.51,
+          "close": 36.39,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 36.39,
+          "high": 38.74,
+          "low": 36.39,
+          "close": 37.98,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 37.98,
+          "high": 37.98,
+          "low": 37.9,
+          "close": 37.9,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 37.9,
+          "high": 37.9,
+          "low": 36.22,
+          "close": 36.6,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 36.6,
+          "high": 36.6,
+          "low": 34.08,
+          "close": 34.35,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 34.35,
+          "high": 37.03,
+          "low": 33.73,
+          "close": 37.03,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 37.03,
+          "high": 41.09,
+          "low": 37.03,
+          "close": 41.09,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 41.09,
+          "high": 45,
+          "low": 40.76,
+          "close": 45,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 45,
+          "high": 49.14,
+          "low": 45,
+          "close": 49.14,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 49.14,
+          "high": 52.05,
+          "low": 48.27,
+          "close": 52.05,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 52.05,
+          "high": 57.04,
+          "low": 51.93,
+          "close": 56.72,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 56.72,
+        "high": 56.72,
+        "low": 55.84,
+        "close": 56.44,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "BLAB3": {
+      "ticker": "BLAB3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:44.841Z",
+          "open": 12,
+          "high": 12.34,
+          "low": 11.57,
+          "close": 12.25,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:58.081Z",
+          "open": 12.25,
+          "high": 13.53,
+          "low": 12.22,
+          "close": 13.53,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:09:13.079Z",
+          "open": 13.53,
+          "high": 13.71,
+          "low": 13.09,
+          "close": 13.46,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:28.081Z",
+          "open": 13.46,
+          "high": 13.64,
+          "low": 12.85,
+          "close": 13.3,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:37.076Z",
+          "open": 13.3,
+          "high": 13.58,
+          "low": 13.09,
+          "close": 13.18,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:47.074Z",
+          "open": 13.18,
+          "high": 13.63,
+          "low": 12.89,
+          "close": 13.63,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:09.079Z",
+          "open": 13.63,
+          "high": 15.19,
+          "low": 13.49,
+          "close": 14.94,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:15:37.856Z",
+          "open": 14.94,
+          "high": 15.4,
+          "low": 14.94,
+          "close": 15.4,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 15.4,
+          "high": 15.68,
+          "low": 14.7,
+          "close": 14.93,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 14.93,
+          "high": 14.93,
+          "low": 13.39,
+          "close": 13.94,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 13.94,
+          "high": 16.57,
+          "low": 13.94,
+          "close": 16.57,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 16.57,
+          "high": 19.32,
+          "low": 16.53,
+          "close": 19.08,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 19.08,
+          "high": 20.62,
+          "low": 18.74,
+          "close": 20.62,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 20.62,
+          "high": 21.08,
+          "low": 19.86,
+          "close": 20.89,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 20.89,
+          "high": 21.87,
+          "low": 20.53,
+          "close": 21.82,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 21.82,
+          "high": 22.41,
+          "low": 20.93,
+          "close": 22.41,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 22.41,
+        "high": 22.46,
+        "low": 21.89,
+        "close": 22.46,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "HOSP3": {
+      "ticker": "HOSP3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 38,
+          "high": 38.36,
+          "low": 37.18,
+          "close": 38.22,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 38.22,
+          "high": 39.26,
+          "low": 38.21,
+          "close": 38.88,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 38.88,
+          "high": 39.24,
+          "low": 36.26,
+          "close": 36.26,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 36.26,
+          "high": 36.26,
+          "low": 33.25,
+          "close": 33.25,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 33.25,
+          "high": 33.26,
+          "low": 32.36,
+          "close": 32.92,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 32.92,
+          "high": 33.24,
+          "low": 32.7,
+          "close": 33.05,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 33.05,
+          "high": 33.26,
+          "low": 31.86,
+          "close": 32.19,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 32.19,
+          "high": 33.03,
+          "low": 31.84,
+          "close": 32.99,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 32.99,
+          "high": 32.99,
+          "low": 32.92,
+          "close": 32.92,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 32.92,
+          "high": 32.92,
+          "low": 30.01,
+          "close": 30.01,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 30.01,
+          "high": 30.07,
+          "low": 27.44,
+          "close": 27.53,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 27.53,
+          "high": 29.9,
+          "low": 26.66,
+          "close": 29.9,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 29.9,
+          "high": 34.64,
+          "low": 29.9,
+          "close": 34.64,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 34.64,
+          "high": 41.95,
+          "low": 34.64,
+          "close": 41.06,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 41.06,
+          "high": 43.97,
+          "low": 41.06,
+          "close": 43.97,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 43.97,
+          "high": 47.31,
+          "low": 43.93,
+          "close": 45.42,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 45.42,
+          "high": 47.06,
+          "low": 45.37,
+          "close": 46.07,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 46.07,
+        "high": 46.41,
+        "low": 45.31,
+        "close": 45.31,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "AGFT3": {
+      "ticker": "AGFT3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 62,
+          "high": 63.65,
+          "low": 62,
+          "close": 62.24,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 62.24,
+          "high": 63.05,
+          "low": 58.73,
+          "close": 59.85,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 59.85,
+          "high": 59.99,
+          "low": 56.12,
+          "close": 56.12,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 56.12,
+          "high": 56.26,
+          "low": 51.32,
+          "close": 51.35,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 51.35,
+          "high": 53.43,
+          "low": 51.35,
+          "close": 53.31,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 53.31,
+          "high": 53.56,
+          "low": 51.7,
+          "close": 51.94,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 51.94,
+          "high": 52.59,
+          "low": 51.35,
+          "close": 52.22,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 52.22,
+          "high": 55.93,
+          "low": 52.22,
+          "close": 55.17,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 55.17,
+          "high": 55.2,
+          "low": 55.14,
+          "close": 55.2,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 55.2,
+          "high": 55.36,
+          "low": 49.04,
+          "close": 49.06,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 49.06,
+          "high": 49.28,
+          "low": 44.11,
+          "close": 44.11,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 44.11,
+          "high": 49.41,
+          "low": 43.25,
+          "close": 48.76,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 48.76,
+          "high": 55.35,
+          "low": 48.76,
+          "close": 55.35,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 55.35,
+          "high": 66.54,
+          "low": 55.35,
+          "close": 66.54,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 66.54,
+          "high": 73.55,
+          "low": 66.54,
+          "close": 73.22,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 73.22,
+          "high": 76.51,
+          "low": 73.22,
+          "close": 74.28,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 74.28,
+          "high": 77.44,
+          "low": 73.67,
+          "close": 74.1,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 74.1,
+        "high": 75.35,
+        "low": 73.26,
+        "close": 73.38,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "FRIG3": {
+      "ticker": "FRIG3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 30,
+          "high": 30.38,
+          "low": 29.02,
+          "close": 30.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 30.38,
+          "high": 30.39,
+          "low": 29.29,
+          "close": 29.92,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 29.92,
+          "high": 30.38,
+          "low": 29,
+          "close": 29,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 29,
+          "high": 29.23,
+          "low": 26.68,
+          "close": 26.8,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 26.8,
+          "high": 26.8,
+          "low": 23.09,
+          "close": 23.09,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 23.09,
+          "high": 23.09,
+          "low": 21.72,
+          "close": 21.84,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 21.84,
+          "high": 23.58,
+          "low": 21.84,
+          "close": 23.29,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 23.29,
+          "high": 24.88,
+          "low": 23.28,
+          "close": 24.09,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 24.09,
+          "high": 24.09,
+          "low": 24.04,
+          "close": 24.04,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 24.04,
+          "high": 24.05,
+          "low": 21.85,
+          "close": 22.18,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 22.18,
+          "high": 22.18,
+          "low": 20.85,
+          "close": 21.31,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 21.31,
+          "high": 22.6,
+          "low": 20.56,
+          "close": 22.6,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 22.6,
+          "high": 24.61,
+          "low": 22.32,
+          "close": 24.39,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 24.39,
+          "high": 26.17,
+          "low": 24.1,
+          "close": 26.17,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 26.17,
+          "high": 26.89,
+          "low": 25.84,
+          "close": 26.83,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 26.83,
+          "high": 30.09,
+          "low": 26.68,
+          "close": 30.09,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 30.09,
+          "high": 30.88,
+          "low": 29.19,
+          "close": 29.97,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 29.97,
+        "high": 31.18,
+        "low": 29.02,
+        "close": 31.18,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "TRTR3": {
+      "ticker": "TRTR3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 44,
+          "high": 45.54,
+          "low": 44,
+          "close": 44.05,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 44.05,
+          "high": 45.21,
+          "low": 43.9,
+          "close": 44.4,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 44.4,
+          "high": 44.82,
+          "low": 42.29,
+          "close": 42.29,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 42.29,
+          "high": 42.31,
+          "low": 39.17,
+          "close": 39.17,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 39.17,
+          "high": 39.17,
+          "low": 36.38,
+          "close": 37.05,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 37.05,
+          "high": 37.79,
+          "low": 36.12,
+          "close": 36.12,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 36.12,
+          "high": 37.27,
+          "low": 35.67,
+          "close": 36.1,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 36.1,
+          "high": 36.63,
+          "low": 34.63,
+          "close": 35.95,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 35.95,
+          "high": 35.95,
+          "low": 35.86,
+          "close": 35.86,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 35.86,
+          "high": 35.92,
+          "low": 34.66,
+          "close": 34.66,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 34.66,
+          "high": 36.85,
+          "low": 34.6,
+          "close": 34.6,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 34.6,
+          "high": 38.08,
+          "low": 33.81,
+          "close": 37.75,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 37.75,
+          "high": 44.37,
+          "low": 37.75,
+          "close": 44.37,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 44.37,
+          "high": 54.41,
+          "low": 44.37,
+          "close": 53.38,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 53.38,
+          "high": 57.53,
+          "low": 53.29,
+          "close": 57.43,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 57.43,
+          "high": 60.32,
+          "low": 57.43,
+          "close": 57.5,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 57.5,
+          "high": 58.8,
+          "low": 55.81,
+          "close": 55.81,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 55.81,
+        "high": 56.56,
+        "low": 54.51,
+        "close": 54.51,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "AERV3": {
+      "ticker": "AERV3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 25,
+          "high": 25.09,
+          "low": 23.67,
+          "close": 23.7,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 23.7,
+          "high": 24.13,
+          "low": 23.33,
+          "close": 23.39,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 23.39,
+          "high": 23.62,
+          "low": 21.59,
+          "close": 21.59,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 21.59,
+          "high": 21.65,
+          "low": 19.48,
+          "close": 19.85,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 19.85,
+          "high": 21.61,
+          "low": 19.85,
+          "close": 21.51,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 21.51,
+          "high": 21.64,
+          "low": 20.42,
+          "close": 20.42,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 20.42,
+          "high": 20.56,
+          "low": 19.77,
+          "close": 19.95,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 19.95,
+          "high": 20.56,
+          "low": 19.73,
+          "close": 20.23,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 20.23,
+          "high": 20.26,
+          "low": 20.23,
+          "close": 20.25,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 20.25,
+          "high": 20.32,
+          "low": 18.23,
+          "close": 18.25,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 18.25,
+          "high": 18.39,
+          "low": 16.7,
+          "close": 16.74,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 16.74,
+          "high": 18.43,
+          "low": 15.89,
+          "close": 18.43,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 18.43,
+          "high": 20.3,
+          "low": 18.43,
+          "close": 20.3,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 20.3,
+          "high": 25.27,
+          "low": 20.3,
+          "close": 25.27,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 25.27,
+          "high": 26.58,
+          "low": 25.26,
+          "close": 25.54,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 25.54,
+          "high": 27.59,
+          "low": 25.54,
+          "close": 27.32,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 27.32,
+          "high": 29.6,
+          "low": 27.32,
+          "close": 29.2,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 29.2,
+        "high": 29.71,
+        "low": 28.95,
+        "close": 29.02,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "MOVB3": {
+      "ticker": "MOVB3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 32,
+          "high": 32.94,
+          "low": 31.81,
+          "close": 32.44,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 32.44,
+          "high": 33.84,
+          "low": 32.18,
+          "close": 32.28,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 32.28,
+          "high": 32.45,
+          "low": 30.83,
+          "close": 30.83,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 30.83,
+          "high": 30.85,
+          "low": 29.42,
+          "close": 29.42,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 29.42,
+          "high": 29.77,
+          "low": 28.62,
+          "close": 28.68,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 28.68,
+          "high": 28.8,
+          "low": 26.7,
+          "close": 26.7,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 26.7,
+          "high": 27,
+          "low": 26.26,
+          "close": 26.84,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 26.84,
+          "high": 27.22,
+          "low": 26.65,
+          "close": 26.99,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 26.99,
+          "high": 26.99,
+          "low": 26.97,
+          "close": 26.97,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 26.97,
+          "high": 27.03,
+          "low": 25.19,
+          "close": 25.19,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 25.19,
+          "high": 25.28,
+          "low": 23.93,
+          "close": 24.12,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 24.12,
+          "high": 25.04,
+          "low": 23.17,
+          "close": 24.56,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 24.56,
+          "high": 28.42,
+          "low": 24.56,
+          "close": 28.19,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 28.19,
+          "high": 31.54,
+          "low": 28.19,
+          "close": 31.24,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 31.24,
+          "high": 34.45,
+          "low": 31.24,
+          "close": 33.84,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 33.84,
+          "high": 35.67,
+          "low": 32.95,
+          "close": 33.39,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 33.39,
+          "high": 34.75,
+          "low": 33.31,
+          "close": 33.57,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 33.57,
+        "high": 34.13,
+        "low": 32.66,
+        "close": 32.67,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "HOTE3": {
+      "ticker": "HOTE3",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 28,
+          "high": 28.36,
+          "low": 27.46,
+          "close": 27.67,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 27.67,
+          "high": 28.42,
+          "low": 27.25,
+          "close": 27.25,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 27.25,
+          "high": 27.86,
+          "low": 26.55,
+          "close": 27.11,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 27.11,
+          "high": 27.41,
+          "low": 26.34,
+          "close": 26.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 26.38,
+          "high": 26.38,
+          "low": 25.06,
+          "close": 25.19,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 25.19,
+          "high": 25.33,
+          "low": 23.06,
+          "close": 23.59,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 23.59,
+          "high": 24.08,
+          "low": 23.05,
+          "close": 23.65,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 23.65,
+          "high": 23.92,
+          "low": 23.46,
+          "close": 23.91,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 23.91,
+          "high": 23.91,
+          "low": 23.86,
+          "close": 23.86,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 23.86,
+          "high": 23.94,
+          "low": 21.6,
+          "close": 21.6,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 21.6,
+          "high": 21.65,
+          "low": 19.72,
+          "close": 19.72,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 19.72,
+          "high": 22.44,
+          "low": 19.72,
+          "close": 21.79,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 21.79,
+          "high": 27.26,
+          "low": 21.79,
+          "close": 27.26,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 27.26,
+          "high": 33.66,
+          "low": 27.26,
+          "close": 33.05,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 33.05,
+          "high": 35.81,
+          "low": 33.01,
+          "close": 35.04,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 35.04,
+          "high": 37.34,
+          "low": 35,
+          "close": 35.9,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 35.9,
+          "high": 37.01,
+          "low": 34.52,
+          "close": 34.79,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 34.79,
+        "high": 35.93,
+        "low": 34.52,
+        "close": 34.52,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "LOGI11": {
+      "ticker": "LOGI11",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 95,
+          "high": 96.15,
+          "low": 94.98,
+          "close": 96.1,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 96.1,
+          "high": 96.1,
+          "low": 95.81,
+          "close": 95.9,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 95.9,
+          "high": 95.92,
+          "low": 94.32,
+          "close": 94.32,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 94.32,
+          "high": 94.32,
+          "low": 89.64,
+          "close": 89.64,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 89.64,
+          "high": 89.64,
+          "low": 87.23,
+          "close": 87.23,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 87.23,
+          "high": 87.23,
+          "low": 85.24,
+          "close": 85.24,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 85.24,
+          "high": 85.29,
+          "low": 84.17,
+          "close": 85.12,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 85.12,
+          "high": 86.57,
+          "low": 85.12,
+          "close": 86.45,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 86.45,
+          "high": 86.45,
+          "low": 86.39,
+          "close": 86.39,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 86.39,
+          "high": 86.59,
+          "low": 84.5,
+          "close": 84.5,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 84.5,
+          "high": 84.5,
+          "low": 83.52,
+          "close": 83.76,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 83.76,
+          "high": 88.54,
+          "low": 83.14,
+          "close": 88.54,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 88.54,
+          "high": 95.73,
+          "low": 88.54,
+          "close": 95.73,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 95.73,
+          "high": 99.47,
+          "low": 95.73,
+          "close": 99.11,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 99.11,
+          "high": 102.66,
+          "low": 99.11,
+          "close": 102.66,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 102.66,
+          "high": 105.08,
+          "low": 101.49,
+          "close": 105.08,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 105.08,
+          "high": 105.11,
+          "low": 104.02,
+          "close": 104.81,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 104.81,
+        "high": 104.81,
+        "low": 103.19,
+        "close": 103.74,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "GLOG11": {
+      "ticker": "GLOG11",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 78,
+          "high": 78.73,
+          "low": 77.98,
+          "close": 78.73,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 78.73,
+          "high": 78.81,
+          "low": 77.53,
+          "close": 78.81,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 78.81,
+          "high": 79.09,
+          "low": 77.95,
+          "close": 77.95,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 77.95,
+          "high": 77.95,
+          "low": 75.16,
+          "close": 75.16,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 75.16,
+          "high": 75.16,
+          "low": 72.66,
+          "close": 72.66,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 72.66,
+          "high": 72.66,
+          "low": 71.16,
+          "close": 71.23,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 71.23,
+          "high": 71.23,
+          "low": 71.02,
+          "close": 71.02,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 71.02,
+          "high": 71.02,
+          "low": 70.55,
+          "close": 70.68,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 70.68,
+          "high": 70.68,
+          "low": 70.63,
+          "close": 70.63,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 70.63,
+          "high": 71.32,
+          "low": 70.28,
+          "close": 70.57,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 70.57,
+          "high": 70.57,
+          "low": 69.38,
+          "close": 69.38,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 69.38,
+          "high": 72,
+          "low": 68.23,
+          "close": 72,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 72,
+          "high": 77.78,
+          "low": 72,
+          "close": 77.78,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 77.78,
+          "high": 82.49,
+          "low": 77.78,
+          "close": 82.49,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 82.49,
+          "high": 84.46,
+          "low": 82.49,
+          "close": 84.46,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 84.46,
+          "high": 85.12,
+          "low": 84.38,
+          "close": 84.87,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 84.87,
+          "high": 84.87,
+          "low": 83.48,
+          "close": 84.12,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 84.12,
+        "high": 84.25,
+        "low": 83.88,
+        "close": 84.25,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "SHOP11": {
+      "ticker": "SHOP11",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 120,
+          "high": 120,
+          "low": 119.13,
+          "close": 119.15,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 119.15,
+          "high": 119.15,
+          "low": 118.47,
+          "close": 118.55,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 118.55,
+          "high": 118.55,
+          "low": 116.28,
+          "close": 116.28,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 116.28,
+          "high": 116.28,
+          "low": 111.65,
+          "close": 111.65,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 111.65,
+          "high": 112.48,
+          "low": 109.95,
+          "close": 109.95,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 109.95,
+          "high": 109.95,
+          "low": 106.14,
+          "close": 106.16,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 106.16,
+          "high": 106.16,
+          "low": 104.52,
+          "close": 104.76,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 104.76,
+          "high": 105.19,
+          "low": 103.99,
+          "close": 104.7,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 104.7,
+          "high": 104.7,
+          "low": 104.6,
+          "close": 104.6,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 104.6,
+          "high": 104.6,
+          "low": 102.76,
+          "close": 102.76,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 102.76,
+          "high": 102.76,
+          "low": 101.87,
+          "close": 102.02,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 102.02,
+          "high": 109.68,
+          "low": 101.45,
+          "close": 109.68,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 109.68,
+          "high": 115.64,
+          "low": 109.68,
+          "close": 115.64,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 115.64,
+          "high": 120.43,
+          "low": 115.64,
+          "close": 120.43,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 120.43,
+          "high": 124.07,
+          "low": 120.43,
+          "close": 124.07,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 124.07,
+          "high": 126.48,
+          "low": 124.05,
+          "close": 125.26,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 125.26,
+          "high": 129.96,
+          "low": 125.23,
+          "close": 129.96,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 129.96,
+        "high": 131.71,
+        "low": 129.92,
+        "close": 130.83,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "MALL11": {
+      "ticker": "MALL11",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 88,
+          "high": 88,
+          "low": 87.28,
+          "close": 87.28,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 87.28,
+          "high": 87.28,
+          "low": 86.71,
+          "close": 86.76,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 86.76,
+          "high": 87.66,
+          "low": 86.18,
+          "close": 86.18,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 86.18,
+          "high": 86.18,
+          "low": 82.49,
+          "close": 82.49,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 82.49,
+          "high": 82.49,
+          "low": 79.75,
+          "close": 79.75,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 79.75,
+          "high": 79.75,
+          "low": 78.39,
+          "close": 78.4,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 78.4,
+          "high": 78.4,
+          "low": 78.08,
+          "close": 78.08,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 78.08,
+          "high": 78.09,
+          "low": 77.37,
+          "close": 77.64,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 77.64,
+          "high": 77.64,
+          "low": 77.56,
+          "close": 77.56,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 77.56,
+          "high": 77.56,
+          "low": 75.46,
+          "close": 75.46,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 75.46,
+          "high": 75.46,
+          "low": 73.74,
+          "close": 73.74,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 73.74,
+          "high": 78.47,
+          "low": 72.71,
+          "close": 78.03,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 78.03,
+          "high": 82.71,
+          "low": 78.03,
+          "close": 82.71,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 82.71,
+          "high": 86.82,
+          "low": 82.71,
+          "close": 86.68,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 86.68,
+          "high": 89.81,
+          "low": 86.68,
+          "close": 88.87,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 88.87,
+          "high": 89.45,
+          "low": 87.98,
+          "close": 89.45,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 89.45,
+          "high": 90.85,
+          "low": 89.45,
+          "close": 90.85,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 90.85,
+        "high": 91.12,
+        "low": 90.79,
+        "close": 91.12,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "PAPF11": {
+      "ticker": "PAPF11",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 98,
+          "high": 98.38,
+          "low": 97.85,
+          "close": 98.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 98.38,
+          "high": 99.6,
+          "low": 98.38,
+          "close": 98.46,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 98.46,
+          "high": 98.48,
+          "low": 96.58,
+          "close": 96.58,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 96.58,
+          "high": 96.58,
+          "low": 92.55,
+          "close": 92.55,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 92.55,
+          "high": 92.55,
+          "low": 89.73,
+          "close": 89.73,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 89.73,
+          "high": 90.09,
+          "low": 89.03,
+          "close": 89.27,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 89.27,
+          "high": 89.84,
+          "low": 88.88,
+          "close": 89.33,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 89.33,
+          "high": 96.38,
+          "low": 89.33,
+          "close": 96.38,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 96.38,
+          "high": 96.53,
+          "low": 96.38,
+          "close": 96.53,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 96.53,
+          "high": 98.28,
+          "low": 96.07,
+          "close": 98.28,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 98.28,
+          "high": 99.7,
+          "low": 95.48,
+          "close": 96.65,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 96.65,
+          "high": 98.99,
+          "low": 96.42,
+          "close": 98.99,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 98.99,
+          "high": 103,
+          "low": 98.99,
+          "close": 103,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 103,
+          "high": 107.6,
+          "low": 103,
+          "close": 107.6,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 107.6,
+          "high": 111.73,
+          "low": 107.6,
+          "close": 111.69,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 111.69,
+          "high": 111.77,
+          "low": 111.43,
+          "close": 111.59,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 111.59,
+          "high": 111.64,
+          "low": 110.77,
+          "close": 110.77,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 110.77,
+        "high": 110.81,
+        "low": 110.45,
+        "close": 110.45,
+        "volume": 0,
+        "round": 2
+      }
+    },
+    "HGLG11": {
+      "ticker": "HGLG11",
+      "ticks": [],
+      "candles": [
+        {
+          "timestamp": "2026-03-06T13:06:20.110Z",
+          "open": 65,
+          "high": 65.32,
+          "low": 64.24,
+          "close": 65.31,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:07:32.068Z",
+          "open": 65.31,
+          "high": 65.57,
+          "low": 64.84,
+          "close": 65.54,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:08:48.082Z",
+          "open": 65.54,
+          "high": 65.58,
+          "low": 64.3,
+          "close": 64.3,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:10:02.485Z",
+          "open": 64.3,
+          "high": 64.3,
+          "low": 62.72,
+          "close": 63.08,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:11:17.075Z",
+          "open": 63.08,
+          "high": 63.35,
+          "low": 62.16,
+          "close": 62.16,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:12:27.073Z",
+          "open": 62.16,
+          "high": 62.16,
+          "low": 61.22,
+          "close": 61.22,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:13:44.072Z",
+          "open": 61.22,
+          "high": 61.66,
+          "low": 60.18,
+          "close": 60.18,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:14:50.456Z",
+          "open": 60.18,
+          "high": 60.22,
+          "low": 59.89,
+          "close": 60.04,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:16:02.794Z",
+          "open": 60.04,
+          "high": 60.04,
+          "low": 59.99,
+          "close": 59.99,
+          "volume": 0,
+          "round": 1
+        },
+        {
+          "timestamp": "2026-03-06T13:17:17.784Z",
+          "open": 59.99,
+          "high": 59.99,
+          "low": 59.15,
+          "close": 59.7,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:18:32.786Z",
+          "open": 59.7,
+          "high": 60.08,
+          "low": 58.62,
+          "close": 58.62,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:19:48.079Z",
+          "open": 58.62,
+          "high": 61.85,
+          "low": 58.34,
+          "close": 61.85,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:21:02.806Z",
+          "open": 61.85,
+          "high": 66.59,
+          "low": 61.85,
+          "close": 66.59,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:22:09.187Z",
+          "open": 66.59,
+          "high": 70.14,
+          "low": 66.59,
+          "close": 70.1,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:23:28.544Z",
+          "open": 70.1,
+          "high": 73.94,
+          "low": 70.1,
+          "close": 73.94,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:24:30.618Z",
+          "open": 73.94,
+          "high": 74.86,
+          "low": 73.94,
+          "close": 74.86,
+          "volume": 0,
+          "round": 2
+        },
+        {
+          "timestamp": "2026-03-06T13:25:35.799Z",
+          "open": 74.86,
+          "high": 75.69,
+          "low": 74.86,
+          "close": 75.62,
+          "volume": 0,
+          "round": 2
+        }
+      ],
+      "formingCandle": {
+        "timestamp": "2026-03-06T13:26:51.074Z",
+        "open": 75.62,
+        "high": 76.73,
+        "low": 75.6,
+        "close": 76.57,
+        "volume": 0,
+        "round": 2
+      }
+    }
+  },
   "fixedIncomeProducts": [
     {
       "id": "cmmbvf8kj001lot8hwdn4xce0",
@@ -188,10 +6150,39 @@
       "isBadInvestment": false
     }
   ],
-  "fixedIncomeInvestments": [],
+  "fixedIncomeInvestments": [
+    {
+      "id": "qHAPMKyr6JbWIFnF5kyhQ",
+      "productId": "cmmbvf8kz001pot8hrcrfxg4v",
+      "ownerId": "yLtxkX70odfKhxpl7nJmQ",
+      "ownerType": "player",
+      "amount": 2500,
+      "roundInvested": 2,
+      "accumulatedYield": 0,
+      "isRedeemed": false
+    }
+  ],
   "loans": [],
   "news": [],
-  "newsArchive": [],
+  "newsArchive": [
+    {
+      "id": "e5477656-ec07-47e2-b571-2a76cb193a33",
+      "round": 1,
+      "timestamp": "2026-03-06T13:06:26.728Z",
+      "title": "🔔 JANELA DE IPO ABERTA: BLAB3",
+      "body": "A empresa BioLab (Saúde) acaba de fazer sua Oferta Pública Inicial (IPO) no mercado. Cotas estão disponíveis em Oferta de Destaque no valor de R$12.00. Corra para aproveitar!",
+      "source": "B3 Oficial",
+      "category": "economy",
+      "scope": "global",
+      "targets": [
+        "BLAB3"
+      ],
+      "isRandom": false,
+      "isPublic": true,
+      "masterOnly": false,
+      "isActive": true
+    }
+  ],
   "cards": {
     "globalDeck": [],
     "sectorDecks": {},
@@ -199,7 +6190,320 @@
     "fiiDecks": {},
     "masterDeck": []
   },
-  "marketOffers": [],
+  "marketOffers": [
+    {
+      "id": "5f6c74e4-3b49-4e66-a15a-79a6c6939286",
+      "ticker": "BLAB3",
+      "type": "sell",
+      "offerPrice": 12,
+      "currentPriceAtCreation": 12,
+      "totalQuantity": 10000,
+      "remainingQuantity": 9000,
+      "reason": "IPO Oficial de BioLab",
+      "createdAt": "2026-03-06T13:06:26.728Z",
+      "expiresAt": "2026-03-07T13:06:26.728Z",
+      "isActive": false,
+      "transactions": [
+        "RrepppC_0GScxl0UksJn4",
+        "L6badP-bgWpIqVs2ZY0uj",
+        "ivPRKBxm54P9YP48Fe0XW"
+      ]
+    }
+  ],
   "activeCardEffects": [],
-  "events": []
+  "events": [
+    {
+      "id": "d8164232-e692-4ee0-b047-91c27b15a8e1",
+      "templateId": "cmmbvf8hu0010ot8h3pqcqgz9",
+      "name": "Bear Market Violento",
+      "headline": "📉 Todas as ações -5% a -15%",
+      "icon": "🐻",
+      "title": "Pânico Generalizado: Ibovespa Derrete em Sell-off Massivo",
+      "body": "O desespero impera. Todas as ações sangram severamente por pura psicologia de massa. Volume de vendas bate recorde histórico.",
+      "expertTip": "Não venda no pânico! Quem segura no bear market colhe no bull. InvestCorp lucra com o giro.",
+      "expertAnalysis": "Sell-off emocional. Ações beta-alto (BRIS3, FTPY3, ONLS3) caem 2x mais que o mercado. Defensivas (NUCL3, VSAU3) caem menos. Oportunidade de compra para quem tem caixa.",
+      "scope": "global",
+      "category": "crisis",
+      "isPositive": false,
+      "effect": {
+        "target": "all",
+        "targetFilter": "stock",
+        "priceModifier": {
+          "min": -0.15,
+          "max": -0.05
+        },
+        "volatilityModifier": 0.08,
+        "trendOverride": "bearish",
+        "duration": 2
+      },
+      "duration": 2,
+      "targets": [
+        "Todos"
+      ],
+      "round": 1,
+      "timestamp": "2026-03-06T13:10:00.107Z",
+      "expiresAtRound": 3,
+      "isActive": true,
+      "isRevealed": true,
+      "impactMap": {
+        "TNOV3": -0.03523465104641106,
+        "DGCR3": -0.04361657178561265,
+        "ENVD3": -0.08262130564127201,
+        "PMAX3": -0.044582921625660056,
+        "NUCL3": -0.013669831693489539,
+        "MCFC3": -0.07488403674278041,
+        "LUXM3": -0.026273615755728976,
+        "BSOL3": -0.016825993143136958,
+        "FTPY3": -0.15541359747135935,
+        "INVS3": -0.07513449050642138,
+        "VSAU3": -0.07952125333098535,
+        "BLAB3": -0.09959669751845328,
+        "HOSP3": -0.07276130661419883,
+        "AGFT3": -0.05460207850306581,
+        "FRIG3": -0.07898877980118536,
+        "TRTR3": -0.05836563546219299,
+        "AERV3": -0.11008416592767349,
+        "MOVB3": -0.06775703001460244,
+        "HOTE3": -0.08285655552011542,
+        "LOGI11": -0.03396367670059307,
+        "GLOG11": -0.038618040132168886,
+        "SHOP11": -0.04698101970089692,
+        "MALL11": -0.0385623905224526,
+        "PAPF11": -0.04162121266640013,
+        "HGLG11": -0.02336318013049632
+      }
+    },
+    {
+      "id": "64814d29-d978-4865-bac4-29a9c5e0cbc1",
+      "templateId": "cmmbvf8ke001kot8hzlb5i6ne",
+      "name": "Inflação Engorda PapelFix",
+      "headline": "📈 PAPF11 +5% a +10% — Dividendos multiplicam",
+      "icon": "📊",
+      "title": "Inflação Persistente Engorda Distribuição dos Fundos de Papel",
+      "body": "IBGE bate no teto a inflação de combustíveis. O fundo PapelFix atrelado ao IPCA bate metas de receita de um ano sem esforço.",
+      "expertTip": "Enquanto a bolsa cai com juros e inflação, PapelFix se empodera. Proteção ativa pura!",
+      "expertAnalysis": "CRIs atrelados a IPCA (PAPF11) vivem disso. O aluno que entende hedge comprou PAPF11 e terá IPCA +7%. Fundo sobe, dividendo multiplica.",
+      "scope": "fii",
+      "category": "opportunity",
+      "isPositive": true,
+      "effect": {
+        "target": "fii",
+        "targetFilter": "PAPF11",
+        "priceModifier": {
+          "min": 0.05,
+          "max": 0.1
+        },
+        "trendOverride": "bullish",
+        "duration": 3,
+        "fixedIncomeRateChange": 0.002
+      },
+      "duration": 3,
+      "targets": [
+        "PAPF11"
+      ],
+      "round": 1,
+      "timestamp": "2026-03-06T13:15:36.085Z",
+      "expiresAtRound": 4,
+      "isActive": true,
+      "isRevealed": true,
+      "impactMap": {
+        "PAPF11": 0.034139697954672775
+      }
+    },
+    {
+      "id": "12a1d93b-8f38-4468-91e2-583b7d8c9ab0",
+      "templateId": "cmmbvf8jw001got8hqq3stzqp",
+      "name": "Megaevento Esportivo",
+      "headline": "📈 Mobilidade e Hotelaria +10% a +20%",
+      "icon": "⚽",
+      "title": "Brasil Sediará Copa do Mundo Sub-20: Turismo em Alta",
+      "body": "Milhões de turistas internacionais e domésticos aquecem aviação, hotelaria e locadoras. Demanda explosiva sazonal.",
+      "expertTip": "HotelBrasil (HOTE3) e AeroViagem (AERV3) sobem forte mas o efeito é temporário.",
+      "expertAnalysis": "HOTE3 sobe com ocupação máxima. AERV3 lucra com malha extra. MOVB3 aluga toda a frota. Efeito de 2-3 rodadas, depois corrige.",
+      "scope": "sector",
+      "category": "opportunity",
+      "isPositive": true,
+      "effect": {
+        "target": "company",
+        "targetFilter": "FTPY3",
+        "priceModifier": {
+          "min": 0.1,
+          "max": 0.2
+        },
+        "trendOverride": "bullish",
+        "duration": 2
+      },
+      "duration": 2,
+      "targets": [
+        "FTPY3"
+      ],
+      "round": 2,
+      "timestamp": "2026-03-06T13:18:27.567Z",
+      "expiresAtRound": 4,
+      "isActive": true,
+      "isRevealed": true,
+      "impactMap": {
+        "FTPY3": 0.11386725574105008
+      }
+    },
+    {
+      "id": "6c2cbc46-171d-459a-a710-6ad7112ffdf5",
+      "templateId": "cmmbvf8ha000wot8h4pv0qsoz",
+      "name": "Choque de Juros (Copom)",
+      "headline": "📉 Todas as ações -8% a -18% — Selic dispara!",
+      "icon": "🏦",
+      "title": "Copom Surpreende: Selic Sobe 1.5% de Uma Vez",
+      "body": "O Banco Central elevou a taxa de juros fora do consenso. A curva de juros reagiu violentamente, ações desabam e dinheiro foge para renda fixa.",
+      "expertTip": "Saia de ações Growth (BRIS3, FTPY3) e migre para Tesouro Selic ou CDB. FIIs de papel se beneficiam.",
+      "expertAnalysis": "Alta de juros mata ativos de risco. Empresas alavancadas (AERV3) e Growth sem lucro (BRIS3, FTPY3) derretem. Refúgio: NuclearBR (NUCL3), VidaSaúde (VSAU3), PapelFix (PAPF11). Renda fixa sobe de rentabilidade!",
+      "scope": "global",
+      "category": "economy",
+      "isPositive": false,
+      "effect": {
+        "target": "all",
+        "targetFilter": "stock",
+        "priceModifier": {
+          "min": -0.18,
+          "max": -0.08
+        },
+        "volatilityModifier": 0.04,
+        "trendOverride": "bearish",
+        "duration": 4,
+        "fixedIncomeRateChange": 0.003
+      },
+      "duration": 4,
+      "targets": [
+        "Todos"
+      ],
+      "round": 2,
+      "timestamp": "2026-03-06T13:19:15.757Z",
+      "expiresAtRound": 6,
+      "isActive": true,
+      "isRevealed": true,
+      "impactMap": {
+        "TNOV3": -0.03626279776687574,
+        "DGCR3": -0.029474936266166107,
+        "ENVD3": -0.07602250068585889,
+        "PMAX3": -0.06817127590756406,
+        "NUCL3": -0.0236368048753621,
+        "MCFC3": -0.08383406275405894,
+        "LUXM3": -0.07893531316279574,
+        "BSOL3": -0.03353373248460896,
+        "FTPY3": -0.20274544062219688,
+        "INVS3": -0.09544501795722284,
+        "VSAU3": -0.0402211632325921,
+        "BLAB3": -0.11798334779725839,
+        "HOSP3": -0.046589976367927166,
+        "AGFT3": -0.052629444673425695,
+        "FRIG3": -0.09443771715791562,
+        "TRTR3": -0.09515360271381096,
+        "AERV3": -0.0917915716128963,
+        "MOVB3": -0.10937673951969318,
+        "HOTE3": -0.050154777524590105,
+        "LOGI11": -0.09181186882670238,
+        "GLOG11": -0.10409338949624707,
+        "SHOP11": -0.06944956057367783,
+        "MALL11": -0.07183407616961962,
+        "PAPF11": -0.03187644486855061,
+        "HGLG11": -0.049938197411192334
+      }
+    },
+    {
+      "id": "0bf58e76-f1d6-4e90-9721-ef2e83113dd3",
+      "templateId": "cmmbvf8gn000sot8h8304t6sl",
+      "name": "Real se Valoriza Forte",
+      "headline": "📈 Consumo e Mobilidade +8% a +18%",
+      "icon": "💵",
+      "title": "Dólar Despenca: Real se Fortalece com Entrada de Capital",
+      "body": "Forte entrada de fluxo estrangeiro fez o dólar desabar. Empresas com custos dolarizados comemoram enquanto exportadoras sofrem.",
+      "expertTip": "Fuja do Agro exportador e compre varejo interno e aviação.",
+      "expertAnalysis": "Dólar fraco é pancada em exportadoras (AGFT3, PMAX3, FRIG3) mas alívio para AeroViagem (AERV3) que economiza em querosene. Efeito dura 2-3 rodadas.",
+      "scope": "global",
+      "category": "economy",
+      "isPositive": true,
+      "effect": {
+        "target": "sector",
+        "targetFilter": "Consumo",
+        "priceModifier": {
+          "min": 0.08,
+          "max": 0.18
+        },
+        "trendOverride": "bullish",
+        "duration": 2
+      },
+      "duration": 2,
+      "targets": [
+        "Consumo"
+      ],
+      "round": 2,
+      "timestamp": "2026-03-06T13:20:02.257Z",
+      "expiresAtRound": 4,
+      "isActive": true,
+      "isRevealed": true,
+      "impactMap": {
+        "MCFC3": 0.18,
+        "LUXM3": 0.1130414371699047
+      }
+    },
+    {
+      "id": "fbb1a366-f54d-4776-a4db-90e8b4bc14ad",
+      "templateId": "cmmbvf8gh000rot8ho9zmaz86",
+      "name": "Euforia Macroeconômica",
+      "headline": "📈 Todas as ações +10% a +25% — Bull Market!",
+      "icon": "🚀",
+      "title": "Fluxo Recorde: Capital Estrangeiro Invade a B3",
+      "body": "Investidores internacionais despejam bilhões no mercado brasileiro. PIB surpreende, juros caem, e a bolsa inteira sobe com força. É a festa do bull market.",
+      "expertTip": "Cuidado: quando todo mundo compra, quem vai vender? Correções bruscas virão em 2-3 rodadas.",
+      "expertAnalysis": "Em euforia máxima, ações beta-alto (BRIS3, FTPY3) exageram no movimento. A grande vencedora estrutural é a InvestCorp (INVS3), que lucra com o giro independente de direção.",
+      "scope": "global",
+      "category": "opportunity",
+      "isPositive": true,
+      "effect": {
+        "target": "all",
+        "priceModifier": {
+          "min": 0.1,
+          "max": 0.25
+        },
+        "volatilityModifier": -0.02,
+        "trendOverride": "bullish",
+        "duration": 3
+      },
+      "duration": 3,
+      "targets": [
+        "Todos"
+      ],
+      "round": 2,
+      "timestamp": "2026-03-06T13:20:27.148Z",
+      "expiresAtRound": 5,
+      "isActive": true,
+      "isRevealed": true,
+      "impactMap": {
+        "TNOV3": 0.06524606442458818,
+        "DGCR3": 0.09334685707924192,
+        "ENVD3": 0.1747140033789992,
+        "PMAX3": 0.2769988812680459,
+        "NUCL3": 0.07107141295981509,
+        "MCFC3": 0.26802974992551254,
+        "LUXM3": 0.12408846422425497,
+        "BSOL3": 0.0962723300343471,
+        "FTPY3": 0.32829814716692773,
+        "INVS3": 0.22266158061785774,
+        "VSAU3": 0.17910738523121444,
+        "BLAB3": 0.3357345953342596,
+        "HOSP3": 0.1466366144048905,
+        "AGFT3": 0.2104316213163962,
+        "FRIG3": 0.13910460363821547,
+        "TRTR3": 0.25,
+        "AERV3": 0.2689840915190271,
+        "MOVB3": 0.161318898539127,
+        "HOTE3": 0.24974413459662698,
+        "LOGI11": 0.19705123329147478,
+        "GLOG11": 0.15009480443178738,
+        "SHOP11": 0.1765257321576238,
+        "MALL11": 0.08340628717881184,
+        "PAPF11": 0.1135282033798272,
+        "HGLG11": 0.189992108904497
+      }
+    }
+  ]
 }
