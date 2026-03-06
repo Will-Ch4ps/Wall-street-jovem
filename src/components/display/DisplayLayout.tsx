@@ -7,7 +7,7 @@ import { ActiveOffer } from '@/components/display/ActiveOffer'
 import { AssetCard } from '@/components/shared/AssetCard'
 import { CandlestickChart } from '@/components/shared/CandlestickChart'
 import { Ranking } from '@/components/display/Ranking'
-import { formatCurrency } from '@/lib/formatters'
+import { formatCurrency, formatPercent } from '@/lib/formatters'
 import { EventRevealModal } from '@/components/display/EventRevealModal'
 import type { GameEvent, GameState, FII, News, Stock } from '@/types'
 
@@ -22,6 +22,13 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
     const [activeTab, setActiveTab] = useState<TabType>('geral')
     const [selectedTicker, setSelectedTicker] = useState<string | null>(null)
     const [selectedPlayerId, setSelectedPlayerId] = useState<string | null>(null)
+    const [theme, setTheme] = useState<'light' | 'dark'>('light')
+
+    useEffect(() => {
+        const saved = localStorage.getItem('projector-theme') as 'light' | 'dark'
+        if (saved) setTheme(saved)
+    }, [])
+
     // Live clock for any countdown displays
     const [now, setNow] = useState(Date.now())
 
@@ -214,8 +221,8 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
 
     if (!state) {
         return (
-            <main className="flex min-h-screen items-center justify-center bg-zinc-950 text-white font-sans">
-                <p className="text-zinc-400">Nenhum jogo ativo. Crie um jogo no painel Master.</p>
+            <main className={`${theme} flex min-h-screen items-center justify-center bg-slate-50 dark:bg-zinc-950 text-slate-800 dark:text-zinc-400 font-sans`}>
+                <p className="text-slate-500 dark:text-zinc-500 font-medium">Nenhum jogo ativo. Crie um jogo no painel Master.</p>
             </main>
         )
     }
@@ -241,26 +248,26 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
         }, {} as Record<string, Stock[]>)
 
         return (
-            <div className="grid grid-cols-1 gap-6 p-4 lg:grid-cols-4">
-                <div className="space-y-6 lg:col-span-3">
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 shadow-lg backdrop-blur-sm">
-                        <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Mercados e Setores da Economia</h2>
+            <div className="grid grid-cols-1 gap-3 px-3 lg:grid-cols-4 max-w-[1920px] mx-auto">
+                <div className="space-y-3 lg:col-span-3">
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm">
+                        <div className="flex items-center justify-between mb-2">
+                            <h2 className="text-lg font-bold text-slate-800 dark:text-white">Mercados e Setores da Economia</h2>
                             {game.config.marketMood && game.config.marketMood !== 'neutral' && (
-                                <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${game.config.marketMood === 'bull' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'}`}>
+                                <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider ${game.config.marketMood === 'bull' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400' : 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400'}`}>
                                     {game.config.marketMood === 'bull' ? '🐂 Bull Market' : '🐻 Bear Market'}
                                 </span>
                             )}
                         </div>
 
-                        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+                        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 space-y-3">
                             {Object.entries(stocksBySector).map(([sector, sectorStocks]) => (
-                                <div key={sector} className="p-4 rounded-lg bg-black/20 border border-white/5 inline-block w-full">
-                                    <h3 className="text-sm font-bold text-zinc-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                <div key={sector} className="p-2.5 rounded-lg bg-slate-50 dark:bg-zinc-800/40 border border-slate-100 dark:border-zinc-700/50 inline-block w-full">
+                                    <h3 className="text-xs font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-2 flex items-center gap-1.5">
                                         <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
                                         {sector}
                                     </h3>
-                                    <div className="flex flex-col gap-3">
+                                    <div className="flex flex-col gap-2">
                                         {sectorStocks.map((a) => (
                                             <AssetCard key={a.ticker} asset={a} compact />
                                         ))}
@@ -269,17 +276,17 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                             ))}
                         </div>
                     </div>
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-5 shadow-lg backdrop-blur-sm">
-                        <h2 className="mb-4 text-xl font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Fundos Imobiliários (FIIs)</h2>
-                        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm mt-3">
+                        <h2 className="mb-2 text-lg font-bold text-slate-800 dark:text-white">Fundos Imobiliários (FIIs)</h2>
+                        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
                             {fiis.map((a) => (
                                 <AssetCard key={a.ticker} asset={a} compact />
                             ))}
                         </div>
                     </div>
                 </div>
-                <div className="space-y-6 lg:col-span-1">
-                    <div className="sticky top-[100px] rounded-xl border border-zinc-800 bg-zinc-900/50 shadow-lg backdrop-blur-sm overflow-hidden">
+                <div className="space-y-3 lg:col-span-1">
+                    <div className="sticky top-[90px] rounded-xl border border-slate-200 dark:border-zinc-800 bg-white/90 dark:bg-zinc-900/90 shadow-sm overflow-hidden">
                         <Ranking
                             players={players}
                             holdings={holdings}
@@ -299,12 +306,12 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
 
     const renderNoticias = () => (
         <div className="p-4 space-y-6 max-w-7xl mx-auto">
-            <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-6 shadow-xl min-h-[70vh]">
+            <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-6 shadow-sm dark:shadow-xl min-h-[70vh]">
                 <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent">
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-amber-500 dark:from-orange-400 dark:to-amber-300 bg-clip-text text-transparent">
                         Notícias do Mercado
                     </h2>
-                    <span className="text-zinc-400 text-sm">Acompanhe as especulações e todos os eventos públicos da economia.</span>
+                    <span className="text-slate-500 dark:text-zinc-400 text-sm font-medium">Acompanhe as especulações e todos os eventos públicos da economia.</span>
                 </div>
                 <NewsFeed events={state.events} news={state.news} maxItems={50} allowDetails={true} />
             </div>
@@ -313,18 +320,18 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
 
     const renderEmpresa = () => (
         <div className="p-4 space-y-6 max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-zinc-900/80 p-5 rounded-xl border border-zinc-800 shadow-xl">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-white dark:bg-zinc-900/80 p-5 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm">
                 <div>
-                    <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-                        <span className="bg-indigo-600 px-3 py-1 rounded text-sm tracking-widest">{selectedTicker}</span>
+                    <h2 className="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-3">
+                        <span className="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 px-3 py-1 rounded text-sm tracking-widest border border-indigo-200 dark:border-indigo-800/50">{selectedTicker}</span>
                         {selectedAsset?.name}
                     </h2>
-                    <p className="text-zinc-400 mt-1">{selectedAsset?.sector} • {selectedAsset?.profile}</p>
+                    <p className="text-slate-500 dark:text-zinc-400 mt-1">{selectedAsset?.sector} • {selectedAsset?.profile}</p>
                 </div>
                 <select
                     value={selectedTicker ?? ''}
                     onChange={(e) => setSelectedTicker(e.target.value || null)}
-                    className="rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 text-base font-medium text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64"
+                    className="rounded-lg border border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-950 px-4 py-3 text-base font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-indigo-500 outline-none w-full md:w-64"
                 >
                     {activeAssets.map((a) => (
                         <option key={a.ticker} value={a.ticker}>
@@ -336,63 +343,65 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 <div className="lg:col-span-3 space-y-6">
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-5 shadow-xl relative">
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-5 shadow-sm relative">
                         <div className="absolute top-4 right-4 text-right">
-                            <p className="text-3xl font-mono font-bold text-white">{selectedAsset ? formatCurrency(selectedAsset.currentPrice) : ''}</p>
+                            <p className="text-3xl font-mono font-bold text-slate-800 dark:text-white">{selectedAsset ? formatCurrency(selectedAsset.currentPrice) : ''}</p>
                             {selectedAsset && selectedAsset.openPrice > 0 && (() => {
                                 const vari = ((selectedAsset.currentPrice - selectedAsset.openPrice) / selectedAsset.openPrice) * 100
                                 const isUp = vari >= 0
-                                return <p className={`text-sm font-mono ${isUp ? 'text-emerald-400' : 'text-red-400'}`}>{isUp ? '▲' : '▼'} {Math.abs(vari).toFixed(2)}% (Hoje)</p>
+                                return <p className={`text-sm font-mono font-bold ${isUp ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>{isUp ? '▲' : '▼'} {Math.abs(vari).toFixed(2)}% (Hoje)</p>
                             })()}
                         </div>
-                        <h3 className="text-lg font-bold text-zinc-300 mb-6">Gráfico de Cotação (B3)</h3>
+                        <h3 className="text-lg font-bold text-slate-700 dark:text-zinc-300 mb-6">Gráfico de Cotação (B3)</h3>
                         {selectedHistory && (
-                            <CandlestickChart
-                                candles={selectedHistory.candles}
-                                ticker={selectedTicker!}
-                                formingCandle={selectedHistory.formingCandle}
-                                className="mt-4"
-                            />
+                            <div className="bg-slate-900 rounded-lg p-2">
+                                <CandlestickChart
+                                    candles={selectedHistory.candles}
+                                    ticker={selectedTicker!}
+                                    formingCandle={selectedHistory.formingCandle}
+                                    className="mt-4"
+                                />
+                            </div>
                         )}
                     </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {selectedAsset?.type === 'stock' ? (
                             <>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">P/L</p>
-                                    <p className="text-xl font-bold text-indigo-300">{(selectedAsset as Stock).peRatio.toFixed(2)}</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">P/L</p>
+                                    <p className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{(selectedAsset as Stock).peRatio.toFixed(2)}</p>
                                 </div>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">Div. Yield</p>
-                                    <p className="text-xl font-bold text-emerald-300">{((selectedAsset as Stock).dividendYield).toFixed(2)}%</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">Div. Yield</p>
+                                    <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{((selectedAsset as Stock).dividendYield).toFixed(2)}%</p>
                                 </div>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">Ações Livres</p>
-                                    <p className="text-xl font-bold text-zinc-200">{selectedAsset.availableShares.toLocaleString()}</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">Ações Livres</p>
+                                    <p className="text-xl font-bold text-slate-700 dark:text-zinc-300">{selectedAsset.availableShares.toLocaleString()}</p>
                                 </div>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">Volatilidade</p>
-                                    <p className="text-xl font-bold text-orange-300">{(selectedAsset.volatility * 100).toFixed(1)}%</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">Volatilidade</p>
+                                    <p className="text-xl font-bold text-amber-600 dark:text-amber-400">{(selectedAsset.volatility * 100).toFixed(1)}%</p>
                                 </div>
                             </>
                         ) : selectedAsset?.type === 'fii' ? (
                             <>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">P/VP</p>
-                                    <p className="text-xl font-bold text-indigo-300">{(selectedAsset as FII).pvpRatio.toFixed(2)}</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">P/VP</p>
+                                    <p className="text-xl font-bold text-indigo-700 dark:text-indigo-400">{(selectedAsset as FII).pvpRatio.toFixed(2)}</p>
                                 </div>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">Vacância</p>
-                                    <p className="text-xl font-bold text-emerald-300">{((selectedAsset as FII).vacancyRate * 100).toFixed(1)}%</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">Vacância</p>
+                                    <p className="text-xl font-bold text-emerald-700 dark:text-emerald-400">{((selectedAsset as FII).vacancyRate * 100).toFixed(1)}%</p>
                                 </div>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">Imóveis</p>
-                                    <p className="text-xl font-bold text-zinc-200">{(selectedAsset as FII).totalProperties}</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">Imóveis</p>
+                                    <p className="text-xl font-bold text-slate-700 dark:text-zinc-300">{(selectedAsset as FII).totalProperties}</p>
                                 </div>
-                                <div className="bg-zinc-900/80 border border-zinc-800 rounded-lg p-4 text-center">
-                                    <p className="text-zinc-500 text-xs uppercase tracking-wider mb-1">DY / Rodada</p>
-                                    <p className="text-xl font-bold text-orange-300">{((selectedAsset as FII).dividendYield / 12).toFixed(2)}%</p>
+                                <div className="bg-slate-50 dark:bg-zinc-800/50 border border-slate-200 dark:border-zinc-700/50 rounded-lg p-4 text-center">
+                                    <p className="text-slate-500 dark:text-zinc-400 text-xs uppercase tracking-wider mb-1 font-semibold">DY / Rodada</p>
+                                    <p className="text-xl font-bold text-amber-600 dark:text-amber-400">{((selectedAsset as FII).dividendYield / 12).toFixed(2)}%</p>
                                 </div>
                             </>
                         ) : null}
@@ -400,41 +409,41 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                 </div>
 
                 <div className="space-y-6">
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-5 shadow-xl h-[724px] flex flex-col">
-                        <h3 className="text-lg font-bold text-zinc-300 mb-4 flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-indigo-500"></span> Eventos Impactando {selectedTicker}
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-5 shadow-sm h-[724px] flex flex-col">
+                        <h3 className="text-lg font-bold text-slate-700 dark:text-white mb-4 flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full bg-indigo-500"></span> Eventos em {selectedTicker}
                         </h3>
                         <div className="space-y-3 overflow-y-auto flex-1 pr-2 custom-scrollbar">
                             {state.events
                                 .filter(e => e.isActive && e.isRevealed && (e.targets.includes('Todos') || e.targets.includes(selectedTicker!)))
                                 .map(e => {
                                     const borderLeft = e.isPositive ? 'border-l-emerald-500' : 'border-l-red-500';
-                                    const iconColor = e.isPositive ? 'text-emerald-400' : 'text-red-400';
+                                    const iconColor = e.isPositive ? 'text-emerald-700 dark:text-emerald-400' : 'text-red-700 dark:text-red-400';
 
                                     return (
-                                        <div key={e.id} className={`p-4 bg-zinc-950/50 rounded-lg border border-zinc-800/80 transition-colors ${borderLeft} border-l-4`}>
+                                        <div key={e.id} className={`p-4 bg-slate-50 dark:bg-zinc-800/40 rounded-lg border border-slate-200 dark:border-zinc-700/50 transition-colors ${borderLeft} border-l-4`}>
                                             <div className="flex justify-between items-start mb-2">
-                                                <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
+                                                <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-500 dark:text-zinc-400">
                                                     <span>Round {e.round} {e.duration > 1 ? `➡ R${e.expiresAtRound}` : ''}</span>
                                                 </div>
                                                 <span className="text-xl">{e.icon}</span>
                                             </div>
                                             <span className={`${iconColor} font-bold text-sm block mb-1`}>{e.name}</span>
-                                            <p className="text-zinc-300 text-xs font-semibold mb-1">{e.headline}</p>
-                                            <p className="text-zinc-500 text-xs leading-relaxed">{e.body}</p>
+                                            <p className="text-slate-800 dark:text-zinc-200 text-xs font-bold mb-1">{e.headline}</p>
+                                            <p className="text-slate-600 dark:text-zinc-400 text-xs leading-relaxed">{e.body}</p>
                                         </div>
                                     )
                                 })}
                             {state.events.filter(e => e.isActive && e.isRevealed && (e.targets.includes('Todos') || e.targets.includes(selectedTicker!))).length === 0 && (
                                 <div className="flex h-full items-center justify-center">
-                                    <p className="text-zinc-600 text-sm italic text-center text-balance">Nenhum evento focado nesta empresa no momento.</p>
+                                    <p className="text-slate-500 dark:text-zinc-500 text-sm italic text-center text-balance font-medium">Nenhum evento focado nesta empresa no momento.</p>
                                 </div>
                             )}
                         </div>
                     </div>
                     {/* painel de notícias da empresa */}
-                    <div className="rounded-xl border border-zinc-800 bg-zinc-900/80 p-5 shadow-xl h-[724px] flex flex-col">
-                        <h3 className="text-lg font-bold text-zinc-300 mb-4">Notícias Relacionadas{selectedTicker ? ` – ${selectedTicker}` : ''}</h3>
+                    <div className="rounded-xl border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-5 shadow-sm h-[724px] flex flex-col">
+                        <h3 className="text-lg font-bold text-slate-700 dark:text-white mb-4">Notícias Relacionadas{selectedTicker ? ` – ${selectedTicker}` : ''}</h3>
                         <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
                             <NewsFeed
                                 events={[]}
@@ -462,14 +471,33 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
         const entity = combinedEntities.find(e => e.id === activeId)
         const portfolio = portfolios.find(p => p.ownerId === activeId)
 
-        // Calculate PATRIMONY
+        const myFixedIncome = fixedIncomeInvestments.filter(fi => fi.ownerId === activeId)
+        const myLoans = loans.filter(l => l.borrowerId === activeId && l.status === 'active')
+
         let patrimony = entity?.cash || 0
+        let variableIncomeTotal = 0
         if (portfolio) {
             portfolio.positions.forEach(pos => {
                 const asset = assets.find(a => a.ticker === pos.ticker)
-                if (asset) patrimony += pos.quantity * asset.currentPrice
+                if (asset) {
+                    const val = pos.quantity * asset.currentPrice
+                    patrimony += val
+                    variableIncomeTotal += val
+                }
             })
         }
+        let fixedIncomeTotal = 0
+        myFixedIncome.forEach(fi => {
+            const fiTotal = fi.amount + fi.accumulatedYield
+            patrimony += fiTotal
+            fixedIncomeTotal += fiTotal
+        })
+        let loansTotal = 0
+        myLoans.forEach(l => {
+            const lTotal = l.amount + l.accumulatedInterest
+            patrimony -= lTotal
+            loansTotal += lTotal
+        })
 
         return (
             <div className="p-4 max-w-5xl mx-auto space-y-6">
@@ -480,8 +508,8 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                     </div>
                     <select
                         value={activeId ?? ''}
-                        onChange={(e) => setSelectedPlayerId(e.target.value || null)}
-                        className="rounded-lg border border-zinc-700 bg-zinc-950 px-4 py-3 text-lg font-medium text-white focus:ring-2 focus:ring-purple-500 outline-none w-full md:w-72"
+                        onChange={(e) => setSelectedPlayerId(e.target.value)}
+                        className="rounded-lg border border-slate-300 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-950 px-4 py-3 text-base font-semibold text-slate-800 dark:text-white focus:ring-2 focus:ring-purple-500 outline-none w-full md:w-80"
                     >
                         {combinedEntities.map((e) => (
                             <option key={e.id} value={e.id}>
@@ -492,86 +520,155 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                 </div>
 
                 {entity && (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="md:col-span-1 space-y-6">
-                            <div className="bg-zinc-900/80 p-6 rounded-xl border border-zinc-800 shadow-xl text-center">
-                                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center text-3xl font-bold text-white mb-4 shadow-lg">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                        {/* Resumo Card (Left Column) */}
+                        <div className="md:col-span-1 space-y-6 sticky top-[90px]">
+                            <div className="bg-slate-50 dark:bg-zinc-900/80 p-6 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm text-center">
+                                <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-3xl font-bold text-white mb-4 shadow-sm">
                                     {entity.name.substring(0, 2).toUpperCase()}
                                 </div>
-                                <h3 className="text-xl font-bold text-white">{entity.name}</h3>
-                                <span className="inline-block mt-2 px-3 py-1 bg-zinc-800 text-zinc-300 text-xs rounded-full uppercase tracking-widest">{entity.type}</span>
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white">{entity.name}</h3>
+                                <span className="inline-block mt-2 px-3 py-1 bg-slate-200 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 text-xs rounded-full uppercase tracking-widest font-bold">{entity.type}</span>
                             </div>
 
-                            <div className="bg-zinc-900/80 p-6 rounded-xl border border-zinc-800 shadow-xl">
-                                <h4 className="text-sm font-bold text-zinc-500 uppercase tracking-widest mb-4">Finanças</h4>
+                            <div className="bg-slate-50 dark:bg-zinc-900/80 p-6 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm">
+                                <h4 className="text-sm font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-widest mb-4">Resumo Financeiro</h4>
                                 <div className="space-y-4">
-                                    <div>
-                                        <p className="text-sm text-zinc-400">Patrimônio Total</p>
-                                        <p className="text-2xl font-bold text-white">{formatCurrency(patrimony)}</p>
+                                    <div className="flex justify-between items-center border-b border-slate-200 dark:border-zinc-800 pb-2">
+                                        <p className="text-sm text-slate-600 dark:text-zinc-400 font-medium">Patrimônio Líquido</p>
+                                        <p className="text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(patrimony)}</p>
                                     </div>
-                                    <div>
-                                        <p className="text-sm text-zinc-400">Saldo Disponível em Caixa</p>
-                                        <p className="text-xl font-mono text-emerald-400">{formatCurrency(entity.cash)}</p>
+                                    <div className="flex justify-between items-center border-b border-slate-200 dark:border-zinc-800 pb-2">
+                                        <p className="text-sm text-slate-600 dark:text-zinc-400 font-medium">Caixa Livre</p>
+                                        <p className="text-lg font-mono text-emerald-600 dark:text-emerald-400">{formatCurrency(entity.cash)}</p>
+                                    </div>
+                                    <div className="flex justify-between items-center border-b border-slate-200 dark:border-zinc-800 pb-2">
+                                        <p className="text-sm text-slate-600 dark:text-zinc-400 font-medium">Inv. Renda Variável</p>
+                                        <p className="text-md font-mono text-indigo-600 dark:text-indigo-400">{formatCurrency(variableIncomeTotal)}</p>
+                                    </div>
+                                    <div className="flex justify-between items-center border-b border-slate-200 dark:border-zinc-800 pb-2">
+                                        <p className="text-sm text-slate-600 dark:text-zinc-400 font-medium">Renda Fixa</p>
+                                        <p className="text-md font-mono text-emerald-600 dark:text-emerald-400">{formatCurrency(fixedIncomeTotal)}</p>
+                                    </div>
+                                    <div className="flex justify-between items-center">
+                                        <p className="text-sm text-slate-600 dark:text-zinc-400 font-medium">Empréstimos Ativos</p>
+                                        <p className="text-md font-mono text-red-600 dark:text-red-400">{formatCurrency(loansTotal)}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        {/* Listas Detalhadas (Right Column) */}
                         <div className="md:col-span-2">
-                            <div className="bg-zinc-900/80 p-6 rounded-xl border border-zinc-800 shadow-xl h-full">
-                                <h4 className="flex justify-between items-center text-lg font-bold text-white mb-6 pb-4 border-b border-zinc-800">
-                                    Sua Carteira de Ativos
-                                    <span className="text-sm font-normal text-zinc-500 bg-zinc-950 px-3 py-1 rounded-full">{portfolio?.positions.length || 0} Ativos</span>
+                            <div className="bg-slate-50 dark:bg-zinc-900/80 p-6 rounded-xl border border-slate-200 dark:border-zinc-800 shadow-sm min-h-[600px] flex flex-col">
+                                <h4 className="flex items-center gap-3 text-lg font-bold text-slate-900 dark:text-white mb-6 pb-3 border-b border-slate-200 dark:border-zinc-800">
+                                    Detalhamento da Carteira
                                 </h4>
 
-                                {(!portfolio || portfolio.positions.length === 0) ? (
-                                    <div className="flex flex-col items-center justify-center h-48 text-zinc-500">
-                                        <p className="italic">Nenhum ativo na carteira no momento.</p>
-                                        <p className="text-sm mt-2">Este investidor está 100% liquído.</p>
-                                    </div>
-                                ) : (
-                                    <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
-                                        {portfolio.positions.map(pos => {
-                                            const asset = assets.find(a => a.ticker === pos.ticker)
-                                            const currentVal = asset ? asset.currentPrice * pos.quantity : 0
-                                            const rentabilidade = ((currentVal - pos.totalInvested) / pos.totalInvested) * 100
-                                            const isUp = rentabilidade >= 0
-                                            return (
-                                                <div key={pos.ticker} className="flex justify-between items-center p-4 bg-zinc-950/50 rounded-lg border border-zinc-800/80 hover:bg-zinc-800/50 transition">
-                                                    <div>
-                                                        <p className="font-bold text-white bg-indigo-900/50 inline-block px-2 py-0.5 rounded text-sm mr-2">{pos.ticker}</p>
-                                                        <span className="text-zinc-400 text-sm">{asset?.name}</span>
-                                                        <p className="text-xs text-zinc-500 mt-1">{pos.quantity} ações negociadas a PM de {formatCurrency(pos.avgPrice)}</p>
+                                <div className="space-y-8 flex-1">
+                                    {/* Renda Variável */}
+                                    <section>
+                                        <h5 className="text-sm font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-2 h-2 rounded-full bg-indigo-500"></span> Renda Variável ({portfolio?.positions.length || 0})
+                                        </h5>
+                                        {(!portfolio || portfolio.positions.length === 0) ? (
+                                            <p className="text-slate-500 dark:text-zinc-500 text-sm italic border-l-2 border-slate-300 dark:border-zinc-700 pl-3">Nenhum ativo de renda variável.</p>
+                                        ) : (
+                                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+                                                {portfolio.positions.map(pos => {
+                                                    const asset = assets.find(a => a.ticker === pos.ticker)
+                                                    const currentVal = asset ? asset.currentPrice * pos.quantity : 0
+                                                    const rentabilidade = pos.totalInvested > 0 ? ((currentVal - pos.totalInvested) / pos.totalInvested) * 100 : 0
+                                                    const isUp = rentabilidade >= 0
+                                                    return (
+                                                        <div key={pos.ticker} className="flex justify-between items-center p-3 bg-white dark:bg-zinc-950/50 rounded-lg border border-slate-200 dark:border-zinc-700/80 hover:bg-slate-100 dark:hover:bg-zinc-800/50 transition">
+                                                            <div>
+                                                                <p className="font-bold text-slate-800 dark:text-white bg-indigo-50 dark:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 inline-block px-2 py-0.5 rounded text-xs mb-1">{pos.ticker}</p>
+                                                                <p className="text-xs text-slate-500 dark:text-zinc-400">{pos.quantity} cotas a PM {formatCurrency(pos.avgPrice)}</p>
+                                                            </div>
+                                                            <div className="text-right">
+                                                                <p className="font-bold text-slate-900 dark:text-white text-sm">{formatCurrency(currentVal)}</p>
+                                                                <p className={`text-xs font-mono font-bold ${isUp ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-600 dark:text-red-400'}`}>
+                                                                    {isUp ? '+' : ''}{rentabilidade.toFixed(1)}%
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        )}
+                                    </section>
+
+                                    {/* Renda Fixa */}
+                                    <section>
+                                        <h5 className="text-sm font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Renda Fixa ({myFixedIncome.length})
+                                        </h5>
+                                        {myFixedIncome.length === 0 ? (
+                                            <p className="text-slate-500 dark:text-zinc-500 text-sm italic border-l-2 border-slate-300 dark:border-zinc-700 pl-3">Nenhum investimento direto em renda fixa.</p>
+                                        ) : (
+                                            <div className="space-y-2">
+                                                {myFixedIncome.map(fi => {
+                                                    const prod = fixedIncomeProducts.find(p => p.id === fi.productId)
+                                                    return (
+                                                        <div key={fi.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 bg-white dark:bg-zinc-950/50 rounded-lg border border-slate-200 dark:border-zinc-700/80 gap-2">
+                                                            <div>
+                                                                <p className="font-bold text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 inline-block px-2 py-0.5 rounded text-xs mb-1">{prod?.name}</p>
+                                                                <p className="text-xs text-slate-500 dark:text-zinc-400">Investido: {formatCurrency(fi.amount)} (Round {fi.roundInvested})</p>
+                                                            </div>
+                                                            <div className="text-left sm:text-right w-full sm:w-auto">
+                                                                <p className="font-bold text-emerald-700 dark:text-emerald-400 text-sm">{formatCurrency(fi.amount + fi.accumulatedYield)}</p>
+                                                                <p className="text-xs font-medium text-emerald-600/70 dark:text-emerald-500/80">Total Acumulado</p>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        )}
+                                    </section>
+
+                                    {/* Empréstimos */}
+                                    <section>
+                                        <h5 className="text-sm font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                            <span className="w-2 h-2 rounded-full bg-red-500"></span> Empréstimos Ativos ({myLoans.length})
+                                        </h5>
+                                        {myLoans.length === 0 ? (
+                                            <p className="text-slate-500 dark:text-zinc-500 text-sm italic border-l-2 border-slate-300 dark:border-zinc-700 pl-3">Nenhuma dívida ativa no momento.</p>
+                                        ) : (
+                                            <div className="space-y-2">
+                                                {myLoans.map(l => (
+                                                    <div key={l.id} className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 bg-red-50 dark:bg-red-950/20 rounded-lg border border-red-200 dark:border-red-900/40 gap-2">
+                                                        <div>
+                                                            <p className="font-bold text-red-800 dark:text-red-400 text-xs mb-1">Empréstimo (Round {l.roundTaken})</p>
+                                                            <p className="text-[11px] font-mono text-red-600/80 dark:text-red-400/80">Principal: {formatCurrency(l.amount)} • Juros/R: {formatPercent(l.interestPerRound)}</p>
+                                                        </div>
+                                                        <div className="text-left sm:text-right w-full sm:w-auto">
+                                                            <p className="font-bold text-red-700 dark:text-red-500 text-sm">-{formatCurrency(l.amount + l.accumulatedInterest)}</p>
+                                                            <p className="text-xs font-bold text-red-600/70 dark:text-red-500/80">{l.roundDue ? (l.roundDue - game.currentRound) + 'R Restantes' : 'Sem prazo'}</p>
+                                                        </div>
                                                     </div>
-                                                    <div className="text-right">
-                                                        <p className="font-bold text-white">{formatCurrency(currentVal)}</p>
-                                                        <p className={`text-sm font-mono ${isUp ? 'text-emerald-400' : 'text-red-400'}`}>
-                                                            {isUp ? '+' : ''}{rentabilidade.toFixed(2)}%
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
-                                )}
+                                                ))}
+                                            </div>
+                                        )}
+                                    </section>
+                                </div>
                             </div>
                         </div>
                     </div>
-                )}
-            </div>
+                )}</div>
         )
     }
 
     const renderFinalRanking = () => {
         return (
-            <div className="min-h-screen bg-zinc-950 text-white flex flex-col items-center justify-center p-8 bg-[url('/bg-pattern.svg')] bg-cover relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/20 via-zinc-950 to-purple-900/20 z-0"></div>
+            <div className="min-h-screen bg-white text-slate-800 flex flex-col items-center justify-center p-8 bg-[url('/bg-pattern.svg')] bg-cover relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-indigo-100/50 via-slate-50 to-purple-100/50 z-0"></div>
 
-                <div className="relative z-10 w-full max-w-4xl bg-zinc-900/80 backdrop-blur-xl border border-zinc-700 p-10 rounded-3xl shadow-2xl text-center flex flex-col items-center">
-                    <h1 className="text-5xl font-black mb-4 bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent drop-shadow-lg">
+                <div className="relative z-10 w-full max-w-4xl bg-white/90 backdrop-blur-xl border border-slate-200 p-10 rounded-3xl shadow-xl text-center flex flex-col items-center">
+                    <h1 className="text-5xl font-black mb-4 bg-gradient-to-r from-amber-500 to-orange-600 bg-clip-text text-transparent drop-shadow-sm">
                         FIM DE JOGO
                     </h1>
-                    <p className="text-xl text-zinc-300 mb-10">O mercado fechou. Confira o resultado final dos investidores!</p>
+                    <p className="text-xl text-slate-600 mb-10 font-medium">O mercado fechou. Confira o resultado final dos investidores!</p>
 
                     <div className="w-full">
                         <Ranking
@@ -592,15 +689,19 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
     }
 
     if (game.status === 'finished') {
-        return renderFinalRanking()
+        return (
+            <div className={`${theme} min-h-screen flex flex-col`}>
+                {renderFinalRanking()}
+            </div>
+        )
     }
 
     return (
-        <main className="min-h-screen bg-zinc-950 text-white font-sans selection:bg-indigo-500/30">
-            <Ticker assets={assets} className="border-b border-zinc-800 bg-zinc-950 sticky top-0 z-50 shadow-md" />
+        <main className={`${theme} min-h-screen bg-slate-50 dark:bg-zinc-950 text-slate-900 dark:text-white font-sans selection:bg-indigo-500/30`}>
+            <Ticker assets={assets} className="border-b border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 sticky top-0 z-50 shadow-md text-slate-800 dark:text-zinc-200" />
 
             {topOffer && (
-                <div className="border-b border-zinc-800 p-4 bg-gradient-to-r from-indigo-900/40 to-blue-900/20">
+                <div className="border-b border-slate-200 dark:border-zinc-800 p-4 bg-gradient-to-r from-indigo-100 to-blue-50/50 dark:from-indigo-950/40 dark:to-blue-900/20">
                     <ActiveOffer
                         offer={topOffer}
                         currentPrice={assets.find((a) => a.ticker === topOffer.ticker)?.currentPrice}
@@ -608,58 +709,70 @@ export function DisplayLayout({ initialState }: DisplayLayoutProps) {
                 </div>
             )}
 
-            <div className="border-b border-zinc-800 bg-zinc-900/30 px-4 py-3 flex gap-2 justify-center sticky top-[41px] z-40 backdrop-blur-md overflow-x-auto whitespace-nowrap custom-scrollbar">
+            <div className="border-b border-slate-200 dark:border-zinc-800 bg-white/80 dark:bg-zinc-900/80 px-4 py-2 flex gap-2 justify-center sticky top-[38px] z-40 backdrop-blur-md overflow-x-auto whitespace-nowrap custom-scrollbar shadow-sm">
                 <button
                     onClick={() => setActiveTab('geral')}
-                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'geral' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'geral' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'bg-transparent text-slate-600 dark:text-zinc-400 hover:text-indigo-700 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-zinc-800'}`}
                 >
                     Visão Geral
                 </button>
                 <button
                     onClick={() => setActiveTab('empresa')}
-                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'empresa' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'empresa' ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/20' : 'bg-transparent text-slate-600 dark:text-zinc-400 hover:text-indigo-700 dark:hover:text-indigo-400 hover:bg-slate-100 dark:hover:bg-zinc-800'}`}
                 >
                     Visão por Empresa (Homebroker)
                 </button>
                 <button
                     onClick={() => setActiveTab('jogadores')}
-                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'jogadores' ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30' : 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'jogadores' ? 'bg-purple-600 text-white shadow-md shadow-purple-600/20' : 'bg-transparent text-slate-600 dark:text-zinc-400 hover:text-purple-700 dark:hover:text-purple-400 hover:bg-slate-100 dark:hover:bg-zinc-800'}`}
                 >
                     Consultar Jogador/Holding
                 </button>
                 <button
                     onClick={() => setActiveTab('noticias')}
-                    className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'noticias' ? 'bg-amber-600 text-white shadow-lg shadow-amber-500/30' : 'bg-transparent text-zinc-400 hover:text-white hover:bg-zinc-800'}`}
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${activeTab === 'noticias' ? 'bg-amber-500 text-white shadow-md shadow-amber-500/20' : 'bg-transparent text-slate-600 dark:text-zinc-400 hover:text-amber-700 dark:hover:text-amber-400 hover:bg-slate-100 dark:hover:bg-zinc-800'}`}
                 >
                     Notícias do Mercado
                 </button>
             </div>
 
-            <div className="min-h-[calc(100vh-160px)] pb-12 pt-6">
+            <div className="min-h-[calc(100vh-140px)] pb-10 pt-4">
                 {activeTab === 'geral' && renderGeral()}
                 {activeTab === 'empresa' && renderEmpresa()}
                 {activeTab === 'jogadores' && renderJogadores()}
                 {activeTab === 'noticias' && renderNoticias()}
             </div>
 
-            <footer className="fixed bottom-0 w-full flex justify-between items-center border-t border-zinc-800 bg-zinc-950/90 backdrop-blur-md px-6 py-3 text-xs font-mono z-50">
-                <div className="text-zinc-500">
+            <footer className="fixed bottom-0 w-full flex justify-between items-center border-t border-slate-300 dark:border-zinc-800 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md px-6 py-2 text-xs font-mono z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] dark:shadow-none">
+                <div className="text-slate-700 dark:text-zinc-400 font-semibold">
                     Rodada {game.currentRound} • {round?.theme ?? '—'} • {game.status.toUpperCase()}
                 </div>
-                <div className={`font-bold text-sm ${(() => {
-                    if (!round?.roundEndsAt) return 'text-zinc-300'
-                    const remaining = new Date(round.roundEndsAt).getTime() - new Date().getTime();
-                    return remaining < 60000 && remaining > 0 ? 'text-red-500 animate-pulse' : 'text-zinc-300';
-                })()
-                    }`}>
-                    ⏱ {(() => {
-                        if (!round?.roundEndsAt) return '--:--';
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => {
+                            const next = theme === 'light' ? 'dark' : 'light'
+                            setTheme(next)
+                            localStorage.setItem('projector-theme', next)
+                        }}
+                        className="bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 px-3 py-1.5 rounded-lg font-sans text-xs font-bold hover:bg-slate-300 dark:hover:bg-zinc-700 transition shadow-sm"
+                    >
+                        {theme === 'light' ? '🌙 Modo Noturno' : '☀️ Modo Claro'}
+                    </button>
+                    <div className={`font-bold text-sm ${(() => {
+                        if (!round?.roundEndsAt) return 'text-slate-400 dark:text-zinc-500'
                         const remaining = new Date(round.roundEndsAt).getTime() - new Date().getTime();
-                        if (remaining <= 0) return '00:00';
-                        const m = Math.floor(remaining / 60000);
-                        const s = Math.floor((remaining % 60000) / 1000);
-                        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-                    })()}
+                        return remaining < 60000 && remaining > 0 ? 'text-red-500 animate-pulse' : 'text-slate-500 dark:text-zinc-400';
+                    })()
+                        }`}>
+                        ⏱ {(() => {
+                            if (!round?.roundEndsAt) return '--:--';
+                            const remaining = new Date(round.roundEndsAt).getTime() - new Date().getTime();
+                            if (remaining <= 0) return '00:00';
+                            const m = Math.floor(remaining / 60000);
+                            const s = Math.floor((remaining % 60000) / 1000);
+                            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+                        })()}
+                    </div>
                 </div>
             </footer>
             {revealedEvents.length > 0 && (

@@ -93,13 +93,13 @@ export function Ranking({
   const maxWorth = entries[0]?.netWorth ?? 1
 
   return (
-    <div className="rounded-lg border border-zinc-700 bg-zinc-800/80 p-4">
-      <h2 className="mb-4 text-lg font-bold">Ranking</h2>
-      <div className="space-y-3">
+    <div className="rounded border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-3 shadow-sm h-full flex flex-col">
+      <h2 className="mb-3 text-base font-bold text-slate-800 dark:text-white uppercase tracking-widest">Ranking Global</h2>
+      <div className="space-y-2 flex-1 overflow-y-auto pr-1 custom-scrollbar">
         {entries.slice(0, 10).map((e, i) => (
           <div key={e.id} className="space-y-1">
-            <div className="flex items-center justify-between text-sm">
-              <span>
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold text-slate-700 dark:text-zinc-200 truncate mr-2">
                 {i === 0 && '🥇 '}
                 {i === 1 && '🥈 '}
                 {i === 2 && '🥉 '}
@@ -107,18 +107,18 @@ export function Ranking({
                 {e.name}
                 {e.type === 'holding' && ' 👥'}
               </span>
-              <span className="font-mono font-semibold">
+              <span className="font-mono font-bold text-slate-900 dark:text-white whitespace-nowrap text-[10px]">
                 {formatCurrency(e.netWorth)}{' '}
                 <span
                   className={
-                    e.returnPercent >= 0 ? 'text-emerald-400' : 'text-red-400'
+                    e.returnPercent >= 0 ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400'
                   }
                 >
                   {formatPercent(e.returnPercent)}
                 </span>
               </span>
             </div>
-            <div className="h-1.5 w-full rounded-full bg-zinc-700">
+            <div className="h-1 w-full rounded-full bg-slate-100 dark:bg-zinc-800">
               <div
                 className="h-full rounded-full bg-indigo-500"
                 style={{ width: `${Math.min(100, (e.netWorth / maxWorth) * 100)}%` }}

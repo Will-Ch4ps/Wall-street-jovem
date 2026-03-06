@@ -24,23 +24,23 @@ export function AssetCard({ asset, className, compact }: AssetCardProps) {
     return (
       <div
         className={cn(
-          'rounded-lg border border-zinc-700 bg-zinc-800/80 p-3 hover:border-zinc-500 transition-colors',
+          'rounded shadow-sm border border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 p-2 hover:border-slate-300 dark:hover:border-zinc-700 transition-colors',
           className
         )}
       >
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1 font-mono font-semibold">
+        <div className="flex items-center justify-between pb-1 border-b border-slate-100 dark:border-zinc-800 mb-1">
+          <span className="flex items-center gap-1 font-mono font-bold text-sm text-slate-800 dark:text-zinc-200 truncate">
             {asset.ticker}
             <GlossaryTooltip term={asset.name} customText={descriptionText} />
           </span>
           <span
-            className={cn('text-xs font-mono', isUp ? 'text-emerald-400' : 'text-red-400')}
+            className={cn('text-[10px] font-mono font-bold', isUp ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400')}
           >
             {isUp ? '▲' : '▼'}
             {formatPercent(Math.abs(variation))}
           </span>
         </div>
-        <div className="mt-1 text-lg font-bold">{formatCurrency(asset.currentPrice)}</div>
+        <div className="text-base font-black text-slate-900 dark:text-white tracking-tight">{formatCurrency(asset.currentPrice)}</div>
       </div>
     )
   }
@@ -48,24 +48,24 @@ export function AssetCard({ asset, className, compact }: AssetCardProps) {
   return (
     <div
       className={cn(
-        'rounded-lg border border-zinc-700 bg-zinc-800/80 p-4 hover:border-zinc-500 transition-colors',
+        'rounded-lg border border-slate-200 dark:border-zinc-700 bg-white dark:bg-zinc-800/80 p-4 hover:border-slate-300 dark:hover:border-zinc-500 transition-colors shadow-sm',
         className
       )}
     >
       <div className="flex items-center justify-between">
-        <span className="flex items-center gap-1 font-mono font-semibold">
+        <span className="flex items-center gap-1 font-mono font-semibold text-slate-800 dark:text-zinc-200">
           {asset.ticker}
           <GlossaryTooltip term={asset.name} customText={descriptionText} />
         </span>
         <span
-          className={cn('text-sm font-mono', isUp ? 'text-emerald-400' : 'text-red-400')}
+          className={cn('text-sm font-mono', isUp ? 'text-emerald-600 dark:text-emerald-400' : 'text-red-500 dark:text-red-400')}
         >
           {isUp ? '▲' : '▼'}
           {formatPercent(Math.abs(variation))}
         </span>
       </div>
-      <div className="mt-2 text-xl font-bold">{formatCurrency(asset.currentPrice)}</div>
-      <div className="mt-2 space-y-1 text-xs text-zinc-400">
+      <div className="mt-2 text-xl font-bold text-slate-900 dark:text-white">{formatCurrency(asset.currentPrice)}</div>
+      <div className="mt-2 space-y-1 text-xs text-slate-500 dark:text-zinc-400">
         <div>
           Abertura: {formatCurrency(asset.openPrice)} | Máx: {formatCurrency(asset.currentPrice)} | Mín: {formatCurrency(asset.currentPrice)}
         </div>
@@ -73,7 +73,7 @@ export function AssetCard({ asset, className, compact }: AssetCardProps) {
         <div>Disponível: {asset.availableShares} {(asset.type === 'fii' ? 'cotas' : 'ações')}</div>
       </div>
       {asset.type === 'fii' && (
-        <div className="mt-2 text-xs text-zinc-500">
+        <div className="mt-2 text-xs text-slate-500 dark:text-zinc-500 font-medium">
           <span>P/VP: {(asset as FII).pvpRatio.toFixed(2)}</span>
           <span className="ml-3">DY/Rod: {((asset as FII).dividendYield / 12).toFixed(1)}%</span>
         </div>
